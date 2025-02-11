@@ -14,7 +14,7 @@ url = "https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/mai
 
 # Cargar datos
 try:
-    df = pd.read_csv(url, sep=",")
+    df = pd.read_csv(url, sep=",", encoding="utf-8")
     st.success("✅ Datos cargados con éxito")
     
     # Mostrar los primeros datos
