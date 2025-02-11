@@ -65,7 +65,7 @@ if df is not None:
                 marker.add_to(capa_no)
 
         # Agregar control de capas (esto actúa como la leyenda)
-        MiniMap().add_to(m)
+        
         folium.LayerControl().add_to(m)
 
         # Mostrar el mapa en Streamlit
