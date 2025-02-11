@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import folium
 from streamlit_folium import folium_static
+from folium.plugins import MiniMap
 
 # Configurar la página
 st.set_page_config(layout="wide", page_title="Mapas de Fiebre Amarilla", page_icon="🦟")
@@ -68,6 +69,7 @@ if df is not None:
         
         folium.LayerControl().add_to(m)
 
+        MiniMap().add_to(m)
         # Mostrar el mapa en Streamlit
         folium_static(m, width=1310, height=600)
     else:
