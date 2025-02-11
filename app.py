@@ -9,14 +9,14 @@ st.set_page_config(layout="wide", page_title="Mapas de Fiebre Amarilla", page_ic
 # Título centrado
 st.markdown("<h1 style='text-align: center;'>🦟 Mapas de Fiebre Amarilla 2025 🦟</h1>", unsafe_allow_html=True)
 
-# Cargar datos desde GitHub
-url = "https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/form-1__geocaracterizacion.csv"
-df = pd.read_csv(url, sep=",")  
+# Cargar datos desde GitHub (repositorio público)
+url = "https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/form-1__geocaracterizacion.xlsx"
+df = pd.read_excel(url, engine="openpyxl")  # Asegura que pandas pueda leer archivos .xlsx
 
 # Crear mapa centrado en La Guajira
 m = folium.Map(location=[11.5449, -72.9066], zoom_start=8)
 
-# Agregar puntos desde el CSV según latitud y longitud
+# Agregar puntos desde el Excel según latitud y longitud
 for _, row in df.iterrows():
     folium.CircleMarker(
         location=[row["lat_93_LOCALIZACIN_DE_LA"], row["long_93_LOCALIZACIN_DE_LA"]],
