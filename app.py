@@ -2,6 +2,9 @@ import streamlit as st
 import folium
 from streamlit_folium import folium_static
 
+# Configurar la página para que use todo el ancho disponible
+st.set_page_config(layout="wide")
+
 # Título de la aplicación
 st.title("Mapa Interactivo con Streamlit")
 
