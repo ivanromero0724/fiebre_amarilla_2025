@@ -3,7 +3,7 @@ import folium
 from streamlit_folium import folium_static
 
 # Configurar la página para que use todo el ancho disponible
-st.set_page_config(layout="wide")
+st.set_page_config(layout="wide", page_title="Mapas de Fiebre Amarilla", page_icon="🦟")
 
 # Título de la aplicación
 st.markdown("<h1 style='text-align: center;'>🦟 Mapas de Fiebre Amarilla 2025 🦟</h1>", unsafe_allow_html=True)
