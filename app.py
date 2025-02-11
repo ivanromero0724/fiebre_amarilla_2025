@@ -18,6 +18,10 @@ st.markdown(
             display: flex;
             justify-content: center;
         }
+        /* Color negro para título y texto */
+        h1, h2, h3, h4, h5, h6, p, span, div {
+            color: black !important;
+        }
     </style>
     """,
     unsafe_allow_html=True
@@ -40,4 +44,4 @@ folium.Marker(
 ).add_to(m)
 
 # Mostrar el mapa con un tamaño más grande y centrado
-folium_static(m, width=900, height=600)
+folium_static(m, width=2000, height=600)
