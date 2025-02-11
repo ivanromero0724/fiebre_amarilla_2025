@@ -12,7 +12,7 @@ st.markdown("<h1 style='text-align: center;'>🦟 Mapas de Fiebre Amarilla 2025 
 # Cargar datos desde GitHub
 @st.cache_data
 def cargar_datos():
-    url = "fiebre_amarilla_2025/form-1__geocaracterizacion.csv"
+    url = "https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/form-1__geocaracterizacion.csv"
     df = pd.read_csv(url, sep=",")  # Asegúrate de que el separador es correcto
     return df
 
