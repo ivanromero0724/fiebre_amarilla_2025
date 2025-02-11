@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import folium
 from streamlit_folium import folium_static
+from branca.element import Template, MacroElement
 
 # Configurar la página
 st.set_page_config(layout="wide", page_title="Mapas de Fiebre Amarilla", page_icon="🦟")
@@ -47,7 +48,7 @@ if df is not None:
                 popup=f"Vivienda efectiva: {estado_vivienda}"
             ).add_to(m)
 
-        # Agregar una leyenda personalizada con HTML y CSS
+        # Agregar una leyenda personalizada con HTML y CSS usando MacroElement
         legend_html = '''
         <div style="position: fixed; 
                     bottom: 50px; left: 50px; width: 200px; height: 100px; 
@@ -55,12 +56,15 @@ if df is not None:
                     border:2px solid grey; padding: 10px; border-radius: 8px;
                     box-shadow: 2px 2px 5px rgba(0,0,0,0.3);">
             <b> Leyenda </b><br>
-            <i class="fa fa-circle" style="color:green"></i> Vivienda efectiva <br>
-            <i class="fa fa-circle" style="color:red"></i> No efectiva <br>
+            <span style="color:green; font-size:16px;">&#9679;</span> Vivienda efectiva <br>
+            <span style="color:red; font-size:16px;">&#9679;</span> No efectiva <br>
         </div>
         '''
 
-        m.get_root().html.add_child(folium.Element(legend_html))
+        legend = MacroElement()
+        legend._template = Template(f"""{{% macro html() %}}{legend_html}{{% endmacro %}}""")
+        m.get_root().add_child(legend)
+        
         folium_static(m, width=1310, height=600)
     else:
         st.error("Las columnas requeridas no se encuentran en el archivo.")
