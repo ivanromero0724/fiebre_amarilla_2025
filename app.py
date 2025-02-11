@@ -14,6 +14,7 @@ url = "https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/mai
 
 @st.cache_data
 def cargar_datos(url):
+    """Carga el archivo Excel desde GitHub."""
     try:
         df = pd.read_excel(url, engine="openpyxl")  
         return df
@@ -24,18 +25,22 @@ def cargar_datos(url):
 df = cargar_datos(url)
 
 if df is not None:
-    # Verificar que las columnas necesarias existen y eliminar filas con valores NaN
+    # Verificar que las columnas requeridas existen
     if {"lat_93_LOCALIZACIN_DE_LA", "long_93_LOCALIZACIN_DE_LA", "6_VIVIENDA_EFECTIVA_"}.issubset(df.columns):
         df = df.dropna(subset=["lat_93_LOCALIZACIN_DE_LA", "long_93_LOCALIZACIN_DE_LA", "6_VIVIENDA_EFECTIVA_"])
 
-        # Crear mapa centrado en Tolima
-        m = folium.Map(location=[4.5, -75.2], zoom_start=8)
+        # Calcular el centroide de los puntos
+        lat_centro = df["lat_93_LOCALIZACIN_DE_LA"].mean()
+        lon_centro = df["long_93_LOCALIZACIN_DE_LA"].mean()
 
-        # Definir capas para cada categoría de vivienda efectiva
+        # Crear mapa centrado en los datos
+        m = folium.Map(location=[lat_centro, lon_centro], zoom_start=8)
+
+        # Crear grupos de capas para la leyenda
         capa_si = folium.FeatureGroup(name="Vivienda efectiva (SI)").add_to(m)
         capa_no = folium.FeatureGroup(name="No efectiva (NO)").add_to(m)
 
-        # Definir colores según la variable "6_VIVIENDA_EFECTIVA_"
+        # Colores según la variable "6_VIVIENDA_EFECTIVA_"
         colores = {"SI": "red", "NO": "blue"}
 
         # Agregar puntos desde el DataFrame
@@ -59,7 +64,7 @@ if df is not None:
             elif estado_vivienda == "NO":
                 marker.add_to(capa_no)
 
-        # Agregar control de capas (esto actúa como leyenda)
+        # Agregar control de capas (esto actúa como la leyenda)
         folium.LayerControl().add_to(m)
 
         # Mostrar el mapa en Streamlit
