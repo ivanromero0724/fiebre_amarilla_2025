@@ -5,7 +5,7 @@ from streamlit_folium import folium_static
 # Configurar la página para que use todo el ancho disponible
 st.set_page_config(layout="wide")
 
-# Aplicar estilos CSS para fondo blanco y centrar el contenido
+# Aplicar estilos CSS para fondo blanco, texto negro y centrar el contenido
 st.markdown(
     """
     <style>
@@ -13,14 +13,15 @@ st.markdown(
         .stApp {
             background-color: white;
         }
-        /* Centrar contenido */
-        .main {
-            display: flex;
-            justify-content: center;
-        }
         /* Color negro para título y texto */
         h1, h2, h3, h4, h5, h6, p, span, div {
             color: black !important;
+        }
+        /* Centrar el mapa */
+        .map-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     </style>
     """,
@@ -43,5 +44,7 @@ folium.Marker(
     icon=folium.Icon(color="blue"),
 ).add_to(m)
 
-# Mostrar el mapa con un tamaño más grande y centrado
-folium_static(m, width=2000, height=600)
+# Centrar el mapa usando un contenedor
+st.markdown('<div class="map-container">', unsafe_allow_html=True)
+folium_static(m, width=900, height=600)
+st.markdown('</div>', unsafe_allow_html=True)
