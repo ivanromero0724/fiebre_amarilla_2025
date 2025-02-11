@@ -5,22 +5,10 @@ from streamlit_folium import folium_static
 # Configurar la página para que use todo el ancho disponible
 st.set_page_config(layout="wide", page_title="Mapas de Fiebre Amarilla", page_icon="🦟")
 
-# Aplicar estilo minimalista con CSS
+# Ocultar la barra superior y el menú de Streamlit
 st.markdown("""
     <style>
-    /* Cambiar el fondo de la aplicación */
-    body {
-        background-color: white;
-        font-family: Arial, sans-serif;
-    }
-    
-    /* Centrar el título */
-    .title {
-        text-align: center;
-        font-size: 36px;
-        font-weight: bold;
-        color: black;
-    }
+    #MainMenu, header, footer {visibility: hidden;}
 
     /* Centrar el mapa */
     .mapa-container {
@@ -29,15 +17,11 @@ st.markdown("""
         align-items: center;
         margin-top: 20px;
     }
-
-    /* Ocultar barra superior y menú de Streamlit */
-    #MainMenu, header, footer {visibility: hidden;}
-
     </style>
     """, unsafe_allow_html=True)
 
-# Título centrado con clase CSS personalizada
-st.markdown("<h1 class='title'>🦟 Mapas de Fiebre Amarilla 2025 🦟</h1>", unsafe_allow_html=True)
+# Título centrado
+st.markdown("<h1 style='text-align: center;'>🦟 Mapas de Fiebre Amarilla 2025 🦟</h1>", unsafe_allow_html=True)
 
 # Crear columnas para centrar el mapa
 col1, col2, col3 = st.columns([1, 3, 1])
