@@ -29,7 +29,7 @@ if df is not None:
     if {"lat_93_LOCALIZACIN_DE_LA", "long_93_LOCALIZACIN_DE_LA", "6_VIVIENDA_EFECTIVA_"}.issubset(df.columns):
         df = df.dropna(subset=["lat_93_LOCALIZACIN_DE_LA", "long_93_LOCALIZACIN_DE_LA", "6_VIVIENDA_EFECTIVA_"])
 
-        lat_centro = 3.84234302999644
+        lat_centro = 3.8141626706706644
         lon_centro = -74.69905002261329
         m = folium.Map(location=[lat_centro, lon_centro], zoom_start=11)
 
