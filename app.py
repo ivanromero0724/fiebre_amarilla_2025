@@ -41,7 +41,7 @@ if df is not None:
         capa_no = folium.FeatureGroup(name="No efectiva (NO)").add_to(m)
 
         # Colores según la variable "6_VIVIENDA_EFECTIVA_"
-        colores = {"SI": "red", "NO": "blue"}
+        colores = {"SI": "green", "NO": "red"}
 
         # Agregar puntos desde el DataFrame
         for _, row in df.iterrows():
@@ -50,7 +50,7 @@ if df is not None:
 
             marker = folium.CircleMarker(
                 location=[row["lat_93_LOCALIZACIN_DE_LA"], row["long_93_LOCALIZACIN_DE_LA"]],
-                radius=5,
+                radius=2,
                 color=color,
                 fill=True,
                 fill_color=color,
