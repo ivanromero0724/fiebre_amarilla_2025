@@ -48,23 +48,22 @@ if df is not None:
                 popup=f"Vivienda efectiva: {estado_vivienda}"
             ).add_to(m)
 
-        # Agregar una leyenda personalizada con HTML y CSS usando MacroElement
+        # Agregar la leyenda como HTML directamente en el mapa
         legend_html = '''
         <div style="position: fixed; 
-                    bottom: 50px; left: 50px; width: 200px; height: 100px; 
+                    bottom: 40px; left: 40px; width: 220px; height: 80px; 
                     background-color: white; z-index:9999; font-size:14px;
                     border:2px solid grey; padding: 10px; border-radius: 8px;
                     box-shadow: 2px 2px 5px rgba(0,0,0,0.3);">
             <b> Leyenda </b><br>
-            <span style="color:green; font-size:16px;">&#9679;</span> Vivienda efectiva <br>
-            <span style="color:red; font-size:16px;">&#9679;</span> No efectiva <br>
+            <span style="color:green; font-size:18px;">&#9679;</span> Vivienda efectiva <br>
+            <span style="color:red; font-size:18px;">&#9679;</span> No efectiva <br>
         </div>
         '''
-
-        legend = MacroElement()
-        legend._template = Template(f"""{{% macro html() %}}{legend_html}{{% endmacro %}}""")
-        m.get_root().add_child(legend)
         
+        m.get_root().html.add_child(folium.Element(legend_html))
+
+        # Renderizar el mapa con la leyenda en Streamlit
         folium_static(m, width=1310, height=600)
     else:
         st.error("Las columnas requeridas no se encuentran en el archivo.")
