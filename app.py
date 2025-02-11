@@ -9,19 +9,27 @@ st.set_page_config(layout="wide")
 st.markdown(
     """
     <style>
-        /* Fondo blanco */
+        /* Fondo blanco general */
         .stApp {
             background-color: white;
         }
-        /* Color negro para título y texto */
+
+        /* Color negro para títulos y texto */
         h1, h2, h3, h4, h5, h6, p, span, div {
             color: black !important;
         }
-        /* Centrar el mapa */
+
+        /* Centrar completamente el mapa */
         .map-container {
             display: flex;
             justify-content: center;
             align-items: center;
+            height: 100vh; /* Ocupa toda la altura disponible */
+        }
+
+        /* Hacer la barra superior blanca */
+        header, .css-18e3th9, .css-1d391kg {
+            background-color: white !important;
         }
     </style>
     """,
@@ -44,7 +52,7 @@ folium.Marker(
     icon=folium.Icon(color="blue"),
 ).add_to(m)
 
-# Centrar el mapa usando un contenedor
+# Centrar el mapa completamente
 st.markdown('<div class="map-container">', unsafe_allow_html=True)
-folium_static(m, width=900, height=600)
+folium_static(m, width=1000, height=700)  # Ajuste de tamaño
 st.markdown('</div>', unsafe_allow_html=True)
