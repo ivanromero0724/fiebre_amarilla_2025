@@ -1,39 +1,53 @@
 import streamlit as st
-import folium
 import pandas as pd
+import folium
 from streamlit_folium import folium_static
 
-# Configurar la página para que use todo el ancho disponible
+# Configurar la página
 st.set_page_config(layout="wide", page_title="Mapas de Fiebre Amarilla", page_icon="🦟")
 
-# Título de la aplicación
+# Título centrado
 st.markdown("<h1 style='text-align: center;'>🦟 Mapas de Fiebre Amarilla 2025 🦟</h1>", unsafe_allow_html=True)
 
-# Cargar datos desde GitHub
-@st.cache_data
-def cargar_datos():
-    url = "https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/form-1__geocaracterizacion.csv"
-    df = pd.read_csv(url, sep=",")  # Asegúrate de que el separador es correcto
-    return df
+# URL del archivo CSV en GitHub
+url = "https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/form-1__geocaracterizacion.csv"
 
-df = cargar_datos()
-
-# Verificar si las columnas necesarias existen
-if "lat_93_LOCALIZACIN_DE_LA" in df.columns and "long_93_LOCALIZACIN_DE_LA" in df.columns:
+# Cargar datos
+try:
+    df = pd.read_csv(url, sep=",", encoding="utf-8")
+    st.success("✅ Datos cargados con éxito")
     
-    # Crear un mapa con Folium
-    m = folium.Map(location=[df["lat_93_LOCALIZACIN_DE_LA"].mean(), df["long_93_LOCALIZACIN_DE_LA"].mean()], zoom_start=8)
+    # Mostrar los primeros datos
+    st.dataframe(df.head())
 
-    # Agregar puntos al mapa
-    for _, row in df.iterrows():
-        folium.Marker(
-            [row["lat_93_LOCALIZACIN_DE_LA"], row["long_93_LOCALIZACIN_DE_LA"]],
-            popup=f"Vivienda Efectiva: {row['6_VIVIENDA_EFECTIVA_']}",
-            icon=folium.Icon(color="blue"),
-        ).add_to(m)
+    # Verificar si las columnas de latitud y longitud existen
+    if "lat_93_LOCALIZACIN_DE_LA" in df.columns and "long_93_LOCALIZACIN_DE_LA" in df.columns:
+        
+        # Convertir a tipo numérico (evitar errores)
+        df["lat_93_LOCALIZACIN_DE_LA"] = pd.to_numeric(df["lat_93_LOCALIZACIN_DE_LA"], errors="coerce")
+        df["long_93_LOCALIZACIN_DE_LA"] = pd.to_numeric(df["long_93_LOCALIZACIN_DE_LA"], errors="coerce")
 
-    # Mostrar el mapa en Streamlit
-    folium_static(m, width=1310, height=600)
+        # Filtrar filas con valores válidos
+        df = df.dropna(subset=["lat_93_LOCALIZACIN_DE_LA", "long_93_LOCALIZACIN_DE_LA"])
 
-else:
-    st.error("⚠️ No se encontraron las columnas de latitud y longitud en el archivo CSV.")
+        # Crear el mapa centrado en la ubicación promedio
+        lat_media = df["lat_93_LOCALIZACIN_DE_LA"].mean()
+        lon_media = df["long_93_LOCALIZACIN_DE_LA"].mean()
+        m = folium.Map(location=[lat_media, lon_media], zoom_start=8)
+
+        # Agregar puntos según la variable 6_VIVIENDA_EFECTIVA_
+        for _, row in df.iterrows():
+            folium.Marker(
+                location=[row["lat_93_LOCALIZACIN_DE_LA"], row["long_93_LOCALIZACIN_DE_LA"]],
+                popup=f"Vivienda efectiva: {row['6_VIVIENDA_EFECTIVA_']}",
+                icon=folium.Icon(color="blue")
+            ).add_to(m)
+
+        # Mostrar el mapa en Streamlit
+        folium_static(m, width=1310, height=600)
+
+    else:
+        st.error("⚠️ Las columnas de latitud y longitud no están en el archivo CSV.")
+
+except Exception as e:
+    st.error(f"⚠️ Error al cargar los datos: {e}")
