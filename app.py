@@ -18,5 +18,6 @@ folium.Marker(
     icon=folium.Icon(color="blue"),
 ).add_to(m)
 
+st.set_page_config(layout="wide")
 # Mostrar el mapa con un tamaño más grande
 folium_static(m, width=900, height=600)
