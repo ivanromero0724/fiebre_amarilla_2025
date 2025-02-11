@@ -64,6 +64,7 @@ if df is not None:
             elif estado_vivienda == "NO":
                 marker.add_to(capa_no)
 
+        folium.TileLayer(show=False).add_to(m)
         # Agregar control de capas (esto actúa como la leyenda)
         folium.LayerControl().add_to(m)
 
