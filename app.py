@@ -37,6 +37,10 @@ if df is not None:
         # Crear mapa centrado en Tolima
         m = folium.Map(location=[lat_centro, lon_centro], zoom_start=11)
 
+        # Agregar el plugin MiniMap
+        minimap = MiniMap(toggle_display=True, position="bottomright")
+        m.add_child(minimap)
+
         # Crear grupos de capas para la leyenda
         capa_si = folium.FeatureGroup(name="Viviendas efectivas").add_to(m)
         capa_no = folium.FeatureGroup(name="No efectivas").add_to(m)
@@ -66,12 +70,28 @@ if df is not None:
                 marker.add_to(capa_no)
 
         # Agregar control de capas (esto actúa como la leyenda)
-        
         folium.LayerControl().add_to(m)
 
-        MiniMap().add_to(m)
-        # Mostrar el mapa en Streamlit
+        # Agregar estilos CSS para el borde negro
+        st.markdown(
+            """
+            <style>
+                .map-container {
+                    border: 5px solid black;
+                    border-radius: 10px;
+                    overflow: hidden;
+                    box-shadow: 3px 3px 10px rgba(0,0,0,0.3);
+                }
+            </style>
+            """, 
+            unsafe_allow_html=True
+        )
+
+        # Mostrar el mapa dentro de un contenedor con borde
+        st.markdown('<div class="map-container">', unsafe_allow_html=True)
         folium_static(m, width=1310, height=600)
+        st.markdown('</div>', unsafe_allow_html=True)
+
     else:
         st.error("Las columnas requeridas no se encuentran en el archivo.")
 else:
