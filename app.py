@@ -10,10 +10,8 @@ st.set_page_config(layout="wide", page_title="Mapas de Fiebre Amarilla", page_ic
 # Título centrado
 st.markdown("<h1 style='text-align: center;'>🗺️ Mapas de Fiebre Amarilla 2025 🦟</h1>", unsafe_allow_html=True)
 
-# Botón para limpiar caché y recargar datos
-if st.button("Recargar datos 🔄"):
-    st.cache_data.clear()
-    st.experimental_rerun()
+# Limpiar caché automáticamente antes de cargar los datos
+st.cache_data.clear()
 
 # URL del archivo en GitHub
 url = "https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/form-1__geocaracterizacion.xlsx"
@@ -28,7 +26,7 @@ def cargar_datos(url):
         st.error(f"Error al cargar los datos: {e}")
         return None
 
-# Cargar los datos después del botón
+# Cargar los datos después de limpiar la caché
 df = cargar_datos(url)
 
 if df is not None:
