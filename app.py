@@ -29,11 +29,11 @@ if df is not None:
     if {"lat_93_LOCALIZACIN_DE_LA", "long_93_LOCALIZACIN_DE_LA", "6_VIVIENDA_EFECTIVA_"}.issubset(df.columns):
         df = df.dropna(subset=["lat_93_LOCALIZACIN_DE_LA", "long_93_LOCALIZACIN_DE_LA", "6_VIVIENDA_EFECTIVA_"])
 
-        # Calcular el centroide de los puntos
-        lat_centro = df["lat_93_LOCALIZACIN_DE_LA"].mean()
-        lon_centro = df["long_93_LOCALIZACIN_DE_LA"].mean()
+        # Coordenadas para centrar el mapa en Tolima
+        lat_centro = 3.84234302999644
+        lon_centro = -74.69905002261329
 
-        # Crear mapa centrado en los datos
+        # Crear mapa centrado en Tolima
         m = folium.Map(location=[lat_centro, lon_centro], zoom_start=8)
 
         # Crear grupos de capas para la leyenda
