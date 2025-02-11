@@ -5,6 +5,21 @@ from streamlit_folium import folium_static
 # Configurar la página para que use todo el ancho disponible
 st.set_page_config(layout="wide", page_title="Mapas de Fiebre Amarilla", page_icon="🦟")
 
+# Ocultar la barra superior y el menú de Streamlit
+st.markdown("""
+    <style>
+    #MainMenu, header, footer {visibility: hidden;}
+
+    /* Centrar el mapa */
+    .mapa-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
 # Título de la aplicación
 st.markdown("<h1 style='text-align: center;'>🦟 Mapas de Fiebre Amarilla 2025 🦟</h1>", unsafe_allow_html=True)
 
