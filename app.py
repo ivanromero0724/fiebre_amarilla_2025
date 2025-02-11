@@ -22,4 +22,4 @@ folium.Marker(
 ).add_to(m)
 
 # Mostrar el mapa con un tamaño más grande
-folium_static(m, width=1300, height=600)
+folium_static(m, width=1400, height=600)
