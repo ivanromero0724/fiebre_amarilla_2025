@@ -18,5 +18,5 @@ folium.Marker(
     icon=folium.Icon(color="blue"),
 ).add_to(m)
 
-# Mostrar el mapa en la app
-folium_static(m)
+# Mostrar el mapa con un tamaño más grande
+folium_static(m, width=900, height=600)
