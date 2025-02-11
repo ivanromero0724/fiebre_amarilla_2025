@@ -51,10 +51,9 @@ if df is not None:
             marker = folium.CircleMarker(
                 location=[row["lat_93_LOCALIZACIN_DE_LA"], row["long_93_LOCALIZACIN_DE_LA"]],
                 radius=2,
-                color="black",  # Borde negro
-                weight=1,  # Grosor del borde
+                color=color,
                 fill=True,
-                fill_color=color,  # Color de relleno según la variable
+                fill_color=color,
                 fill_opacity=1,
                 popup=f"Vivienda efectiva: {estado_vivienda}"
             )
