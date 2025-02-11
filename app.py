@@ -51,9 +51,10 @@ if df is not None:
             marker = folium.CircleMarker(
                 location=[row["lat_93_LOCALIZACIN_DE_LA"], row["long_93_LOCALIZACIN_DE_LA"]],
                 radius=2,
-                color=color,
+                color="black",  # Borde negro
+                weight=1,  # Grosor del borde
                 fill=True,
-                fill_color=color,
+                fill_color=color,  # Color de relleno según la variable
                 fill_opacity=1,
                 popup=f"Vivienda efectiva: {estado_vivienda}"
             )
@@ -64,8 +65,6 @@ if df is not None:
             elif estado_vivienda == "NO":
                 marker.add_to(capa_no)
 
-        folium.TileLayer("OpenStreetMap").add_to(m)
-        folium.TileLayer(show=True).add_to(m)
         # Agregar control de capas (esto actúa como la leyenda)
         folium.LayerControl().add_to(m)
 
