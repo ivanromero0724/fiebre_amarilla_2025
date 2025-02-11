@@ -78,7 +78,6 @@ if df is not None:
         ).add_to(m)
         # Agregar control de capas (esto actúa como la leyenda)
         folium.LayerControl().add_to(m)
-        folium.plugins.Geocoder().add_to(m)
         # Mostrar el mapa en Streamlit
         folium_static(m, width=1305, height=600)
     else:
