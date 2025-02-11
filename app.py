@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import folium
 from streamlit_folium import folium_static
-from branca.element import Template, MacroElement
+import streamlit.components.v1 as components
 
 # Configurar la página
 st.set_page_config(layout="wide", page_title="Mapas de Fiebre Amarilla", page_icon="🦟")
@@ -48,23 +48,40 @@ if df is not None:
                 popup=f"Vivienda efectiva: {estado_vivienda}"
             ).add_to(m)
 
-        # Agregar la leyenda como HTML directamente en el mapa
+        # Agregar la leyenda como HTML
         legend_html = '''
-        <div style="position: fixed; 
-                    bottom: 40px; left: 40px; width: 220px; height: 80px; 
-                    background-color: white; z-index:9999; font-size:14px;
-                    border:2px solid grey; padding: 10px; border-radius: 8px;
-                    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);">
+        <div style="
+            position: fixed; 
+            bottom: 40px; left: 40px; width: 220px; height: 80px; 
+            background-color: white; z-index:9999; font-size:14px;
+            border:2px solid grey; padding: 10px; border-radius: 8px;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+        ">
             <b> Leyenda </b><br>
             <span style="color:green; font-size:18px;">&#9679;</span> Vivienda efectiva <br>
             <span style="color:red; font-size:18px;">&#9679;</span> No efectiva <br>
         </div>
         '''
-        
-        m.get_root().html.add_child(folium.Element(legend_html))
 
-        # Renderizar el mapa con la leyenda en Streamlit
-        folium_static(m, width=1310, height=600)
+        # Guardar el mapa con la leyenda en un archivo HTML temporal
+        m_html = m._repr_html_()
+        full_map = f"""
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Mapa de Fiebre Amarilla</title>
+        </head>
+        <body>
+            {m_html}
+            {legend_html} <!-- Agregar la leyenda aquí -->
+        </body>
+        </html>
+        """
+
+        # Renderizar el mapa en Streamlit
+        components.html(full_map, width=1310, height=600)
     else:
         st.error("Las columnas requeridas no se encuentran en el archivo.")
 else:
