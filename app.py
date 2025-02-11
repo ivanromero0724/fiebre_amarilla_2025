@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import folium
 from streamlit_folium import folium_static
-from folium.plugins import MarkerCluster
 
 # Configurar la página
 st.set_page_config(layout="wide", page_title="Mapas de Fiebre Amarilla", page_icon="🦟")
@@ -39,10 +38,6 @@ if df is not None:
         # Definir colores según la variable "6_VIVIENDA_EFECTIVA_"
         colores = {"SI": "red", "NO": "blue"}
 
-        # Agrupar puntos cercanos en clústeres
-        marker_cluster_si = MarkerCluster().add_to(capa_si)
-        marker_cluster_no = MarkerCluster().add_to(capa_no)
-
         # Agregar puntos desde el DataFrame
         for _, row in df.iterrows():
             estado_vivienda = str(row["6_VIVIENDA_EFECTIVA_"]).strip().upper()
@@ -60,9 +55,9 @@ if df is not None:
 
             # Asignar el marcador a la capa correspondiente
             if estado_vivienda == "SI":
-                marker.add_to(marker_cluster_si)
+                marker.add_to(capa_si)
             elif estado_vivienda == "NO":
-                marker.add_to(marker_cluster_no)
+                marker.add_to(capa_no)
 
         # Agregar control de capas (esto actúa como leyenda)
         folium.LayerControl().add_to(m)
