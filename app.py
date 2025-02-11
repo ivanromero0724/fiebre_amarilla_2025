@@ -10,9 +10,6 @@ st.set_page_config(layout="wide", page_title="Mapas de Fiebre Amarilla", page_ic
 # Título centrado
 st.markdown("<h1 style='text-align: center;'>🗺️ Mapas de Fiebre Amarilla 2025 🦟</h1>", unsafe_allow_html=True)
 
-# Limpiar caché automáticamente antes de cargar los datos
-st.cache_data.clear()
-
 # URL del archivo en GitHub
 url = "https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/form-1__geocaracterizacion.xlsx"
 
