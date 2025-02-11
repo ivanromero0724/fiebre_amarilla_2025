@@ -3,6 +3,8 @@ import pandas as pd
 import folium
 from streamlit_folium import folium_static
 from folium.plugins import MiniMap
+import requests
+from io import BytesIO
 
 # Configurar la página
 st.set_page_config(layout="wide", page_title="Mapas de Fiebre Amarilla", page_icon="🦟")
@@ -16,10 +18,15 @@ url = "https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/mai
 def cargar_datos(url):
     """Carga el archivo Excel desde GitHub sin usar caché."""
     try:
-        df = pd.read_excel(url, engine="openpyxl")  
+        response = requests.get(url, timeout=10)  # Forzar nueva descarga
+        response.raise_for_status()
+        df = pd.read_excel(BytesIO(response.content), engine="openpyxl")  
         return df
+    except requests.exceptions.RequestException:
+        st.warning("⚠️ No se pudo descargar el archivo. Puede que haya sido eliminado o la URL sea incorrecta.")
+        return None
     except Exception as e:
-        st.warning("No se encontraron datos. Puede que el archivo haya sido eliminado.")
+        st.error(f"Error al leer el archivo: {e}")
         return None
 
 df = cargar_datos(url)
