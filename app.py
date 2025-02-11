@@ -2,6 +2,27 @@ import streamlit as st
 import folium
 from streamlit_folium import folium_static
 
+# Configurar la página para que use todo el ancho disponible
+st.set_page_config(layout="wide")
+
+# Aplicar estilos CSS para fondo blanco y centrar el contenido
+st.markdown(
+    """
+    <style>
+        /* Fondo blanco */
+        .stApp {
+            background-color: white;
+        }
+        /* Centrar contenido */
+        .main {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 # Título de la aplicación
 st.title("Mapa Interactivo con Streamlit")
 
@@ -18,5 +39,5 @@ folium.Marker(
     icon=folium.Icon(color="blue"),
 ).add_to(m)
 
-# Mostrar el mapa con un tamaño más grande
-folium_static(m, width=2000, height=600)
+# Mostrar el mapa con un tamaño más grande y centrado
+folium_static(m, width=900, height=600)
