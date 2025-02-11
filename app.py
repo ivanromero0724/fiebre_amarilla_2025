@@ -37,8 +37,8 @@ if df is not None:
         m = folium.Map(location=[lat_centro, lon_centro], zoom_start=8)
 
         # Crear grupos de capas para la leyenda
-        capa_si = folium.FeatureGroup(name="Vivienda efectiva (SI)").add_to(m)
-        capa_no = folium.FeatureGroup(name="No efectiva (NO)").add_to(m)
+        capa_si = folium.FeatureGroup(name="Viviendas efectivas").add_to(m)
+        capa_no = folium.FeatureGroup(name="No efectivas").add_to(m)
 
         # Colores según la variable "6_VIVIENDA_EFECTIVA_"
         colores = {"SI": "green", "NO": "red"}
