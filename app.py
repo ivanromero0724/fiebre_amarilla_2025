@@ -69,6 +69,13 @@ if df is not None:
             elif estado_vivienda == "NO":
                 marker.add_to(capa_no)
 
+
+        folium.plugins.Fullscreen(
+            position="topright",
+            title="Expand me",
+            title_cancel="Exit me",
+            force_separate_button=True,
+        ).add_to(m)
         # Agregar control de capas (esto actúa como la leyenda)
         folium.LayerControl().add_to(m)
 
