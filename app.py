@@ -6,7 +6,7 @@ from streamlit_folium import folium_static
 st.set_page_config(layout="wide")
 
 # Título de la aplicación
-st.title("Mapas de Fiebre Amarilla 2025")
+st.title("Mapas de Fiebre Amarilla 2025 🦟")
 
 # Instrucciones
 st.write("Este es un mapa interactivo de ejemplo con Streamlit y Folium.")
