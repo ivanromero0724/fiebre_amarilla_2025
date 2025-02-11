@@ -8,9 +8,6 @@ st.set_page_config(layout="wide")
 # Título de la aplicación
 st.markdown("<h1 style='text-align: center;'>🦟 Mapas de Fiebre Amarilla 2025 🦟</h1>", unsafe_allow_html=True)
 
-# Instrucciones
-st.write("Este es un mapa interactivo de ejemplo con Streamlit y Folium.")
-
 # Crear un mapa con Folium
 m = folium.Map(location=[11.5449, -72.9066], zoom_start=8)
 
