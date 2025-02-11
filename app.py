@@ -80,7 +80,7 @@ if df is not None:
         folium.LayerControl().add_to(m)
 
         # Mostrar el mapa en Streamlit
-        folium_static(m, width=1310, height=600)
+        folium_static(m, width=1305, height=600)
     else:
         st.error("Las columnas requeridas no se encuentran en el archivo.")
 else:
