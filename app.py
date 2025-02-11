@@ -52,7 +52,7 @@ if df is not None:
         legend_html = '''
         <div style="
             position: fixed; 
-            bottom: 10px; left: 20px; width: 100px; height: 60px; 
+            bottom: 10px; left: 20px; width: 150px; height: 60px; 
             background-color: white; z-index:9999; font-size:14px;
             border:2px solid grey; padding: 10px; border-radius: 4px;
             box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
