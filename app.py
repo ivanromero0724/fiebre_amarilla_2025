@@ -54,6 +54,7 @@ if df is not None:
                 color=color,
                 fill=True,
                 fill_color=color,
+                fill_opacity=1,
                 popup=f"Vivienda efectiva: {estado_vivienda}"
             )
 
