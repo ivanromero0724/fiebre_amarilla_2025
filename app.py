@@ -10,6 +10,11 @@ st.set_page_config(layout="wide", page_title="Mapas de Fiebre Amarilla", page_ic
 # Título centrado
 st.markdown("<h1 style='text-align: center;'>🗺️ Mapas de Fiebre Amarilla 2025 🦟</h1>", unsafe_allow_html=True)
 
+# Botón para limpiar caché y recargar datos
+if st.button("Recargar datos 🔄"):
+    st.cache_data.clear()
+    st.experimental_rerun()
+
 # URL del archivo en GitHub
 url = "https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/form-1__geocaracterizacion.xlsx"
 
@@ -23,6 +28,7 @@ def cargar_datos(url):
         st.error(f"Error al cargar los datos: {e}")
         return None
 
+# Cargar los datos después del botón
 df = cargar_datos(url)
 
 if df is not None:
@@ -34,8 +40,25 @@ if df is not None:
         lat_centro = 3.84234302999644
         lon_centro = -74.69905002261329
 
-        # Crear mapa centrado en Tolima
-        m = folium.Map(location=[lat_centro, lon_centro], zoom_start=11)
+        # Crear mapa centrado en Tolima con borde negro
+        m = folium.Map(
+            location=[lat_centro, lon_centro], 
+            zoom_start=11, 
+            control_scale=True
+        )
+
+        # Agregar borde negro al mapa con CSS
+        st.markdown(
+            """
+            <style>
+                .folium-map {
+                    border: 4px solid black;
+                    border-radius: 10px;
+                }
+            </style>
+            """,
+            unsafe_allow_html=True
+        )
 
         # Agregar el plugin MiniMap
         minimap = MiniMap(toggle_display=True, position="bottomright")
@@ -69,17 +92,20 @@ if df is not None:
             elif estado_vivienda == "NO":
                 marker.add_to(capa_no)
 
-
+        # Agregar botón de pantalla completa
         folium.plugins.Fullscreen(
             position="topleft",
-            title="Expand me",
-            title_cancel="Exit me",
+            title="Expandir",
+            title_cancel="Salir",
             force_separate_button=True,
         ).add_to(m)
+
         # Agregar control de capas (esto actúa como la leyenda)
         folium.LayerControl().add_to(m)
-        # Mostrar el mapa en Streamlit
+
+        # Mostrar el mapa en Streamlit con borde negro
         folium_static(m, width=1305, height=600)
+
     else:
         st.error("Las columnas requeridas no se encuentran en el archivo.")
 else:
