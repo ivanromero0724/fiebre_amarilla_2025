@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import folium
 from streamlit_folium import folium_static
-from branca.element import Template, MacroElement  # Para la leyenda
 
 # Configurar la página
 st.set_page_config(layout="wide", page_title="Mapas de Fiebre Amarilla", page_icon="🦟")
@@ -51,9 +50,8 @@ if df is not None:
 
             marker = folium.CircleMarker(
                 location=[row["lat_93_LOCALIZACIN_DE_LA"], row["long_93_LOCALIZACIN_DE_LA"]],
-                radius=4,  # Tamaño aumentado para mejor visibilidad
-                color="black",  # Borde negro
-                weight=1,  # Grosor del borde
+                radius=2,
+                color=color,
                 fill=True,
                 fill_color=color,
                 fill_opacity=1,
@@ -66,33 +64,8 @@ if df is not None:
             elif estado_vivienda == "NO":
                 marker.add_to(capa_no)
 
-        # Agregar control de capas (esto actúa como la leyenda en capas)
+        # Agregar control de capas (esto actúa como la leyenda)
         folium.LayerControl().add_to(m)
-
-        # Crear leyenda personalizada (HTML + CSS)
-        legend_html = """
-        <div style="
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            width: 180px;
-            background-color: white;
-            z-index:9999;
-            font-size:14px;
-            border-radius: 8px;
-            padding: 10px;
-            box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
-        ">
-            <b>Leyenda</b><br>
-            🟢 <span style="color:green;">Vivienda efectiva</span><br>
-            🔴 <span style="color:red;">No efectiva</span><br>
-        </div>
-        """
-        
-        # Agregar la leyenda al mapa
-        legend = MacroElement()
-        legend._template = Template(legend_html)
-        m.get_root().add_child(legend)
 
         # Mostrar el mapa en Streamlit
         folium_static(m, width=1310, height=600)
