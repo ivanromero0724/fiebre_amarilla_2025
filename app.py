@@ -25,30 +25,19 @@ def cargar_datos(url):
 df = cargar_datos(url)
 
 if df is not None:
-    # Verificar que las columnas requeridas existen
     if {"lat_93_LOCALIZACIN_DE_LA", "long_93_LOCALIZACIN_DE_LA", "6_VIVIENDA_EFECTIVA_"}.issubset(df.columns):
         df = df.dropna(subset=["lat_93_LOCALIZACIN_DE_LA", "long_93_LOCALIZACIN_DE_LA", "6_VIVIENDA_EFECTIVA_"])
 
-        # Coordenadas para centrar el mapa en Tolima
         lat_centro = 3.84234302999644
         lon_centro = -74.69905002261329
-
-        # Crear mapa centrado en Tolima
         m = folium.Map(location=[lat_centro, lon_centro], zoom_start=11)
 
-        # Crear grupos de capas para la leyenda
-        capa_si = folium.FeatureGroup(name="Viviendas efectivas").add_to(m)
-        capa_no = folium.FeatureGroup(name="No efectivas").add_to(m)
-
-        # Colores según la variable "6_VIVIENDA_EFECTIVA_"
         colores = {"SI": "green", "NO": "red"}
 
-        # Agregar puntos desde el DataFrame
         for _, row in df.iterrows():
             estado_vivienda = str(row["6_VIVIENDA_EFECTIVA_"]).strip().upper()
-            color = colores.get(estado_vivienda, "gray")  # Gris si el valor es desconocido
-
-            marker = folium.CircleMarker(
+            color = colores.get(estado_vivienda, "gray")
+            folium.CircleMarker(
                 location=[row["lat_93_LOCALIZACIN_DE_LA"], row["long_93_LOCALIZACIN_DE_LA"]],
                 radius=2,
                 color=color,
@@ -56,18 +45,22 @@ if df is not None:
                 fill_color=color,
                 fill_opacity=1,
                 popup=f"Vivienda efectiva: {estado_vivienda}"
-            )
+            ).add_to(m)
 
-            # Asignar el marcador a la capa correspondiente
-            if estado_vivienda == "SI":
-                marker.add_to(capa_si)
-            elif estado_vivienda == "NO":
-                marker.add_to(capa_no)
+        # Agregar una leyenda personalizada con HTML y CSS
+        legend_html = '''
+        <div style="position: fixed; 
+                    bottom: 50px; left: 50px; width: 200px; height: 100px; 
+                    background-color: white; z-index:9999; font-size:14px;
+                    border:2px solid grey; padding: 10px; border-radius: 8px;
+                    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);">
+            <b> Leyenda </b><br>
+            <i class="fa fa-circle" style="color:green"></i> Vivienda efectiva <br>
+            <i class="fa fa-circle" style="color:red"></i> No efectiva <br>
+        </div>
+        '''
 
-        # Agregar control de capas (esto actúa como la leyenda)
-        folium.LayerControl().add_to(m)
-
-        # Mostrar el mapa en Streamlit
+        m.get_root().html.add_child(folium.Element(legend_html))
         folium_static(m, width=1310, height=600)
     else:
         st.error("Las columnas requeridas no se encuentran en el archivo.")
