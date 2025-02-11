@@ -52,14 +52,14 @@ if df is not None:
         legend_html = '''
         <div style="
             position: fixed; 
-            bottom: 40px; left: 40px; width: 220px; height: 80px; 
+            bottom: 10px; left: 10px; width: 220px; height: 50px; 
             background-color: white; z-index:9999; font-size:14px;
             border:2px solid grey; padding: 10px; border-radius: 8px;
             box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
         ">
             <b> Leyenda </b><br>
             <span style="color:green; font-size:18px;">&#9679;</span> Vivienda efectiva <br>
-            <span style="color:red; font-size:18px;">&#9679;</span> No efectiva <br>
+            <span style="color:red; font-size:18px;">&#9679;</span> Vivienda no efectiva <br>
         </div>
         '''
 
