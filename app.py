@@ -3,6 +3,7 @@ import pandas as pd
 import folium
 from streamlit_folium import folium_static
 import streamlit.components.v1 as components
+from folium.plugins import LayerControl
 
 # Configurar la página
 st.set_page_config(layout="wide", page_title="Mapas de Fiebre Amarilla", page_icon="🦟")
@@ -29,37 +30,46 @@ if df is not None:
     if {"lat_93_LOCALIZACIN_DE_LA", "long_93_LOCALIZACIN_DE_LA", "6_VIVIENDA_EFECTIVA_"}.issubset(df.columns):
         df = df.dropna(subset=["lat_93_LOCALIZACIN_DE_LA", "long_93_LOCALIZACIN_DE_LA", "6_VIVIENDA_EFECTIVA_"])
 
-        lat_centro = 3.80
+        lat_centro = 3.84234302999644
         lon_centro = -74.69905002261329
-        m = folium.Map(location=[lat_centro, lon_centro], zoom_start=11)
+        m = folium.Map(location=[lat_centro, lon_centro], zoom_start=11, control_scale=True)
+
+        # Capas base
+        folium.TileLayer("OpenStreetMap").add_to(m)
+        folium.TileLayer("Stamen Terrain").add_to(m)
+        folium.TileLayer("CartoDB positron").add_to(m)
 
         colores = {"SI": "green", "NO": "red"}
+        grupo_viviendas = folium.FeatureGroup(name="Viviendas").add_to(m)
 
         for _, row in df.iterrows():
             estado_vivienda = str(row["6_VIVIENDA_EFECTIVA_"]).strip().upper()
             color = colores.get(estado_vivienda, "gray")
             folium.CircleMarker(
                 location=[row["lat_93_LOCALIZACIN_DE_LA"], row["long_93_LOCALIZACIN_DE_LA"]],
-                radius=2,
+                radius=3,
                 color=color,
                 fill=True,
                 fill_color=color,
                 fill_opacity=1,
                 popup=f"Vivienda efectiva: {estado_vivienda}"
-            ).add_to(m)
+            ).add_to(grupo_viviendas)
+
+        # Control de capas
+        folium.LayerControl(collapsed=False).add_to(m)
 
         # Agregar la leyenda como HTML
         legend_html = '''
         <div style="
             position: fixed; 
-            bottom: 10px; left: 20px; width: 150px; height: 60px; 
+            bottom: 40px; left: 40px; width: 220px; height: 80px; 
             background-color: white; z-index:9999; font-size:14px;
-            border:2px solid grey; padding: 10px; border-radius: 4px;
+            border:2px solid grey; padding: 10px; border-radius: 8px;
             box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
         ">
             <b> Leyenda </b><br>
             <span style="color:green; font-size:18px;">&#9679;</span> Vivienda efectiva <br>
-            <span style="color:red; font-size:18px;">&#9679;</span> Vivienda no efectiva <br>
+            <span style="color:red; font-size:18px;">&#9679;</span> No efectiva <br>
         </div>
         '''
 
