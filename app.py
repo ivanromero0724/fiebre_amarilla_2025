@@ -71,7 +71,7 @@ if df is not None:
 
 
         folium.plugins.Fullscreen(
-            position="topright",
+            position="topleft",
             title="Expand me",
             title_cancel="Exit me",
             force_separate_button=True,
