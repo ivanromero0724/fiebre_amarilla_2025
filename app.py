@@ -34,7 +34,7 @@ if df is not None:
         lon_centro = -74.69905002261329
 
         # Crear mapa centrado en Tolima
-        m = folium.Map(location=[lat_centro, lon_centro], zoom_start=13)
+        m = folium.Map(location=[lat_centro, lon_centro], zoom_start=11)
 
         # Crear grupos de capas para la leyenda
         capa_si = folium.FeatureGroup(name="Viviendas efectivas").add_to(m)
