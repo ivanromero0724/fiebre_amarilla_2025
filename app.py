@@ -23,7 +23,7 @@ st.markdown(
 
 # Obtener la fecha actual en la zona horaria de Colombia
 tz_colombia = pytz.timezone("America/Bogota")
-fecha_actual = datetime.now(tz_colombia).strftime("%d de %B de %Y")
+fecha_actual = datetime.now(tz_colombia).strftime("%d/%m/%Y")
 # Título centrado
 st.markdown("<h1 style='text-align: center;'>Viviendas con abordaje en búsqueda activa comunitaria por atención a brote de Fiebre Amarilla en Tolima</h1>", unsafe_allow_html=True)
 # Mostrar la fecha de actualización en Streamlit
