@@ -8,7 +8,7 @@ import pytz
 from branca.element import Template, MacroElement
 
 # Configurar la página
-st.set_page_config(layout="wide", page_title="Mapas de Fiebre Amarilla", page_icon="\U0001F99F")
+st.set_page_config(layout="wide", page_title="Mapa de Fiebre Amarilla", page_icon="\U0001F99F")
 
 # Reducir espacio superior con CSS
 st.markdown(
@@ -51,7 +51,7 @@ m.add_child(minimap)
 
 # Crear capas para viviendas efectivas y no efectivas
 capa_si = folium.FeatureGroup(name="Viviendas efectivas")
-capa_no = folium.FeatureGroup(name="No efectivas")
+capa_no = folium.FeatureGroup(name="Viviendas no efectivas")
 
 # Definir colores para los estados de las viviendas
 colores = df["6_VIVIENDA_EFECTIVA_"].str.strip().str.upper().map({"SI": "green", "NO": "red"}).fillna("gray")
