@@ -79,7 +79,7 @@ m.add_child(capa_si)
 m.add_child(capa_no)
 
 # Agregar capas base adicionales
-folium.TileLayer("OpenStreetMap").add_to(m)
+folium.TileLayer("OpenStreetMap",name="OPM").add_to(m)
 folium.TileLayer("CartoDB Positron").add_to(m)
 # Agregar capas base de Esri
 folium.TileLayer(
