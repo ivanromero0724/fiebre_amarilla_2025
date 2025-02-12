@@ -46,8 +46,8 @@ lat_centro, lon_centro = 3.84234302999644, -74.69905002261329
 m = folium.Map(location=[lat_centro, lon_centro], zoom_start=11)
 
 # Agregar minimapa
-#minimap = MiniMap(toggle_display=True, position="bottomright")
-#m.add_child(minimap)
+minimap = MiniMap(toggle_display=True, position="bottomright")
+m.add_child(minimap)
 
 # Crear capas para viviendas efectivas y no efectivas
 capa_si = folium.FeatureGroup(name="Viviendas efectivas")
@@ -102,3 +102,14 @@ m.get_root().html.add_child(legend)
 
 # Mostrar el mapa en Streamlit
 folium_static(m, height=650, width=1305)
+
+# Mostrar la leyenda en Streamlit con HTML y CSS
+st.markdown("""
+    <div style="background-color: white; padding: 10px; border-radius: 5px; 
+                box-shadow: 2px 2px 5px rgba(0,0,0,0.3); width: 220px;
+                line-height: 18px; margin-top: 10px;">
+        <b>Leyenda</b><br>
+        <i style="background: green; width: 12px; height: 12px; display: inline-block; margin-right: 8px; border-radius: 50%;"></i> Vivienda efectiva<br>
+        <i style="background: red; width: 12px; height: 12px; display: inline-block; margin-right: 8px; border-radius: 50%;"></i> No efectiva
+    </div>
+""", unsafe_allow_html=True)
