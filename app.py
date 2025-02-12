@@ -5,6 +5,7 @@ from streamlit_folium import folium_static
 from folium.plugins import MiniMap
 from datetime import datetime
 import pytz
+import locale
 
 # Configurar la página
 st.set_page_config(layout="wide", page_title="Mapas de Fiebre Amarilla", page_icon="🦟")
@@ -21,7 +22,10 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Obtener la fecha actual en la zona horaria de Colombia
+# Configurar locale en español (para sistemas que lo soporten)
+locale.setlocale(locale.LC_TIME, "es_ES")  # Para Windows (si es compatible)
+
+# Obtener la fecha actual en español
 tz_colombia = pytz.timezone("America/Bogota")
 fecha_actual = datetime.now(tz_colombia).strftime("%d de %B de %Y")
 # Título centrado
