@@ -100,4 +100,4 @@ legend._template = Template(legend_html)
 # Agregar la leyenda al mapa
 m.get_root().add_child(legend)
 # Mostrar el mapa en Streamlit
-folium_static(m, height=650, width=1305)
+folium_static(m, height=650)
