@@ -157,12 +157,14 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-st.markdown("#### Resumen de Viviendas por Municipio")
+# Crear columnas vacías a los lados para centrar la tabla
+col1, col2, col3 = st.columns([1, 3, 1])  # Ajusta los valores según el ancho deseado
 
-tabla_resumen = datos.groupby("1_MUNICIPIO")["6_VIVIENDA_EFECTIVA_"].value_counts().unstack(fill_value=0)
-tabla_resumen["Total"] = tabla_resumen.sum(axis=1)
-tabla_resumen.columns = ["Viviendas No Efectivas", "Viviendas Efectivas", "Total"]
+with col2:  # Coloca la tabla en la columna central
+    st.markdown("#### Resumen de Viviendas por Municipio")
 
-st.markdown('<div class="centered-table">', unsafe_allow_html=True)
-st.dataframe(tabla_resumen.style.set_properties(**{'background-color': 'white', 'border-radius': '10px', 'padding': '10px'}))
-st.markdown('</div>', unsafe_allow_html=True)
+    tabla_resumen = datos.groupby("1_MUNICIPIO")["6_VIVIENDA_EFECTIVA_"].value_counts().unstack(fill_value=0)
+    tabla_resumen["Total"] = tabla_resumen.sum(axis=1)
+    tabla_resumen.columns = ["Viviendas No Efectivas", "Viviendas Efectivas", "Total"]
+
+    st.dataframe(tabla_resumen.style.set_properties(**{'background-color': 'white', 'border-radius': '10px', 'padding': '10px'}))
