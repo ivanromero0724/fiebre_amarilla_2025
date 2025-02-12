@@ -134,6 +134,50 @@ datos["1_MUNICIPIO"] = datos["1_MUNICIPIO"].astype(str)
 datos["2_AREA"] = datos["2_AREA"].astype(str)
 datos["6_VIVIENDA_EFECTIVA_"] = datos["6_VIVIENDA_EFECTIVA_"].astype(str)
 
+import streamlit as st
+import pandas as pd
+import folium
+from streamlit_folium import folium_static
+from folium.plugins import MiniMap
+from datetime import datetime
+import pytz
+import matplotlib.pyplot as plt
+import plotly.express as px
+
+# Configuración de la página
+st.set_page_config(layout="wide", page_title="Mapa de Fiebre Amarilla", page_icon="\U0001F99F")
+
+# Reducir espacio superior con CSS
+st.markdown("""
+    <style>
+        .block-container {
+            padding-top: 2rem !important;
+        }
+        .metric-container {
+            text-align: center;
+            font-size: 18px;
+        }
+        .stTable {
+            background-color: white;
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+    </style>
+""", unsafe_allow_html=True)
+
+# Obtener la fecha actual en la zona horaria de Colombia
+tz_colombia = pytz.timezone("America/Bogota")
+fecha_actual = datetime.now(tz_colombia).strftime("%d/%m/%Y")
+
+# Mostrar el título y la fecha de actualización
+st.markdown(f"""
+    <h1 style='text-align: center;'>Viviendas con abordaje en búsqueda activa comunitaria por atención a brote de Fiebre Amarilla en Tolima</h1>
+    <p style='text-align: center; font-size: 14px;'><b>Última fecha de actualización:</b> {fecha_actual}</p>
+""", unsafe_allow_html=True)
+
+# Cargar los datos desde el archivo en GitHub
+url = "https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/2025-02-11.xlsx"
 datos = pd.read_excel(url, engine="openpyxl")
 
 # Filtrar valores nulos en coordenadas
@@ -145,30 +189,37 @@ porcentaje_geo = (len(datos_geo) / len(datos)) * 100
 # Diseño del dashboard
 st.markdown("## Dashboard de Análisis de Viviendas")
 
-col1, col2 = st.columns([1, 2])
+# Sección de métricas
+st.markdown("### Métricas Claves")
+st.markdown(f"""
+    <div class="metric-container">
+        <h2>Porcentaje de viviendas georreferenciadas</h2>
+        <p style='font-size: 24px; font-weight: bold; color: #ff5733;'>{porcentaje_geo:.2f}%</p>
+    </div>
+""", unsafe_allow_html=True)
 
-# Cuadro de porcentaje de viviendas georreferenciadas
+# Sección de gráficos
+st.markdown("### Visualización de Datos")
+col1, col2 = st.columns(2)
+
 with col1:
-    st.metric("Porcentaje de viviendas georreferenciadas", f"{porcentaje_geo:.2f}%")
-
-# Diagramas de torta
-with col2:
     fig1 = px.pie(datos, names="1_MUNICIPIO", title="Distribución por Municipio")
     st.plotly_chart(fig1, use_container_width=True)
 
-col3, col4 = st.columns(2)
-with col3:
+with col2:
     fig2 = px.pie(datos, names="2_AREA", title="Distribución por Área")
     st.plotly_chart(fig2, use_container_width=True)
 
-with col4:
+col3, col4 = st.columns(2)
+
+with col3:
     fig3 = px.pie(datos, names="6_VIVIENDA_EFECTIVA_", title="Viviendas Efectivas vs No Efectivas")
     st.plotly_chart(fig3, use_container_width=True)
 
 # Tabla resumen por municipio
+st.markdown("### Resumen de Viviendas por Municipio")
 tabla_resumen = datos.groupby("1_MUNICIPIO")["6_VIVIENDA_EFECTIVA_"].value_counts().unstack(fill_value=0)
 tabla_resumen["Total"] = tabla_resumen.sum(axis=1)
 tabla_resumen.columns = ["Viviendas No Efectivas", "Viviendas Efectivas", "Total"]
 
-st.markdown("### Resumen de Viviendas por Municipio")
-st.dataframe(tabla_resumen)
+st.dataframe(tabla_resumen.style.set_properties(**{'background-color': 'white', 'border-radius': '10px', 'padding': '10px'}))
