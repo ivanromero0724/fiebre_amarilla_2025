@@ -43,7 +43,7 @@ df = df.dropna(subset=["lat_93_LOCALIZACIN_DE_LA", "long_93_LOCALIZACIN_DE_LA", 
 
 # Definir coordenadas centrales del mapa
 lat_centro, lon_centro = 3.84234302999644, -74.69905002261329
-m = folium.Map(location=[lat_centro, lon_centro], zoom_start=11,tiles=None)
+m = folium.Map(location=[lat_centro, lon_centro], zoom_start=11)
 
 # Agregar minimapa
 minimap = MiniMap(toggle_display=True, position="bottomright")
@@ -85,8 +85,7 @@ folium.TileLayer(
     name="Imagen satelital"
 ).add_to(m)
 # Agregar capas base con nombres personalizados
-folium.TileLayer("CartoDB Positron", name="Mapa Claro (CartoDB)").add_to(m)
-folium.TileLayer("OpenStreetMap", name="Mapa OpenStreetMap").add_to(m)
+folium.TileLayer("CartoDB Positron").add_to(m)
 
 folium.LayerControl().add_to(m)
 
