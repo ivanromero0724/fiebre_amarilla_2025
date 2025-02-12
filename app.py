@@ -80,9 +80,6 @@ m.add_child(capa_no)
 
 # Agregar capas base adicionales
 folium.TileLayer("OpenStreetMap").add_to(m)
-folium.TileLayer("Stamen Terrain").add_to(m)
-folium.TileLayer("Stamen Toner").add_to(m)
-folium.TileLayer("Stamen Watercolor").add_to(m)
 folium.TileLayer("CartoDB Positron").add_to(m)
 folium.TileLayer("CartoDB Dark_Matter").add_to(m)
 folium.TileLayer("https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}", 
