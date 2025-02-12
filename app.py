@@ -155,7 +155,7 @@ with col2:  # Coloca la tabla en la columna central
 
     tabla_resumen = datos.groupby("1_MUNICIPIO")["6_VIVIENDA_EFECTIVA_"].value_counts().unstack(fill_value=0)
     tabla_resumen["Total"] = tabla_resumen.sum(axis=1)
-    tabla_resumen.columns = ["No Efectivas", "Efectivas", "Total"]
+    tabla_resumen.columns = ["Viviendas no efectivas", "Viviendas efectivas", "Total"]
 
     # Agregar la fila de totales
     total_row = pd.DataFrame(tabla_resumen.sum(), columns=["Total"]).T
