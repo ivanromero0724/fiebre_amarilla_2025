@@ -5,66 +5,78 @@ from streamlit_folium import folium_static
 from folium.plugins import MiniMap
 from datetime import datetime
 import pytz
-from folium import Element
 
+# Configurar la página
 st.set_page_config(layout="wide", page_title="Mapas de Fiebre Amarilla", page_icon="\U0001F99F")
 
-st.markdown("""
+# Reducir espacio superior con CSS
+st.markdown(
+    """
     <style>
         .block-container {
             padding-top: 2rem !important;
         }
     </style>
-    """, unsafe_allow_html=True)
+    """,
+    unsafe_allow_html=True
+)
 
-fecha_actual = datetime.now(pytz.timezone("America/Bogota")).strftime("%d/%m/%Y")
+# Obtener la fecha actual en la zona horaria de Colombia
+tz_colombia = pytz.timezone("America/Bogota")
+fecha_actual = datetime.now(tz_colombia).strftime("%d/%m/%Y")
 
-st.markdown(f"""
+# Mostrar el título y la fecha de actualización
+st.markdown("""
     <h1 style='text-align: center;'>Viviendas con abordaje en búsqueda activa comunitaria por atención a brote de Fiebre Amarilla en Tolima</h1>
-    <p style='text-align: center; font-size: 14px;'><b>Fecha de actualización:</b> {fecha_actual}</p>
-    """, unsafe_allow_html=True)
+    <p style='text-align: center; font-size: 14px;'><b>Fecha de actualización:</b> {}</p>
+    """.format(fecha_actual), unsafe_allow_html=True)
 
+# URL del archivo en GitHub
 url = "https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/form-1__geocaracterizacion.xlsx"
+
+# Cargar los datos desde el archivo Excel
 df = pd.read_excel(url, engine="openpyxl")
+
+# Filtrar valores nulos en las columnas necesarias
 df = df.dropna(subset=["lat_93_LOCALIZACIN_DE_LA", "long_93_LOCALIZACIN_DE_LA", "6_VIVIENDA_EFECTIVA_"])
 
+# Definir coordenadas centrales del mapa
 lat_centro, lon_centro = 3.84234302999644, -74.69905002261329
 m = folium.Map(location=[lat_centro, lon_centro], zoom_start=11)
 
+# Agregar minimapa
 minimap = MiniMap(toggle_display=True, position="bottomright")
 m.add_child(minimap)
 
-capa_si, capa_no = folium.FeatureGroup(name="Viviendas efectivas"), folium.FeatureGroup(name="No efectivas")
-colores = {"SI": "green", "NO": "red"}
+# Crear capas para viviendas efectivas y no efectivas
+capa_si = folium.FeatureGroup(name="Viviendas efectivas")
+capa_no = folium.FeatureGroup(name="No efectivas")
 
-for _, row in df.iterrows():
-    estado_vivienda = str(row["6_VIVIENDA_EFECTIVA_"]).strip().upper()
-    color = colores.get(estado_vivienda, "gray")
-    marker = folium.CircleMarker(
-        location=[row["lat_93_LOCALIZACIN_DE_LA"], row["long_93_LOCALIZACIN_DE_LA"]],
-        radius=2, color=color, fill=True, fill_color=color, fill_opacity=1,
-        popup=f"Vivienda efectiva: {estado_vivienda}"
-    )
-    (capa_si if estado_vivienda == "SI" else capa_no).add_child(marker)
+# Definir colores para los estados de las viviendas
+colores = df["6_VIVIENDA_EFECTIVA_"].str.strip().str.upper().map({"SI": "green", "NO": "red"}).fillna("gray")
 
+# Crear los marcadores en el mapa
+df_si = df[colores == "green"]
+df_no = df[colores == "red"]
+
+capa_si.add_child(folium.FeatureGroup(name="Viviendas efectivas",
+    children=[folium.CircleMarker(
+        location=[lat, lon],
+        radius=2, color="green", fill=True, fill_color="green", fill_opacity=1,
+        popup="Vivienda efectiva: SI"
+    ) for lat, lon in zip(df_si["lat_93_LOCALIZACIN_DE_LA"], df_si["long_93_LOCALIZACIN_DE_LA"])]))
+
+capa_no.add_child(folium.FeatureGroup(name="No efectivas",
+    children=[folium.CircleMarker(
+        location=[lat, lon],
+        radius=2, color="red", fill=True, fill_color="red", fill_opacity=1,
+        popup="Vivienda efectiva: NO"
+    ) for lat, lon in zip(df_no["lat_93_LOCALIZACIN_DE_LA"], df_no["long_93_LOCALIZACIN_DE_LA"])]))
+
+# Agregar las capas al mapa
 m.add_child(capa_si)
 m.add_child(capa_no)
 folium.LayerControl().add_to(m)
 
-legend_html = """
-<div id='maplegend' class='maplegend' 
-    style='position: absolute; z-index: 9999; background-color: rgba(255, 255, 255, 0.7);
-    border-radius: 6px; padding: 10px; font-size: 12px; right: 20px; bottom: 20px;'>     
-<b>🦟 Leyenda</b>
-<div class='legend-scale'>
-  <ul class='legend-labels' style='list-style: none; padding-left: 10px;'>
-    <li><span style='background: green; display: inline-block; width: 12px; height: 12px; margin-right: 5px;'></span> Viviendas efectivas</li>
-    <li><span style='background: red; display: inline-block; width: 12px; height: 12px; margin-right: 5px;'></span> No efectivas</li>
-  </ul>
-</div>
-</div>
-"""
-legend = Element(legend_html)
-m.get_root().html.add_child(legend)
-
+# Mostrar el mapa en Streamlit
 folium_static(m, width=1305, height=600)
