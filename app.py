@@ -7,7 +7,7 @@ from datetime import datetime
 import pytz
 
 # Configurar la página
-st.set_page_config(layout="centered", page_title="Mapas de Fiebre Amarilla", page_icon="\U0001F99F")
+st.set_page_config(layout="wide", page_title="Mapas de Fiebre Amarilla", page_icon="\U0001F99F")
 
 # Reducir espacio superior con CSS
 st.markdown(
@@ -79,4 +79,4 @@ m.add_child(capa_no)
 folium.LayerControl().add_to(m)
 
 # Mostrar el mapa en Streamlit
-folium_static(m, width=1305, height=650)
+folium_static(m, height=650)
