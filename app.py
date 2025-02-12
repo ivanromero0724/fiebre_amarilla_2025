@@ -106,7 +106,7 @@ legend_template = """
 # Add the legend to the map
 macro = MacroElement()
 macro._template = Template(legend_template)
-map.get_root().add_child(macro)
+m.get_root().add_child(macro)
 
 # Mostrar el mapa en Streamlit
 folium_static(m, width=1305, height=600)
