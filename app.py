@@ -6,7 +6,6 @@ from folium.plugins import MiniMap
 from datetime import datetime
 import pytz
 from branca.element import Template, MacroElement
-from folium.plugins import Fullscreen
 
 # Configurar la página
 st.set_page_config(layout="wide", page_title="Mapa de Fiebre Amarilla", page_icon="\U0001F99F")
@@ -45,9 +44,6 @@ df = df.dropna(subset=["lat_93_LOCALIZACIN_DE_LA", "long_93_LOCALIZACIN_DE_LA", 
 # Definir coordenadas centrales del mapa
 lat_centro, lon_centro = 3.84234302999644, -74.69905002261329
 m = folium.Map(location=[lat_centro, lon_centro], zoom_start=11, tiles= None)
-
-# Agregar el botón de pantalla completa en la esquina superior izquierda
-Fullscreen(position="topleft").add_to(m)
 
 # Agregar minimapa
 minimap = MiniMap(toggle_display=True, position="bottomright")
