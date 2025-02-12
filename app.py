@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 import plotly.express as px
 
 # Configurar la página
-st.set_page_config(layout="wide", page_title="Mapa de Fiebre Amarilla", page_icon="\U0001F99F")
+st.set_page_config(layout="wide", page_title="Fiebre Amarilla Tolima", page_icon="\U0001F99F")
 
 # Reducir espacio superior con CSS
 st.markdown(
@@ -135,17 +135,17 @@ st.markdown("""
 col1, col2, col3 = st.columns(3)
 
 with col1:
-    fig1 = px.pie(datos, names="1_MUNICIPIO", title="Distribución de viviendas por municipio",color_discrete_sequence=px.colors.qualitative.Safe)
+    fig1 = px.pie(datos, names="1_MUNICIPIO", title="Distribución de Viviendas por Municipio",color_discrete_sequence=px.colors.qualitative.Safe)
     fig1.update_layout(title={'x': 0.5, 'xanchor': 'center'})
     st.plotly_chart(fig1, use_container_width=True)
 
 with col2:
-    fig2 = px.pie(datos, names="2_AREA", title="Distribución de viviendas por área",color_discrete_sequence=px.colors.qualitative.Safe)
+    fig2 = px.pie(datos, names="2_AREA", title="Distribución de Viviendas por Área",color_discrete_sequence=px.colors.qualitative.Safe)
     fig2.update_layout(title={'x': 0.5, 'xanchor': 'center'})
     st.plotly_chart(fig2, use_container_width=True)
 
 with col3:
-    fig3 = px.pie(datos, names="6_VIVIENDA_EFECTIVA_", title="Viviendas efectivas vs no efectivas",
+    fig3 = px.pie(datos, names="6_VIVIENDA_EFECTIVA_", title="Viviendas Efectivas vs No Efectivas",
                   color_discrete_sequence=[px.colors.qualitative.Safe[3], px.colors.qualitative.Safe[1]])
     fig3.update_layout(title={'x': 0.5, 'xanchor': 'center'})
     st.plotly_chart(fig3, use_container_width=True)
