@@ -159,7 +159,7 @@ with col2:  # Coloca la tabla en la columna central
 
     # Agregar la fila de totales
     total_row = pd.DataFrame(tabla_resumen.sum(), columns=["Total"]).T
-    total_row.index = ["Total General"]
+    total_row.index = ["Total"]
 
     # Concatenar la fila de totales con la tabla original
     tabla_resumen = pd.concat([tabla_resumen, total_row])
