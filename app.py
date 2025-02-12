@@ -43,7 +43,7 @@ df = df.dropna(subset=["lat_93_LOCALIZACIN_DE_LA", "long_93_LOCALIZACIN_DE_LA", 
 
 # Definir coordenadas centrales del mapa
 lat_centro, lon_centro = 3.84234302999644, -74.69905002261329
-m = folium.Map(location=[lat_centro, lon_centro], zoom_start=11)
+m = folium.Map(location=[lat_centro, lon_centro], zoom_start=11, tiles= None)
 
 # Agregar minimapa
 minimap = MiniMap(toggle_display=True, position="bottomright")
