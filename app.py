@@ -77,6 +77,17 @@ for lat, lon in zip(df_no["lat_93_LOCALIZACIN_DE_LA"], df_no["long_93_LOCALIZACI
 # Agregar las capas al mapa
 m.add_child(capa_si)
 m.add_child(capa_no)
+
+# Agregar capas base adicionales
+folium.TileLayer("OpenStreetMap").add_to(m)
+folium.TileLayer("Stamen Terrain").add_to(m)
+folium.TileLayer("Stamen Toner").add_to(m)
+folium.TileLayer("Stamen Watercolor").add_to(m)
+folium.TileLayer("CartoDB Positron").add_to(m)
+folium.TileLayer("CartoDB Dark_Matter").add_to(m)
+folium.TileLayer("https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}", 
+                 attr="Google Satellite", name="Google Satellite").add_to(m)
+
 folium.LayerControl().add_to(m)
 
 # Mostrar el mapa en Streamlit
