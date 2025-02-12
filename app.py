@@ -7,8 +7,13 @@ from folium.plugins import MiniMap
 # Configurar la página
 st.set_page_config(layout="wide", page_title="Mapas de Fiebre Amarilla", page_icon="🦟")
 
+# Obtener la fecha actual en la zona horaria de Colombia
+tz_colombia = pytz.timezone("America/Bogota")
+fecha_actual = datetime.now(tz_colombia).strftime("%d de %B de %Y")
 # Título centrado
 st.markdown("<h1 style='text-align: center;'>Viviendas con abordaje en búsqueda activa comunitaria por atención brote de fiebre amarilla en Tolima</h1>", unsafe_allow_html=True)
+# Mostrar la fecha de actualización en Streamlit
+st.markdown(f"<p style='text-align: center; font-size: 16px;'><b>Fecha de actualización:</b> {fecha_actual}</p>", unsafe_allow_html=True)
 
 # URL del archivo en GitHub
 url = "https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/form-1__geocaracterizacion.xlsx"
