@@ -78,15 +78,15 @@ for lat, lon in zip(df_no["lat_93_LOCALIZACIN_DE_LA"], df_no["long_93_LOCALIZACI
 m.add_child(capa_si)
 m.add_child(capa_no)
 
-# Agregar capas base con nombres personalizados
-folium.TileLayer("OpenStreetMap", name="Mapa OpenStreetMap").add_to(m)
-folium.TileLayer("CartoDB Positron", name="Mapa Claro (CartoDB)").add_to(m)
 # Agregar capas base de Esri
 folium.TileLayer(
     tiles="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
     attr="Esri World Imagery",
     name="Imagen satelital"
 ).add_to(m)
+# Agregar capas base con nombres personalizados
+folium.TileLayer("CartoDB Positron", name="Mapa Claro (CartoDB)").add_to(m)
+folium.TileLayer("OpenStreetMap", name="Mapa OpenStreetMap").add_to(m)
 
 folium.LayerControl().add_to(m)
 
