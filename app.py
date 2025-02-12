@@ -43,7 +43,7 @@ df = df.dropna(subset=["lat_93_LOCALIZACIN_DE_LA", "long_93_LOCALIZACIN_DE_LA", 
 
 # Definir coordenadas centrales del mapa
 lat_centro, lon_centro = 3.84234302999644, -74.69905002261329
-m = folium.Map(location=[lat_centro, lon_centro], zoom_start=11)
+m = folium.Map(location=[lat_centro, lon_centro], zoom_start=11,tiles="OpenStreetMap")
 
 # Agregar minimapa
 minimap = MiniMap(toggle_display=True, position="bottomright")
@@ -78,14 +78,15 @@ for lat, lon in zip(df_no["lat_93_LOCALIZACIN_DE_LA"], df_no["long_93_LOCALIZACI
 m.add_child(capa_si)
 m.add_child(capa_no)
 
+
+# Agregar capas base con nombres personalizados
+folium.TileLayer("CartoDB Positron").add_to(m)
 # Agregar capas base de Esri
 folium.TileLayer(
     tiles="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
     attr="Esri World Imagery",
     name="Imagen satelital"
 ).add_to(m)
-# Agregar capas base con nombres personalizados
-folium.TileLayer("CartoDB Positron").add_to(m)
 
 folium.LayerControl().add_to(m)
 
