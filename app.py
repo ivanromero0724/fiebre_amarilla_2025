@@ -119,3 +119,45 @@ st.markdown("""
         <i style="background: red; width: 12px; height: 12px; display: inline-block; margin-right: 8px; border-radius: 50%;"></i> Vivienda no efectiva
     </div>
 """, unsafe_allow_html=True)
+
+
+
+
+datos = pd.read_excel(url, engine="openpyxl")
+
+# Filtrar valores nulos en coordenadas
+datos_geo = datos.dropna(subset=["lat_93_LOCALIZACIN_DE_LA", "long_93_LOCALIZACIN_DE_LA"])
+
+# Calcular porcentaje de viviendas georreferenciadas
+porcentaje_geo = (len(datos_geo) / len(datos)) * 100
+
+# Diseño del dashboard
+st.markdown("## Dashboard de Análisis de Viviendas")
+
+col1, col2 = st.columns([1, 2])
+
+# Cuadro de porcentaje de viviendas georreferenciadas
+with col1:
+    st.metric("Porcentaje de viviendas georreferenciadas", f"{porcentaje_geo:.2f}%")
+
+# Diagramas de torta
+with col2:
+    fig1 = px.pie(datos, names="1_MUNICIPIO", title="Distribución por Municipio")
+    st.plotly_chart(fig1, use_container_width=True)
+
+col3, col4 = st.columns(2)
+with col3:
+    fig2 = px.pie(datos, names="2_AREA", title="Distribución por Área")
+    st.plotly_chart(fig2, use_container_width=True)
+
+with col4:
+    fig3 = px.pie(datos, names="6_VIVIENDA_EFECTIVA_", title="Viviendas Efectivas vs No Efectivas")
+    st.plotly_chart(fig3, use_container_width=True)
+
+# Tabla resumen por municipio
+tabla_resumen = datos.groupby("1_MUNICIPIO")["6_VIVIENDA_EFECTIVA_"].value_counts().unstack(fill_value=0)
+tabla_resumen["Total"] = tabla_resumen.sum(axis=1)
+tabla_resumen.columns = ["Viviendas No Efectivas", "Viviendas Efectivas", "Total"]
+
+st.markdown("### Resumen de Viviendas por Municipio")
+st.dataframe(tabla_resumen)
