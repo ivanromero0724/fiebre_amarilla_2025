@@ -8,7 +8,7 @@ from folium.plugins import MiniMap
 st.set_page_config(layout="wide", page_title="Mapas de Fiebre Amarilla", page_icon="🦟")
 
 # Título centrado
-st.markdown("<h1 style='text-align: center;'>Viviendas con abordaje en búsqueda activa comunitaria por atención brote de fiebre amarilla en Tolima</h1>", unsafe_allow_html=True)
+st.markdown("<h2 style='text-align: center;'>Viviendas con abordaje en búsqueda activa comunitaria por atención brote de fiebre amarilla en Tolima</h2>", unsafe_allow_html=True)
 
 # URL del archivo en GitHub
 url = "https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/form-1__geocaracterizacion.xlsx"
