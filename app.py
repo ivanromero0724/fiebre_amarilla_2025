@@ -157,4 +157,11 @@ with col2:  # Coloca la tabla en la columna central
     tabla_resumen["Total"] = tabla_resumen.sum(axis=1)
     tabla_resumen.columns = ["Viviendas No Efectivas", "Viviendas Efectivas", "Total"]
 
+    # Agregar la fila de totales
+    total_row = pd.DataFrame(tabla_resumen.sum(), columns=["Total"]).T
+    total_row.index = ["Total General"]
+
+    # Concatenar la fila de totales con la tabla original
+    tabla_resumen = pd.concat([tabla_resumen, total_row])
+
     st.dataframe(tabla_resumen.style.set_properties(**{'background-color': 'white', 'border-radius': '10px', 'padding': '10px'}))
