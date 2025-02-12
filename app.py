@@ -120,6 +120,6 @@ st.markdown("""
     <div class="legend-container">
         <b>Leyenda</b><br>
         <i style="background: green; width: 12px; height: 12px; display: inline-block; margin-right: 8px; border-radius: 50%;"></i> Vivienda efectiva<br>
-        <i style="background: red; width: 12px; height: 12px; display: inline-block; margin-right: 8px; border-radius: 50%;"></i> No efectiva
+        <i style="background: red; width: 12px; height: 12px; display: inline-block; margin-right: 8px; border-radius: 50%;"></i> Vivienda no efectiva
     </div>
 """, unsafe_allow_html=True)
