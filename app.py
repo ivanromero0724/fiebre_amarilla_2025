@@ -82,6 +82,12 @@ m.add_child(capa_no)
 folium.TileLayer("OpenStreetMap").add_to(m)
 folium.TileLayer("CartoDB Positron").add_to(m)
 folium.TileLayer("CartoDB Dark_Matter").add_to(m)
+# Capas de Google Maps
+folium.TileLayer(
+    tiles="https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}",
+    attr="Google Maps",
+    name="Google Maps"
+).add_to(m)
 folium.TileLayer("https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}", 
                  attr="Google Satellite", name="Google Satellite").add_to(m)
 
