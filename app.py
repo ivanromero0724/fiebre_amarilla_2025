@@ -9,6 +9,18 @@ import pytz
 # Configurar la página
 st.set_page_config(layout="wide", page_title="Mapas de Fiebre Amarilla", page_icon="🦟")
 
+# Reducir espacio superior con CSS
+st.markdown(
+    """
+    <style>
+        .block-container {
+            padding-top: 0rem !important;
+        }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 # Obtener la fecha actual en la zona horaria de Colombia
 tz_colombia = pytz.timezone("America/Bogota")
 fecha_actual = datetime.now(tz_colombia).strftime("%d de %B de %Y")
