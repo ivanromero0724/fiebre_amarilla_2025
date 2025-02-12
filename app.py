@@ -5,6 +5,7 @@ from streamlit_folium import folium_static
 from folium.plugins import MiniMap
 from datetime import datetime
 import pytz
+from branca.element import Template, MacroElement
 
 # Configurar la página
 st.set_page_config(layout="wide", page_title="Mapas de Fiebre Amarilla", page_icon="🦟")
@@ -24,8 +25,10 @@ st.markdown(
 # Obtener la fecha actual en la zona horaria de Colombia
 tz_colombia = pytz.timezone("America/Bogota")
 fecha_actual = datetime.now(tz_colombia).strftime("%d/%m/%Y")
+
 # Título centrado
 st.markdown("<h1 style='text-align: center;'>Viviendas con abordaje en búsqueda activa comunitaria por atención a brote de Fiebre Amarilla en Tolima</h1>", unsafe_allow_html=True)
+
 # Mostrar la fecha de actualización en Streamlit
 st.markdown(f"<p style='text-align: center; font-size: 14px;'><b>Fecha de actualización:</b> {fecha_actual}</p>", unsafe_allow_html=True)
 
@@ -88,15 +91,42 @@ if df is not None:
             elif estado_vivienda == "NO":
                 marker.add_to(capa_no)
 
-
         folium.plugins.Fullscreen(
             position="topleft",
-            title="Expand me",
-            title_cancel="Exit me",
+            title="Expandir",
+            title_cancel="Salir",
             force_separate_button=True,
         ).add_to(m)
-        # Agregar control de capas (esto actúa como la leyenda)
+
+        # Agregar control de capas
         folium.LayerControl().add_to(m)
+
+        # **Agregar leyenda personalizada**
+        legend_template = """
+        {% macro html(this, kwargs) %}
+        <div id='maplegend' class='maplegend' 
+            style='position: absolute; z-index: 9999; background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 6px; padding: 10px; font-size: 12px; right: 20px; top: 20px;'>     
+            <div class='legend-title'><b>Leyenda</b></div>
+            <div class='legend-scale'>
+              <ul class='legend-labels'>
+                <li><span style='background: green; opacity: 0.75;'></span>Vivienda efectiva</li>
+                <li><span style='background: red; opacity: 0.75;'></span>No efectiva</li>
+              </ul>
+            </div>
+        </div> 
+        <style type='text/css'>
+          .maplegend .legend-scale ul {margin: 0; padding: 0; color: #0f0f0f;}
+          .maplegend .legend-scale ul li {list-style: none; line-height: 18px; margin-bottom: 5px;}
+          .maplegend ul.legend-labels li span {float: left; height: 16px; width: 16px; margin-right: 10px;}
+        </style>
+        {% endmacro %}
+        """
+
+        macro = MacroElement()
+        macro._template = Template(legend_template)
+        m.get_root().add_child(macro)
+
         # Mostrar el mapa en Streamlit
         folium_static(m, width=1305, height=600)
     else:
