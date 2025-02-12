@@ -126,60 +126,6 @@ st.markdown("""
 
 datos = pd.read_excel(url, engine="openpyxl")
 
-# Eliminar filas donde "1_MUNICIPIO" sea nulo
-datos = datos.dropna(subset=["1_MUNICIPIO"])
-
-# Convertir a string por seguridad
-datos["1_MUNICIPIO"] = datos["1_MUNICIPIO"].astype(str)
-datos["2_AREA"] = datos["2_AREA"].astype(str)
-datos["6_VIVIENDA_EFECTIVA_"] = datos["6_VIVIENDA_EFECTIVA_"].astype(str)
-
-import streamlit as st
-import pandas as pd
-import folium
-from streamlit_folium import folium_static
-from folium.plugins import MiniMap
-from datetime import datetime
-import pytz
-import matplotlib.pyplot as plt
-import plotly.express as px
-
-# Configuración de la página
-st.set_page_config(layout="wide", page_title="Mapa de Fiebre Amarilla", page_icon="\U0001F99F")
-
-# Reducir espacio superior con CSS
-st.markdown("""
-    <style>
-        .block-container {
-            padding-top: 2rem !important;
-        }
-        .metric-container {
-            text-align: center;
-            font-size: 18px;
-        }
-        .stTable {
-            background-color: white;
-            border-radius: 10px;
-            padding: 10px;
-            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
-        }
-    </style>
-""", unsafe_allow_html=True)
-
-# Obtener la fecha actual en la zona horaria de Colombia
-tz_colombia = pytz.timezone("America/Bogota")
-fecha_actual = datetime.now(tz_colombia).strftime("%d/%m/%Y")
-
-# Mostrar el título y la fecha de actualización
-st.markdown(f"""
-    <h1 style='text-align: center;'>Viviendas con abordaje en búsqueda activa comunitaria por atención a brote de Fiebre Amarilla en Tolima</h1>
-    <p style='text-align: center; font-size: 14px;'><b>Última fecha de actualización:</b> {fecha_actual}</p>
-""", unsafe_allow_html=True)
-
-# Cargar los datos desde el archivo en GitHub
-url = "https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/2025-02-11.xlsx"
-datos = pd.read_excel(url, engine="openpyxl")
-
 # Filtrar valores nulos en coordenadas
 datos_geo = datos.dropna(subset=["lat_93_LOCALIZACIN_DE_LA", "long_93_LOCALIZACIN_DE_LA"])
 
