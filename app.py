@@ -21,23 +21,9 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Diccionario para traducir los meses manualmente
-meses = {
-    "January": "enero", "February": "febrero", "March": "marzo", "April": "abril",
-    "May": "mayo", "June": "junio", "July": "julio", "August": "agosto",
-    "September": "septiembre", "October": "octubre", "November": "noviembre", "December": "diciembre"
-}
-
 # Obtener la fecha actual en la zona horaria de Colombia
 tz_colombia = pytz.timezone("America/Bogota")
-fecha_obj = datetime.now(tz_colombia)
-
-# Extraer mes en inglés y traducirlo
-mes_en_ingles = fecha_obj.strftime("%B")
-mes_en_espanol = meses.get(mes_en_ingles, mes_en_ingles)
-
-# Construir la fecha con el mes en español
-fecha_actual = fecha_obj.strftime(f"%d de {mes_en_espanol} de %Y")
+fecha_actual = datetime.now(tz_colombia).strftime("%d/%m/%Y")
 # Título centrado
 st.markdown("<h1 style='text-align: center;'>Viviendas con abordaje en búsqueda activa comunitaria por atención a brote de Fiebre Amarilla en Tolima</h1>", unsafe_allow_html=True)
 # Mostrar la fecha de actualización en Streamlit
