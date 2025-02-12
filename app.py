@@ -143,7 +143,7 @@ with col2:
     st.plotly_chart(fig2, use_container_width=True)
 
 with col3:
-    fig3 = px.pie(datos, names="6_VIVIENDA_EFECTIVA_", title="Viviendas Efectivas vs No Efectivas",color_discrete_sequence=["red", "green"])
+    fig3 = px.pie(datos, names="6_VIVIENDA_EFECTIVA_", title="Viviendas Efectivas vs No Efectivas",color_discrete_sequence=["green", "red"])
     fig3.update_layout(title={'x': 0.5, 'xanchor': 'center'})
     st.plotly_chart(fig3, use_container_width=True)
     
