@@ -79,24 +79,6 @@ m.add_child(capa_si)
 m.add_child(capa_no)
 folium.LayerControl().add_to(m)
 
-## Definir el HTML de la leyenda con mejor posición y diseño
-legend_html = '''
-<div style="position: fixed; 
-            bottom: 20px; right: 20px; width: 200px; height: auto; 
-            background-color: white; z-index:9999; font-size:14px;
-            padding: 10px; border-radius: 5px;
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
-            opacity: 0.9;">
-    <b>Leyenda</b><br>
-    <i style="background: green; width: 12px; height: 12px; display: inline-block; margin-right: 8px; border-radius:50%;"></i> Vivienda efectiva<br>
-    <i style="background: red; width: 12px; height: 12px; display: inline-block; margin-right: 8px; border-radius:50%;"></i> No efectiva
-</div>
-'''
-
-# Crear el objeto de la leyenda
-legend = MacroElement()
-legend._template = Template(legend_html)
-
 # Mostrar el mapa en Streamlit
 folium_static(m, height=650, width=1305)
 
