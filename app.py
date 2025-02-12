@@ -148,7 +148,7 @@ with col3:
     fig3.update_layout(title={'x': 0.5, 'xanchor': 'center'})
     st.plotly_chart(fig3, use_container_width=True)
     
-col1, col2, col3 = st.columns([1,3,1])  # Ajusta los valores según el ancho deseado
+col1, col2, col3 = st.columns(3)  # Ajusta los valores según el ancho deseado
 
 with col2:  # Coloca la tabla en la columna central
     st.markdown("<h6 style='text-align: center; font-weight: bold;'>Resumen de Viviendas por Municipio</h6>", unsafe_allow_html=True)
