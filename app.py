@@ -7,7 +7,7 @@ from datetime import datetime
 import pytz
 
 # Configurar la página
-st.set_page_config(layout="wide", page_title="Mapas de Fiebre Amarilla", page_icon="\U0001F99F")
+st.set_page_config(layout="centered", page_title="Mapas de Fiebre Amarilla", page_icon="\U0001F99F")
 
 # Reducir espacio superior con CSS
 st.markdown(
