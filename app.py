@@ -135,19 +135,16 @@ col1, col2, col3 = st.columns(3)
 with col1:
     fig1 = px.pie(datos, names="1_MUNICIPIO", title="Distribución por Municipio")
     fig1.update_layout(title={'x': 0.5, 'xanchor': 'center'})
-    fig1.update_traces(pull=[0] * len(datos["1_MUNICIPIO"].unique()), selector=dict(type='pie', legendgroup=None))
     st.plotly_chart(fig1, use_container_width=True)
 
 with col2:
     fig2 = px.pie(datos, names="2_AREA", title="Distribución por Área")
     fig2.update_layout(title={'x': 0.5, 'xanchor': 'center'})
-    fig2.update_traces(pull=[0] * len(datos["2_AREA"].unique()), selector=dict(type='pie', legendgroup=None))
     st.plotly_chart(fig2, use_container_width=True)
 
 with col3:
     fig3 = px.pie(datos, names="6_VIVIENDA_EFECTIVA_", title="Viviendas Efectivas vs No Efectivas")
     fig3.update_layout(title={'x': 0.5, 'xanchor': 'center'})
-    fig3.update_traces(pull=[0] * len(datos["6_VIVIENDA_EFECTIVA_"].unique()), selector=dict(type='pie', legendgroup=None))
     st.plotly_chart(fig3, use_container_width=True)
     
 # Tabla resumen por municipio
