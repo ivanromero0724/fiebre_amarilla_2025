@@ -128,7 +128,7 @@ if df is not None:
         m.get_root().add_child(macro)
 
         # Mostrar el mapa en Streamlit
-        folium_static(m, width=1305, height=600)
+        m
     else:
         st.error("Las columnas requeridas no se encuentran en el archivo.")
 else:
