@@ -9,6 +9,24 @@ import pytz
 # Configurar la página
 st.set_page_config(layout="wide", page_title="Mapas de Fiebre Amarilla", page_icon="\U0001F99F")
 
+# CSS para expandir el mapa al ancho completo
+st.markdown(
+    """
+    <style>
+        [data-testid="stVerticalBlock"] {
+            align-items: center;
+        }
+        .streamlit-folium {
+            display: flex;
+            justify-content: center;
+            width: 100% !important;
+        }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+
 # Reducir espacio superior con CSS
 st.markdown(
     """
@@ -79,4 +97,4 @@ m.add_child(capa_no)
 folium.LayerControl().add_to(m)
 
 # Mostrar el mapa en Streamlit
-folium_static(m, height=650, width="100%")
+folium_static(m, height=650, width=1305)
