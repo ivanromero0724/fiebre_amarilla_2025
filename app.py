@@ -79,5 +79,18 @@ m.add_child(capa_si)
 m.add_child(capa_no)
 folium.LayerControl().add_to(m)
 
+# Agregar leyenda personalizada
+legend_html = '''
+<div style="position: fixed; 
+            bottom: 50px; left: 50px; width: 160px; height: 80px; 
+            background-color: white; z-index:9999; font-size:14px;
+            border-radius: 8px; padding: 10px; box-shadow: 2px 2px 6px rgba(0,0,0,0.3);">
+    <b> Leyenda </b><br>
+    <i class="fa fa-circle" style="color:green"></i> Vivienda efectiva<br>
+    <i class="fa fa-circle" style="color:red"></i> No efectiva
+</div>
+'''
+m.get_root().html.add_child(folium.Element(legend_html))
+
 # Mostrar el mapa en Streamlit
 folium_static(m, width=1305, height=600)
