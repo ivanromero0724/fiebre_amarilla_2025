@@ -133,6 +133,7 @@ porcentaje_geo = (len(datos_geo) / len(datos)) * 100
 
 # Diseño del dashboard
 st.markdown("## Dashboard de Análisis de Viviendas")
+st.write(datos.columns.tolist())  # Muestra la lista de nombres exactos de columnas
 
 col1, col2 = st.columns([1, 2])
 
