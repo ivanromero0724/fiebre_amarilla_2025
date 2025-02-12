@@ -44,14 +44,7 @@ fecha_actual = datetime.now(tz_colombia).strftime("%d/%m/%Y")
 st.markdown("""
     <h1 style='text-align: center;'>Viviendas con abordaje en búsqueda activa comunitaria por atención a brote de Fiebre Amarilla en Tolima</h1>
     <p style='text-align: center; font-size: 14px;'><b>Última fecha de actualización:</b> {}</p>
-    """.format(fecha_actual), unsafe_allow_html=True)
-
-# Mostrar porcentaje de viviendas georreferenciadas
-st.markdown(f"""
-    <div class="metric-container">
-        <h2 style='text-align: center;'>Porcentaje de viviendas georreferenciadas</h2>
-        <p style='text-align: center; font-size: 24px; font-weight: bold; color: #ff5733;'>{porcentaje_geo:.2f}%</p>
-    </div>
+    <p style='text-align: center; font-size: 14px;'><b>Porcentaje de viviendas georreferenciadas:</b> {porcentaje_geo:.2f}%</p>
 """, unsafe_allow_html=True)
 
 
