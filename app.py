@@ -34,7 +34,9 @@ datos = pd.read_excel(url, engine="openpyxl")
 # Filtrar valores nulos en coordenadas
 datos_geo = datos.dropna(subset=["lat_93_LOCALIZACIN_DE_LA", "long_93_LOCALIZACIN_DE_LA"])
 # Calcular porcentaje de viviendas georreferenciadas
-porcentaje_geo = (len(datos_geo) / len(datos)) * 100
+total_viviendas = len(datos)
+viviendas_geo = len(datos_geo)
+porcentaje_geo = (viviendas_geo / total_viviendas) * 100
 
 # Obtener la fecha actual en la zona horaria de Colombia
 tz_colombia = pytz.timezone("America/Bogota")
@@ -44,7 +46,7 @@ fecha_actual = datetime.now(tz_colombia).strftime("%d/%m/%Y")
 st.markdown(f"""
     <h1 style='text-align: center;'>Viviendas con abordaje en búsqueda activa comunitaria por atención a brote de Fiebre Amarilla en Tolima</h1>
     <p style='text-align: center; font-size: 14px;margin-bottom: 0px;'><b>Última fecha de actualización:</b> {fecha_actual}</p>
-    <p style='text-align: center; font-size: 14px;'><b>Porcentaje de viviendas georreferenciadas:</b> {porcentaje_geo:.2f}%</p>
+    <p style='text-align: center; font-size: 14px;'><b>Porcentaje de viviendas georreferenciadas:</b> {porcentaje_geo:.2f}% ({viviendas_geo} de {total_viviendas})</p>
 """, unsafe_allow_html=True)
 
 
