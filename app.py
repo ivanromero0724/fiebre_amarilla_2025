@@ -59,19 +59,19 @@ colores = df["6_VIVIENDA_EFECTIVA_"].str.strip().str.upper().map({"SI": "green",
 df_si = df[colores == "green"]
 df_no = df[colores == "red"]
 
-capa_si.add_child(folium.FeatureGroup(name="Viviendas efectivas",
-    children=[folium.CircleMarker(
+for lat, lon in zip(df_si["lat_93_LOCALIZACIN_DE_LA"], df_si["long_93_LOCALIZACIN_DE_LA"]):
+    folium.CircleMarker(
         location=[lat, lon],
         radius=2, color="green", fill=True, fill_color="green", fill_opacity=1,
         popup="Vivienda efectiva: SI"
-    ) for lat, lon in zip(df_si["lat_93_LOCALIZACIN_DE_LA"], df_si["long_93_LOCALIZACIN_DE_LA"])]))
+    ).add_to(capa_si)
 
-capa_no.add_child(folium.FeatureGroup(name="No efectivas",
-    children=[folium.CircleMarker(
+for lat, lon in zip(df_no["lat_93_LOCALIZACIN_DE_LA"], df_no["long_93_LOCALIZACIN_DE_LA"]):
+    folium.CircleMarker(
         location=[lat, lon],
         radius=2, color="red", fill=True, fill_color="red", fill_opacity=1,
         popup="Vivienda efectiva: NO"
-    ) for lat, lon in zip(df_no["lat_93_LOCALIZACIN_DE_LA"], df_no["long_93_LOCALIZACIN_DE_LA"])]))
+    ).add_to(capa_no)
 
 # Agregar las capas al mapa
 m.add_child(capa_si)
