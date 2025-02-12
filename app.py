@@ -7,6 +7,7 @@ from datetime import datetime
 import pytz
 from branca.element import Template, MacroElement
 import matplotlib.pyplot as plt
+import plotly.express as px
 
 # Configurar la página
 st.set_page_config(layout="wide", page_title="Mapa de Fiebre Amarilla", page_icon="\U0001F99F")
@@ -132,6 +133,8 @@ datos = datos.dropna(subset=["1_MUNICIPIO"])
 datos["1_MUNICIPIO"] = datos["1_MUNICIPIO"].astype(str)
 datos["2_AREA"] = datos["2_AREA"].astype(str)
 datos["6_VIVIENDA_EFECTIVA_"] = datos["6_VIVIENDA_EFECTIVA_"].astype(str)
+
+datos = pd.read_excel(url, engine="openpyxl")
 
 # Filtrar valores nulos en coordenadas
 datos_geo = datos.dropna(subset=["lat_93_LOCALIZACIN_DE_LA", "long_93_LOCALIZACIN_DE_LA"])
