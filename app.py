@@ -145,7 +145,7 @@ with col3:
     st.plotly_chart(fig3, use_container_width=True)
 
 # Tabla resumen por municipio
-st.markdown("### Resumen de Viviendas por Municipio")
+st.markdown("# Resumen de Viviendas por Municipio")
 tabla_resumen = datos.groupby("1_MUNICIPIO")["6_VIVIENDA_EFECTIVA_"].value_counts().unstack(fill_value=0)
 tabla_resumen["Total"] = tabla_resumen.sum(axis=1)
 tabla_resumen.columns = ["Viviendas No Efectivas", "Viviendas Efectivas", "Total"]
