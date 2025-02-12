@@ -5,7 +5,8 @@ from streamlit_folium import folium_static
 from folium.plugins import MiniMap
 from datetime import datetime
 import pytz
-from branca.element import Template, MacroElement
+from branca.element import MacroElement, Template
+import streamlit.components.v1 as components
 
 # Configurar la página
 st.set_page_config(layout="wide", page_title="Mapas de Fiebre Amarilla", page_icon="\U0001F99F")
@@ -79,26 +80,23 @@ m.add_child(capa_si)
 m.add_child(capa_no)
 folium.LayerControl().add_to(m)
 
-# Agregar leyenda con branca
+# Agregar leyenda con HTML
 legend_html = '''
 <div style="position: fixed; 
             bottom: 50px; left: 50px; width: 200px; height: 90px; 
             background-color: white; z-index:9999; font-size:14px;
             border-radius: 8px; padding: 10px; box-shadow: 2px 2px 6px rgba(0,0,0,0.3);">
-    <p style="margin: 0; font-weight: bold; text-align: center;">Leyenda</p>
-    <p style="margin: 5px 0;">
-        <span style="display: inline-block; width: 12px; height: 12px; background-color: green; border-radius: 50%;"></span> 
-        Vivienda efectiva
-    </p>
-    <p style="margin: 5px 0;">
-        <span style="display: inline-block; width: 12px; height: 12px; background-color: red; border-radius: 50%;"></span> 
-        No efectiva
-    </p>
+    <b> Leyenda </b><br>
+    <svg width="16" height="16"><circle cx="8" cy="8" r="8" fill="green"/></svg> Vivienda efectiva<br>
+    <svg width="16" height="16"><circle cx="8" cy="8" r="8" fill="red"/></svg> No efectiva
 </div>
 '''
-legend = MacroElement()
-legend._template = Template(legend_html)
-m.get_root().html.add_child(legend)
+
+# Verificar que el HTML de la leyenda se genera correctamente
+st.write(legend_html)
+
+# Mostrar la leyenda manualmente en Streamlit
+components.html(legend_html, height=120)
 
 # Mostrar el mapa en Streamlit
-folium_static(m)
+folium_static(m, width=1305, height=600)
