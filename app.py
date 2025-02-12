@@ -105,8 +105,8 @@ st.markdown("""
     <style>
         .legend-container {
             position: absolute;
-            bottom: 20px;
-            left: 20px;
+            bottom: 10px;
+            left: 10px;
             background-color: white;
             padding: 10px;
             border-radius: 5px;
