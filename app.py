@@ -29,7 +29,7 @@ fecha_actual = datetime.now(tz_colombia).strftime("%d/%m/%Y")
 # Mostrar el título y la fecha de actualización
 st.markdown("""
     <h1 style='text-align: center;'>Viviendas con abordaje en búsqueda activa comunitaria por atención a brote de Fiebre Amarilla en Tolima</h1>
-    <p style='text-align: center; font-size: 14px;'><b>Fecha de actualización:</b> {}</p>
+    <p style='text-align: center; font-size: 14px;'><b>Última fecha de actualización:</b> {}</p>
     """.format(fecha_actual), unsafe_allow_html=True)
 
 # URL del archivo en GitHub
