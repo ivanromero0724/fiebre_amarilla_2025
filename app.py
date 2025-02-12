@@ -79,4 +79,4 @@ m.add_child(capa_no)
 folium.LayerControl().add_to(m)
 
 # Mostrar el mapa en Streamlit
-folium_static(m, height=650, width=100%)
+folium_static(m, height=650, width='100%')
