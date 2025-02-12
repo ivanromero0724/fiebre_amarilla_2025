@@ -5,6 +5,7 @@ from streamlit_folium import folium_static
 from folium.plugins import MiniMap
 from datetime import datetime
 import pytz
+from branca.element import Template, MacroElement
 
 # Configurar la página
 st.set_page_config(layout="wide", page_title="Mapas de Fiebre Amarilla", page_icon="\U0001F99F")
@@ -78,5 +79,25 @@ m.add_child(capa_si)
 m.add_child(capa_no)
 folium.LayerControl().add_to(m)
 
+# Definir el HTML de la leyenda
+legend_html = '''
+<div style="position: fixed; 
+            bottom: 50px; left: 50px; width: 180px; height: 90px; 
+            background-color: white; z-index:9999; font-size:14px;
+            padding: 10px; border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+            line-height: 18px;">
+    <b>Leyenda</b><br>
+    <i style="background: green; width: 10px; height: 10px; display: inline-block; margin-right: 5px;"></i> Vivienda efectiva<br>
+    <i style="background: red; width: 10px; height: 10px; display: inline-block; margin-right: 5px;"></i> No efectiva
+</div>
+'''
+
+# Crear el objeto de la leyenda
+legend = MacroElement()
+legend._template = Template(legend_html)
+
+# Agregar la leyenda al mapa
+m.get_root().add_child(legend)
 # Mostrar el mapa en Streamlit
 folium_static(m, height=650, width=1305)
