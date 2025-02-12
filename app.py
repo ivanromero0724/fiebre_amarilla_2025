@@ -5,7 +5,6 @@ from streamlit_folium import folium_static
 from folium.plugins import MiniMap
 from datetime import datetime
 import pytz
-import locale
 
 # Configurar la página
 st.set_page_config(layout="wide", page_title="Mapas de Fiebre Amarilla", page_icon="🦟")
@@ -22,13 +21,23 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Configurar locale en español (para sistemas que lo soporten)
-#locale.setlocale(locale.LC_TIME, "es_ES.utf8")  # Para Linux y Mac
-locale.setlocale(locale.LC_TIME, "es_ES")  # Para Windows (si es compatible)
+# Diccionario para traducir los meses manualmente
+meses = {
+    "January": "enero", "February": "febrero", "March": "marzo", "April": "abril",
+    "May": "mayo", "June": "junio", "July": "julio", "August": "agosto",
+    "September": "septiembre", "October": "octubre", "November": "noviembre", "December": "diciembre"
+}
 
-# Obtener la fecha actual en español
+# Obtener la fecha actual en la zona horaria de Colombia
 tz_colombia = pytz.timezone("America/Bogota")
-fecha_actual = datetime.now(tz_colombia).strftime("%d de %B de %Y")
+fecha_obj = datetime.now(tz_colombia)
+
+# Extraer mes en inglés y traducirlo
+mes_en_ingles = fecha_obj.strftime("%B")
+mes_en_espanol = meses.get(mes_en_ingles, mes_en_ingles)
+
+# Construir la fecha con el mes en español
+fecha_actual = fecha_obj.strftime(f"%d de {mes_en_espanol} de %Y")
 # Título centrado
 st.markdown("<h1 style='text-align: center;'>Viviendas con abordaje en búsqueda activa comunitaria por atención a brote de Fiebre Amarilla en Tolima</h1>", unsafe_allow_html=True)
 # Mostrar la fecha de actualización en Streamlit
