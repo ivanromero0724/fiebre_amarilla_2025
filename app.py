@@ -9,6 +9,8 @@ import pytz
 # Configurar la página
 st.set_page_config(layout="wide", page_title="Mapas de Fiebre Amarilla", page_icon="🦟")
 
+# Establecer el idioma en español
+locale.setlocale(locale.LC_TIME, "es_ES.utf8")  # En sistemas Linux/Mac
 # Obtener la fecha actual en la zona horaria de Colombia
 tz_colombia = pytz.timezone("America/Bogota")
 fecha_actual = datetime.now(tz_colombia).strftime("%d de %B de %Y")
