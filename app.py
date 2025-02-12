@@ -157,11 +157,10 @@ with col2:  # Coloca la tabla en la columna central
     tabla_resumen["Total"] = tabla_resumen.sum(axis=1)
     tabla_resumen.columns = ["Viviendas No Efectivas", "Viviendas Efectivas", "Total"]
 
-    # Aplicar estilo para centrar los valores de las columnas excepto la de municipio
-    styled_tabla = tabla_resumen.style.set_properties(**{'background-color': 'white', 'border-radius': '10px', 'padding': '10px'}) \
-        .set_table_styles([
-            {'selector': 'th', 'props': [('text-align', 'center')]},  # Centrar encabezados
-            {'selector': 'td', 'props': [('text-align', 'center')]},  # Centrar contenido
-        ], overwrite=False)
+    # Asegurar que las columnas numéricas estén centradas
+    styled_tabla = tabla_resumen.style.set_properties(
+        subset=["Viviendas No Efectivas", "Viviendas Efectivas", "Total"],
+        **{'text-align': 'center'}
+    )
 
     st.dataframe(styled_tabla)
