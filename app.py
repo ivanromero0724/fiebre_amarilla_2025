@@ -6,6 +6,7 @@ from folium.plugins import MiniMap
 from datetime import datetime
 import pytz
 from branca.element import Template, MacroElement
+import matplotlib.pyplot as plt
 
 # Configurar la página
 st.set_page_config(layout="wide", page_title="Mapa de Fiebre Amarilla", page_icon="\U0001F99F")
