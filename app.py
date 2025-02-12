@@ -81,39 +81,11 @@ m.add_child(capa_no)
 # Agregar capas base adicionales
 folium.TileLayer("OpenStreetMap").add_to(m)
 folium.TileLayer("CartoDB Positron").add_to(m)
-folium.TileLayer("CartoDB Dark_Matter").add_to(m)
-# Capas de Google Maps
-folium.TileLayer(
-    tiles="https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}",
-    attr="Google Maps",
-    name="Google Maps"
-).add_to(m)
-folium.TileLayer("https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}", 
-                 attr="Google Satellite", name="Google Satellite").add_to(m)
-
 # Agregar capas base de Esri
 folium.TileLayer(
     tiles="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
     attr="Esri World Imagery",
-    name="Esri World Imagery"
-).add_to(m)
-
-folium.TileLayer(
-    tiles="https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}",
-    attr="Esri Topographic",
-    name="Esri Topographic"
-).add_to(m)
-
-folium.TileLayer(
-    tiles="https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}",
-    attr="Esri Street Map",
-    name="Esri Street Map"
-).add_to(m)
-
-folium.TileLayer(
-    tiles="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}",
-    attr="Esri Light Gray",
-    name="Esri Light Gray"
+    name="Imagen satelital"
 ).add_to(m)
 
 folium.LayerControl().add_to(m)
