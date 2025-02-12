@@ -148,7 +148,7 @@ with col3:
 st.markdown("### Resumen de Viviendas por Municipio")
 tabla_resumen = datos.groupby("1_MUNICIPIO")["6_VIVIENDA_EFECTIVA_"].value_counts().unstack(fill_value=0)
 tabla_resumen["Total"] = tabla_resumen.sum(axis=1)
-tabla_resumen.columns = ["Municipio","Viviendas No Efectivas", "Viviendas Efectivas", "Total"]
+tabla_resumen.columns = ["Viviendas No Efectivas", "Viviendas Efectivas", "Total"]
 
 # Agregar fila de totales generales
 total_general = tabla_resumen.sum(axis=0).to_frame().T
