@@ -24,6 +24,18 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+# URL del archivo en GitHub
+url = "https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/2025-02-11.xlsx"
+# Cargar los datos desde el archivo Excel
+df = pd.read_excel(url, engine="openpyxl")
+# Filtrar valores nulos en las columnas necesarias
+df = df.dropna(subset=["lat_93_LOCALIZACIN_DE_LA", "long_93_LOCALIZACIN_DE_LA", "6_VIVIENDA_EFECTIVA_"])
+datos = pd.read_excel(url, engine="openpyxl")
+# Filtrar valores nulos en coordenadas
+datos_geo = datos.dropna(subset=["lat_93_LOCALIZACIN_DE_LA", "long_93_LOCALIZACIN_DE_LA"])
+# Calcular porcentaje de viviendas georreferenciadas
+porcentaje_geo = (len(datos_geo) / len(datos)) * 100
+
 # Obtener la fecha actual en la zona horaria de Colombia
 tz_colombia = pytz.timezone("America/Bogota")
 fecha_actual = datetime.now(tz_colombia).strftime("%d/%m/%Y")
@@ -34,14 +46,14 @@ st.markdown("""
     <p style='text-align: center; font-size: 14px;'><b>Última fecha de actualización:</b> {}</p>
     """.format(fecha_actual), unsafe_allow_html=True)
 
-# URL del archivo en GitHub
-url = "https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/2025-02-11.xlsx"
+# Mostrar porcentaje de viviendas georreferenciadas
+st.markdown(f"""
+    <div class="metric-container">
+        <h2 style='text-align: center;'>Porcentaje de viviendas georreferenciadas</h2>
+        <p style='text-align: center; font-size: 24px; font-weight: bold; color: #ff5733;'>{porcentaje_geo:.2f}%</p>
+    </div>
+""", unsafe_allow_html=True)
 
-# Cargar los datos desde el archivo Excel
-df = pd.read_excel(url, engine="openpyxl")
-
-# Filtrar valores nulos en las columnas necesarias
-df = df.dropna(subset=["lat_93_LOCALIZACIN_DE_LA", "long_93_LOCALIZACIN_DE_LA", "6_VIVIENDA_EFECTIVA_"])
 
 # Definir coordenadas centrales del mapa
 lat_centro, lon_centro = 3.84234302999644, -74.69905002261329
@@ -124,29 +136,9 @@ st.markdown("""
 
 
 
-datos = pd.read_excel(url, engine="openpyxl")
-
-# Filtrar valores nulos en coordenadas
-datos_geo = datos.dropna(subset=["lat_93_LOCALIZACIN_DE_LA", "long_93_LOCALIZACIN_DE_LA"])
-
-# Calcular porcentaje de viviendas georreferenciadas
-porcentaje_geo = (len(datos_geo) / len(datos)) * 100
-
-# Diseño del dashboard
-st.markdown("## Dashboard de Análisis de Viviendas")
-
-# Sección de métricas
-st.markdown("### Métricas Claves")
-st.markdown(f"""
-    <div class="metric-container">
-        <h2>Porcentaje de viviendas georreferenciadas</h2>
-        <p style='font-size: 24px; font-weight: bold; color: #ff5733;'>{porcentaje_geo:.2f}%</p>
-    </div>
-""", unsafe_allow_html=True)
-
 # Sección de gráficos
 st.markdown("### Visualización de Datos")
-col1, col2 = st.columns(2)
+col1, col2, col3 = st.columns(3)
 
 with col1:
     fig1 = px.pie(datos, names="1_MUNICIPIO", title="Distribución por Municipio")
@@ -155,8 +147,6 @@ with col1:
 with col2:
     fig2 = px.pie(datos, names="2_AREA", title="Distribución por Área")
     st.plotly_chart(fig2, use_container_width=True)
-
-col3, col4 = st.columns(2)
 
 with col3:
     fig3 = px.pie(datos, names="6_VIVIENDA_EFECTIVA_", title="Viviendas Efectivas vs No Efectivas")
