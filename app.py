@@ -147,22 +147,11 @@ with col3:
     fig3.update_layout(title={'x': 0.5, 'xanchor': 'center'})
     st.plotly_chart(fig3, use_container_width=True)
     
-# Tabla resumen por municipio
-st.markdown("""
-    <style>
-        .centered-table {
-            display: flex;
-            justify-content: center;
-        }
-    </style>
-""", unsafe_allow_html=True)
-
-# Crear columnas vacías a los lados para centrar la tabla
 col1, col2, col3 = st.columns(3)  # Ajusta los valores según el ancho deseado
 
 with col2:  # Coloca la tabla en la columna central
     st.markdown("#### Resumen de Viviendas por Municipio")
-
+    
     tabla_resumen = datos.groupby("1_MUNICIPIO")["6_VIVIENDA_EFECTIVA_"].value_counts().unstack(fill_value=0)
     tabla_resumen["Total"] = tabla_resumen.sum(axis=1)
     tabla_resumen.columns = ["Viviendas No Efectivas", "Viviendas Efectivas", "Total"]
