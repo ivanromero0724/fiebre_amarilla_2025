@@ -82,7 +82,7 @@ folium.LayerControl().add_to(m)
 # Definir el HTML de la leyenda
 legend_html = '''
 <div style="position: fixed; 
-            bottom: 50px; left: 50px; width: 180px; height: 90px; 
+            bottom: 100px; left: 100px; width: 180px; height: 90px; 
             background-color: white; z-index:9999; font-size:14px;
             padding: 10px; border-radius: 5px;
             box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
