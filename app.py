@@ -15,7 +15,7 @@ fecha_actual = datetime.now(tz_colombia).strftime("%d de %B de %Y")
 # Título centrado
 st.markdown("<h1 style='text-align: center;'>Viviendas con abordaje en búsqueda activa comunitaria por atención a brote de Fiebre Amarilla en Tolima</h1>", unsafe_allow_html=True)
 # Mostrar la fecha de actualización en Streamlit
-st.markdown(f"<p style='text-align: center; font-size: 10px;'><b>Fecha de actualización:</b> {fecha_actual}</p>", unsafe_allow_html=True)
+st.markdown(f"<p style='text-align: center; font-size: 14px;'><b>Fecha de actualización:</b> {fecha_actual}</p>", unsafe_allow_html=True)
 
 # URL del archivo en GitHub
 url = "https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/form-1__geocaracterizacion.xlsx"
