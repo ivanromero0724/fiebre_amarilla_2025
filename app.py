@@ -23,6 +23,7 @@ st.markdown(
 )
 
 # Configurar locale en español (para sistemas que lo soporten)
+#locale.setlocale(locale.LC_TIME, "es_ES.utf8")  # Para Linux y Mac
 locale.setlocale(locale.LC_TIME, "es_ES")  # Para Windows (si es compatible)
 
 # Obtener la fecha actual en español
