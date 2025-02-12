@@ -14,7 +14,7 @@ st.markdown(
     """
     <style>
         .block-container {
-            padding-top: 0rem !important;
+            padding-top: 2rem !important;
         }
     </style>
     """,
