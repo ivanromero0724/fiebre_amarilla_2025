@@ -33,7 +33,7 @@ st.markdown("""
     """.format(fecha_actual), unsafe_allow_html=True)
 
 # URL del archivo en GitHub
-url = "https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/form-1__geocaracterizacion.xlsx"
+url = "https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/2025-02-11.xlsx"
 
 # Cargar los datos desde el archivo Excel
 df = pd.read_excel(url, engine="openpyxl")
