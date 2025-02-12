@@ -148,9 +148,21 @@ with col3:
     st.plotly_chart(fig3, use_container_width=True)
     
 # Tabla resumen por municipio
+st.markdown("""
+    <style>
+        .centered-table {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+""", unsafe_allow_html=True)
+
 st.markdown("#### Resumen de Viviendas por Municipio")
+
 tabla_resumen = datos.groupby("1_MUNICIPIO")["6_VIVIENDA_EFECTIVA_"].value_counts().unstack(fill_value=0)
 tabla_resumen["Total"] = tabla_resumen.sum(axis=1)
 tabla_resumen.columns = ["Viviendas No Efectivas", "Viviendas Efectivas", "Total"]
 
+st.markdown('<div class="centered-table">', unsafe_allow_html=True)
 st.dataframe(tabla_resumen.style.set_properties(**{'background-color': 'white', 'border-radius': '10px', 'padding': '10px'}))
+st.markdown('</div>', unsafe_allow_html=True)
