@@ -133,7 +133,7 @@ st.markdown("""
 col1, col2, col3 = st.columns(3)
 
 with col1:
-    fig1 = px.pie(datos, names="1_MUNICIPIO", title="Distribución por Municipio",color_discrete_sequence=px.colors.qualitative.Set2)
+    fig1 = px.pie(datos, names="1_MUNICIPIO", title="Distribución por Municipio",color_discrete_sequence=px.colors.qualitative.Set3)
     fig1.update_layout(title={'x': 0.5, 'xanchor': 'center'})
     st.plotly_chart(fig1, use_container_width=True)
 
