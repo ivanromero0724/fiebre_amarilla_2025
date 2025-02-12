@@ -82,7 +82,7 @@ folium.LayerControl().add_to(m)
 # Definir el HTML de la leyenda
 legend_html = '''
 <div style="position: fixed; 
-            bottom: 100px; left: 100px; width: 180px; height: 90px; 
+            bottom: 1px; left: 1px; width: 180px; height: 90px; 
             background-color: white; z-index:9999; font-size:14px;
             padding: 10px; border-radius: 5px;
             box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
@@ -100,4 +100,4 @@ legend._template = Template(legend_html)
 # Agregar la leyenda al mapa
 m.get_root().add_child(legend)
 # Mostrar el mapa en Streamlit
-folium_static(m, height=650)
+folium_static(m, height=650, width=1305)
