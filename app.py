@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 import plotly.express as px
 
 # Configurar la página
-st.set_page_config(layout="wide", page_title="Fiebre Amarilla Tolima", page_icon="\U0001F99F")
+st.set_page_config(layout="wide", page_title="Mapa Fiebre Amarilla Tolima", page_icon="\U0001F99F")
 
 # Reducir espacio superior con CSS
 st.markdown(
