@@ -13,7 +13,7 @@ st.set_page_config(layout="wide", page_title="Mapas de Fiebre Amarilla", page_ic
 tz_colombia = pytz.timezone("America/Bogota")
 fecha_actual = datetime.now(tz_colombia).strftime("%d de %B de %Y")
 # Título centrado
-st.markdown("<h1 style='text-align: center;'>Viviendas con abordaje en búsqueda activa comunitaria por atención brote de fiebre amarilla en Tolima</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center;'>Viviendas con abordaje en búsqueda activa comunitaria por atención a brote de Fiebre Amarilla en Tolima</h1>", unsafe_allow_html=True)
 # Mostrar la fecha de actualización en Streamlit
 st.markdown(f"<p style='text-align: center; font-size: 16px;'><b>Fecha de actualización:</b> {fecha_actual}</p>", unsafe_allow_html=True)
 
