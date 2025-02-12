@@ -47,7 +47,7 @@ m = folium.Map(location=[lat_centro, lon_centro], zoom_start=11)
 
 # Agregar minimapa
 #minimap = MiniMap(toggle_display=True, position="bottomright")
-m.add_child(minimap)
+#m.add_child(minimap)
 
 # Crear capas para viviendas efectivas y no efectivas
 capa_si = folium.FeatureGroup(name="Viviendas efectivas")
