@@ -158,7 +158,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Crear columnas vacías a los lados para centrar la tabla
-col1, col2, col3 = st.columns([1, 3, 1])  # Ajusta los valores según el ancho deseado
+col1, col2, col3 = st.columns(3)  # Ajusta los valores según el ancho deseado
 
 with col2:  # Coloca la tabla en la columna central
     st.markdown("#### Resumen de Viviendas por Municipio")
