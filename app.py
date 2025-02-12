@@ -145,14 +145,9 @@ with col3:
     st.plotly_chart(fig3, use_container_width=True)
 
 # Tabla resumen por municipio
-st.markdown("### Resumen de Viviendas por Municipio")
+st.markdown("#### Resumen de Viviendas por Municipio")
 tabla_resumen = datos.groupby("1_MUNICIPIO")["6_VIVIENDA_EFECTIVA_"].value_counts().unstack(fill_value=0)
 tabla_resumen["Total"] = tabla_resumen.sum(axis=1)
 tabla_resumen.columns = ["Viviendas No Efectivas", "Viviendas Efectivas", "Total"]
-
-# Agregar fila de totales generales
-total_general = tabla_resumen.sum(axis=0).to_frame().T
-total_general.index = ["Total General"]
-tabla_resumen = pd.concat([tabla_resumen, total_general])
 
 st.dataframe(tabla_resumen.style.set_properties(**{'background-color': 'white', 'border-radius': '10px', 'padding': '10px'}))
