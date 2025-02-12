@@ -143,14 +143,10 @@ with col2:
     st.plotly_chart(fig2, use_container_width=True)
 
 with col3:
-    fig3 = px.pie(
-    datos, 
-    names="6_VIVIENDA_EFECTIVA_", 
-    title="Viviendas Efectivas vs No Efectivas",
-    color="6_VIVIENDA_EFECTIVA_", 
-    color_discrete_map={"SI": px.colors.qualitative.Safe[3], "NO": px.colors.qualitative.Safe[1]},
-    category_orders={"6_VIVIENDA_EFECTIVA_": ["SI", "NO"]}
-)
+    fig3 = px.pie(datos, names="6_VIVIENDA_EFECTIVA_", title="Viviendas Efectivas vs No Efectivas",
+                  color_discrete_sequence=[px.colors.qualitative.Safe[3], px.colors.qualitative.Safe[1]])
+    fig3.update_layout(title={'x': 0.5, 'xanchor': 'center'})
+    st.plotly_chart(fig3, use_container_width=True)
     
 col1, col2, col3 = st.columns(3)  # Ajusta los valores según el ancho deseado
 
