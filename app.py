@@ -125,6 +125,14 @@ st.markdown("""
 
 datos = pd.read_excel(url, engine="openpyxl")
 
+# Eliminar filas donde "1_MUNICIPIO" sea nulo
+datos = datos.dropna(subset=["1_MUNICIPIO"])
+
+# Convertir a string por seguridad
+datos["1_MUNICIPIO"] = datos["1_MUNICIPIO"].astype(str)
+datos["2_AREA"] = datos["2_AREA"].astype(str)
+datos["6_VIVIENDA_EFECTIVA_"] = datos["6_VIVIENDA_EFECTIVA_"].astype(str)
+
 # Filtrar valores nulos en coordenadas
 datos_geo = datos.dropna(subset=["lat_93_LOCALIZACIN_DE_LA", "long_93_LOCALIZACIN_DE_LA"])
 
@@ -133,7 +141,6 @@ porcentaje_geo = (len(datos_geo) / len(datos)) * 100
 
 # Diseño del dashboard
 st.markdown("## Dashboard de Análisis de Viviendas")
-st.write(datos.columns.tolist())  # Muestra la lista de nombres exactos de columnas
 
 col1, col2 = st.columns([1, 2])
 
