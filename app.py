@@ -178,17 +178,14 @@ with col3:
 col1, col2= st.columns(2)  # Ajusta los valores según el ancho deseado
 
 with col1:  # Coloca la tabla en la columna central
-    # Espacio arriba del título
-    st.markdown("<div style='margin-top: 38px;'></div>", unsafe_allow_html=True)
+    st.markdown(
+        "<div style='margin-top: 38px;'></div>", 
+        unsafe_allow_html=True
+    )
 
-    # Título centrado
     st.markdown("<h6 style='text-align:center; font-weight: bold;'>Resumen de Viviendas por Municipio</h6>", unsafe_allow_html=True)
-
-    # Espacio entre el título y la tabla
-    st.text("")
-    st.text("")
     
-    # Crear la tabla resumen
+    # Crear la tabla
     tabla_resumen = datos.groupby("1_MUNICIPIO")["6_VIVIENDA_EFECTIVA_"].value_counts().unstack(fill_value=0)
     tabla_resumen["Total"] = tabla_resumen.sum(axis=1)
     tabla_resumen.columns = ["Viviendas no efectivas", "Viviendas efectivas", "Total"]
@@ -203,23 +200,18 @@ with col1:  # Coloca la tabla en la columna central
     # Restaurar el nombre de la primera columna (índice)
     tabla_resumen.index.name = "Municipio"
 
-    # Agregar margen izquierdo usando HTML y CSS
-    st.markdown("""
-        <style>
-        .tabla-con-margen {
-            padding-left: 50px;
-        }
-        </style>
-        <div class="tabla-con-margen">
-    """, unsafe_allow_html=True)
+    # Convertir la tabla en HTML con estilos
+    tabla_html = tabla_resumen.to_html(classes="table", border=0)
 
-    st.write(tabla_resumen.style.set_properties(**{
-        'background-color': 'white', 
-        'border-radius': '10px', 
-        'padding': '10px'
-    }))
-
-    st.markdown("</div>", unsafe_allow_html=True)  # Cierra el div después de la tabla
+    # Centrar la tabla usando CSS
+    st.markdown(
+        f"""
+        <div style="display: flex; justify-content: center;">
+            {tabla_html}
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
     
 with col2:
     fig4 = px.pie(fa_datos, names="nmun_proce", title="Distribución de Casos de FA por Municipio",color_discrete_sequence=px.colors.qualitative.Safe)
