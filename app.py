@@ -178,7 +178,7 @@ with col3:
 col1, col2= st.columns(2)  # Ajusta los valores según el ancho deseado
 
 with col1:  # Coloca la tabla en la columna central
-    st.markdown("<h6 style='text-align: left; font-weight: bold;'>Resumen de Viviendas por Municipio</h6>", unsafe_allow_html=True)
+    st.markdown("<h6 style='text-align: left; font-weight: bold;'>                 Resumen de Viviendas por Municipio</h6>", unsafe_allow_html=True)
 
     tabla_resumen = datos.groupby("1_MUNICIPIO")["6_VIVIENDA_EFECTIVA_"].value_counts().unstack(fill_value=0)
     tabla_resumen["Total"] = tabla_resumen.sum(axis=1)
