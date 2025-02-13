@@ -30,12 +30,12 @@ st.markdown(
     <style>
         .logo-container {
             position: absolute;
-            top: 0px;
-            left: 0px;
+            top: -10px;
+            left: -10px;
             z-index: 1000;
         }
         .logo-container img {
-            width: 120px;  /* Ajusta el tamaño del logo */
+            width: 150px;  /* Ajusta el tamaño del logo */
             height: auto;
         }
     </style>
