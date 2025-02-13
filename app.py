@@ -24,6 +24,28 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+st.markdown(
+    """
+    <style>
+        .logo-container {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 1000;
+        }
+        .logo-container img {
+            width: 120px;  /* Ajusta el tamaño del logo */
+            height: auto;
+        }
+    </style>
+    <div class="logo-container">
+        <img src="https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/LOGO INS.png">
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
+
 # URL del archivo en GitHub
 url = "https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/2025-02-11.xlsx"
 # Cargar los datos desde el archivo Excel
@@ -46,10 +68,7 @@ fecha_actual = datetime.now(tz_colombia).strftime("%d/%m/%Y")
 
 # Mostrar el título, fecha de actualización y porcentaje de viviendas georreferenciadas juntos
 st.markdown(f"""
-   <div style="display: flex; align-items: center; justify-content: center;">
-        <img src="https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/Logo INS.PNG" width="60" style="margin-right: 60px;">
-        <h1 style="text-align: center; margin: 0;">Viviendas con abordaje en búsqueda activa comunitaria por atención a brote de Fiebre Amarilla en Tolima</h1>
-    </div>
+    <h1 style='text-align: center;'>Viviendas con abordaje en búsqueda activa comunitaria por atención a brote de Fiebre Amarilla en Tolima</h1>
     <p style='text-align: center; font-size: 14px;margin-bottom: 0px;'><b>Última fecha de actualización:</b> 12/02/2025</p>
     <p style='text-align: center; font-size: 14px;'><b>Porcentaje de viviendas georreferenciadas:</b> {porcentaje_geo:.2f}% ({viviendas_geo} de {total_viviendas})</p>
 """, unsafe_allow_html=True)
