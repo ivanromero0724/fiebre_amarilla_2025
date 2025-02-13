@@ -146,7 +146,7 @@ st.markdown("""
             z-index: 1000;
         }
     </style>
-    <div class="legend-container">
+    <div class="legend-container" style="font-size: 14px;">
         <i style="background: green; width: 12px; height: 12px; display: inline-block; margin-right: 8px; border-radius: 50%;"></i> Viviendas efectivas<br>
         <i style="background: red; width: 12px; height: 12px; display: inline-block; margin-right: 8px; border-radius: 50%;"></i> Viviendas no efectivas<br>
         <i style="background: gold; width: 12px; height: 12px; display: inline-block; margin-right: 8px; border-radius: 50%;"></i> Casos confirmados de FA
