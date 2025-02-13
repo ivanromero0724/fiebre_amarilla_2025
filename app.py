@@ -37,6 +37,8 @@ datos_geo = datos.dropna(subset=["lat_93_LOCALIZACIN_DE_LA", "long_93_LOCALIZACI
 total_viviendas = len(datos)
 viviendas_geo = len(datos_geo)
 porcentaje_geo = (viviendas_geo / total_viviendas) * 100
+fa_datos = pd.read_excel("https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/FA_2025-02-12.xlsx",engine="openpyxl")
+
 
 # Obtener la fecha actual en la zona horaria de Colombia
 tz_colombia = pytz.timezone("America/Bogota")
@@ -59,8 +61,9 @@ minimap = MiniMap(toggle_display=True, position="bottomright")
 m.add_child(minimap)
 
 # Crear capas para viviendas efectivas y no efectivas
-capa_si = folium.FeatureGroup(name="Vivienda efectiva")
-capa_no = folium.FeatureGroup(name="Vivienda no efectiva")
+capa_si = folium.FeatureGroup(name="Viviendas efectivas")
+capa_no = folium.FeatureGroup(name="Viviendas no efectivas")
+capa_fa = folium.FeatureGroup(name="Casos positivos de Fiebre Amarilla)
 
 # Definir colores para los estados de las viviendas
 colores = df["6_VIVIENDA_EFECTIVA_"].str.strip().str.upper().map({"SI": "green", "NO": "red"}).fillna("gray")
@@ -83,9 +86,23 @@ for lat, lon in zip(df_no["lat_93_LOCALIZACIN_DE_LA"], df_no["long_93_LOCALIZACI
         popup="Vivienda efectiva: NO"
     ).add_to(capa_no)
 
+for lat, lon, caso in zip(fa_datos["LATITUD"], fa_datos["LONGITUD"], fa_datos["Caso"]):
+    popup_text = f"<b>Caso:</b> {caso}"
+    
+    folium.CircleMarker(
+        location=[lat, lon],
+        radius=2, 
+        color="yellow", 
+        fill=True, 
+        fill_color="yellow", 
+        fill_opacity=1,
+        popup=folium.Popup(popup_text, max_width=300)
+    ).add_to(capa_fa)
+
 # Agregar las capas al mapa
 m.add_child(capa_si)
 m.add_child(capa_no)
+m.add_child(capa_fa)
 
 # Agregar capas base de Esri
 folium.TileLayer(
