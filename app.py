@@ -76,7 +76,7 @@ for lat, lon in zip(df_si["lat_93_LOCALIZACIN_DE_LA"], df_si["long_93_LOCALIZACI
     folium.CircleMarker(
         location=[lat, lon],
         radius=2, color="green", fill=True, fill_color="green", fill_opacity=1,
-        popup="Vivienda efectiva: SI"
+        popup="</b>Vivienda efectiva</b>: SI"
     ).add_to(capa_si)
 
 for lat, lon in zip(df_no["lat_93_LOCALIZACIN_DE_LA"], df_no["long_93_LOCALIZACIN_DE_LA"]):
