@@ -177,9 +177,15 @@ with col3:
 
 col1, col2= st.columns(2)  # Ajusta los valores según el ancho deseado
 
-with col1:  # La tabla estará en la columna del medio
+with col1:  # Coloca la tabla en la columna central
+    st.markdown(
+        "<div style='margin-top: 38px;'></div>", 
+        unsafe_allow_html=True
+    )
+
     st.markdown("<h6 style='text-align:center; font-weight: bold;'>Resumen de Viviendas por Municipio</h6>", unsafe_allow_html=True)
     
+    # Crear la tabla
     tabla_resumen = datos.groupby("1_MUNICIPIO")["6_VIVIENDA_EFECTIVA_"].value_counts().unstack(fill_value=0)
     tabla_resumen["Total"] = tabla_resumen.sum(axis=1)
     tabla_resumen.columns = ["Viviendas no efectivas", "Viviendas efectivas", "Total"]
@@ -194,7 +200,18 @@ with col1:  # La tabla estará en la columna del medio
     # Restaurar el nombre de la primera columna (índice)
     tabla_resumen.index.name = "Municipio"
 
-    st.dataframe(tabla_resumen)
+    # Convertir la tabla en HTML con estilos
+    tabla_html = tabla_resumen.to_html(classes="table", border=0)
+
+    # Centrar la tabla usando CSS
+    st.markdown(
+        f"""
+        <div style="display: flex; justify-content: center;">
+            {tabla_html}
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
     
 with col2:
     fig4 = px.pie(fa_datos, names="nmun_proce", title="Distribución de Casos de FA por Municipio",color_discrete_sequence=px.colors.qualitative.Safe)
