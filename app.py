@@ -175,8 +175,6 @@ with col3:
     fig3.update_layout(title={'x': 0.5, 'xanchor': 'center'})
     st.plotly_chart(fig3, use_container_width=True)
 
-st.markdown("<div style='margin-bottom: -60px;'></div>", unsafe_allow_html=True)
-
 col1, col2= st.columns(2)  # Ajusta los valores según el ancho deseado
 
 with col1:  # Coloca la tabla en la columna central
@@ -187,6 +185,8 @@ with col1:  # Coloca la tabla en la columna central
     st.markdown("<h6 style='text-align:center; font-weight: bold;'>Resumen de Viviendas por Municipio</h6>", unsafe_allow_html=True)
     st.text("")
     st.text("")
+    # Agregar espacio antes de la tabla
+    st.markdown("<div style='padding-left: 50px;'>", unsafe_allow_html=True)
     
     tabla_resumen = datos.groupby("1_MUNICIPIO")["6_VIVIENDA_EFECTIVA_"].value_counts().unstack(fill_value=0)
     tabla_resumen["Total"] = tabla_resumen.sum(axis=1)
