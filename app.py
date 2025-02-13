@@ -175,7 +175,7 @@ with col3:
     fig3.update_layout(title={'x': 0.5, 'xanchor': 'center'})
     st.plotly_chart(fig3, use_container_width=True)
 
-col1, col2, col3= st.columns([3,1,3])  # Ajusta los valores según el ancho deseado
+col1, col2, col3= st.columns([1,1,3])  # Ajusta los valores según el ancho deseado
 
 with col1:  # Coloca la tabla en la columna central
     st.markdown(
