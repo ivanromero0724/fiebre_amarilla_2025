@@ -178,34 +178,24 @@ with col3:
 col1, col2= st.columns(2)  # Ajusta los valores según el ancho deseado
 
 with col1:  # Coloca la tabla en la columna central
-    st.markdown("<h6 style='text-align: center; font-weight: bold;'>Resumen de Viviendas por Municipio</h6>", unsafe_allow_html=True)
+    st.markdown("<h6 style='text-align: left; font-weight: bold;'>Resumen de Viviendas por Municipio</h6>", unsafe_allow_html=True)
 
-    # Agrupar y calcular la tabla de resumen
     tabla_resumen = datos.groupby("1_MUNICIPIO")["6_VIVIENDA_EFECTIVA_"].value_counts().unstack(fill_value=0)
     tabla_resumen["Total"] = tabla_resumen.sum(axis=1)
     tabla_resumen.columns = ["Viviendas no efectivas", "Viviendas efectivas", "Total"]
-    
+
     # Agregar la fila de totales
     total_row = pd.DataFrame(tabla_resumen.sum(), columns=["Total"]).T
     total_row.index = ["Total"]
-    
+
     # Concatenar la fila de totales con la tabla original
     tabla_resumen = pd.concat([tabla_resumen, total_row])
-    tabla_resumen.index.name = "Municipio"
-    
-    # Convertir DataFrame en lista para Plotly
-    header = ["Municipio"] + list(tabla_resumen.columns)
-    data = [tabla_resumen.index.tolist()] + [tabla_resumen[col].tolist() for col in tabla_resumen.columns]
-    
-    # Crear la tabla con Plotly
-    fig = go.Figure(data=[go.Table(
-        header=dict(values=header, fill_color="lightgray", align="center", font=dict(color="black", size=12)),
-        cells=dict(values=data, fill_color="white", align="center", font=dict(color="black", size=11))
-    )])
-    
-    # Mostrar la tabla en Streamlit
-    st.plotly_chart(fig)
 
+    # Restaurar el nombre de la primera columna (índice)
+    tabla_resumen.index.name = "Municipio"
+
+    st.dataframe(tabla_resumen.style.set_properties(**{'background-color': 'white', 'border-radius': '10px', 'padding': '10px'}))
+    
 with col2:
     fig4 = px.pie(fa_datos, names="nmun_proce", title="Distribución de Casos de FA por Municipio",color_discrete_sequence=px.colors.qualitative.Safe)
     fig4.update_layout(title={'x': 0.5, 'xanchor': 'center'})
