@@ -178,8 +178,7 @@ with col3:
 col1, col2, col3= st.columns(3)  # Ajusta los valores según el ancho deseado
 
 with col2:  # Coloca la tabla en la columna central
-    st.write("")
-    st.write("")
+    st.markdown("<br><br>", unsafe_allow_html=True)
     st.markdown("<h6 style='text-align:center; font-weight: bold;'>Resumen de Viviendas por Municipio</h6>", unsafe_allow_html=True)
     st.text("")
     st.text("")
