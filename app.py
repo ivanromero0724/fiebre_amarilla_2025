@@ -140,13 +140,12 @@ st.markdown("""
             padding: 10px;
             border-radius: 5px;
             box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
-            width: 210px;
             line-height: 18px;
             opacity: 0.9;
             z-index: 1000;
         }
     </style>
-    <div class="legend-container" style="font-size: 14px;">
+    <div class="legend-container" style="font-size: 12px;">
         <i style="background: green; width: 12px; height: 12px; display: inline-block; margin-right: 8px; border-radius: 50%;"></i> Viviendas efectivas<br>
         <i style="background: red; width: 12px; height: 12px; display: inline-block; margin-right: 8px; border-radius: 50%;"></i> Viviendas no efectivas<br>
         <i style="background: gold; width: 12px; height: 12px; display: inline-block; margin-right: 8px; border-radius: 50%;"></i> Casos confirmados de FA
