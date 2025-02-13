@@ -177,7 +177,7 @@ st.markdown("""
 
 
 st.markdown(
-    "<div style='margin-top: 30px;'></div>", 
+    "<div style='margin-top: 100px;'></div>", 
     unsafe_allow_html=True
 )
 
