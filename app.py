@@ -86,8 +86,15 @@ for lat, lon in zip(df_no["lat_93_LOCALIZACIN_DE_LA"], df_no["long_93_LOCALIZACI
         popup="Vivienda efectiva: NO"
     ).add_to(capa_no)
 
-for lat, lon, caso in zip(fa_datos["LATITUD"], fa_datos["LONGITUD"], fa_datos["Caso"]):
-    popup_text = f"<b>Caso:</b> {caso}"
+or lat, lon, caso, municipio, vereda in zip(
+    fa_datos["LATITUD"], fa_datos["LONGITUD"], fa_datos["Caso"], 
+    fa_datos["Municipio de Procedencia"], fa_datos["Vereda"]
+):
+    popup_text = f"""
+    <b>Caso:</b> {caso} <br>
+    <b>Municipio:</b> {municipio} <br>
+    <b>Vereda:</b> {vereda}
+    """
     
     folium.CircleMarker(
         location=[lat, lon],
