@@ -200,18 +200,20 @@ with col1:  # Coloca la tabla en la columna central
     # Restaurar el nombre de la primera columna (índice)
     tabla_resumen.index.name = "Municipio"
 
-    # Convertir la tabla en HTML con estilos
-    tabla_html = tabla_resumen.to_html(classes="table", border=0)
-
-    # Centrar la tabla usando CSS
+    # CSS para centrar la tabla sin perder funcionalidad
     st.markdown(
-        f"""
-        <div style="display: flex; justify-content: center;">
-            {tabla_html}
-        </div>
+        """
+        <style>
+        div[data-testid="stDataFrame"] { 
+            margin: auto; 
+        }
+        </style>
         """,
         unsafe_allow_html=True
     )
+
+    # Mostrar la tabla de manera dinámica
+    st.dataframe(tabla_resumen)
     
 with col2:
     fig4 = px.pie(fa_datos, names="nmun_proce", title="Distribución de Casos de FA por Municipio",color_discrete_sequence=px.colors.qualitative.Safe)
