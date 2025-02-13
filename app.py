@@ -72,7 +72,7 @@ colores = df["6_VIVIENDA_EFECTIVA_"].str.strip().str.upper().map({"SI": "green",
 df_si = df[colores == "green"]
 df_no = df[colores == "red"]
 
-for lat, lon in zip(df_si["lat_93_LOCALIZACIN_DE_LA"], df_si["long_93_LOCALIZACIN_DE_LA"],df_si["6_VIVIENDA_EFECTIVA_"]):
+for lat, lon in zip(df_si["lat_93_LOCALIZACIN_DE_LA"], df_si["long_93_LOCALIZACIN_DE_LA"]):
     folium.CircleMarker(
         location=[lat, lon],
         radius=2, color="green", fill=True, fill_color="green", fill_opacity=1,
