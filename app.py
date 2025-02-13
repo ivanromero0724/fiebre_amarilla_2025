@@ -24,47 +24,30 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+
 st.markdown(
     """
     <style>
-        /* Barra superior personalizada */
-        .custom-header {
+        /* Contenedor del logo */
+        .custom-logo {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 60px;
-            background-color: white; /* Fondo blanco para simular barra */
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            top: 10px;
+            left: 10px;
             z-index: 1000;
-            display: flex;
-            align-items: center;
-            padding-left: 20px;
         }
-
-        /* Logo dentro de la barra */
-        .custom-header img {
-            height: 100px; /* Ajusta el tamaño del logo */
-        }
-
-        /* Espacio para que el contenido no se superponga con la barra */
-        .content {
-            margin-top: 70px; 
+        /* Ajustar el tamaño del logo */
+        .custom-logo img {
+            width: 100px;  /* Ajusta el tamaño */
+            height: auto;
         }
     </style>
-
-    <!-- Barra superior con logo -->
-    <div class="custom-header">
+    
+    <div class="custom-logo">
         <img src="https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/Logo.png">
     </div>
-    
-    <!-- Espacio para el contenido -->
-    <div class="content"></div>
     """,
     unsafe_allow_html=True
 )
-
-
 
 # URL del archivo en GitHub
 url = "https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/2025-02-11.xlsx"
