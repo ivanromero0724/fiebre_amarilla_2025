@@ -76,14 +76,14 @@ for lat, lon in zip(df_si["lat_93_LOCALIZACIN_DE_LA"], df_si["long_93_LOCALIZACI
     folium.CircleMarker(
         location=[lat, lon],
         radius=2, color="green", fill=True, fill_color="green", fill_opacity=1,
-        popup=folium.Popup("<b>Vivienda efectiva:</b> Si")
+        popup=folium.Popup("<b>Vivienda efectiva:</b> Si", max_width=300)
     ).add_to(capa_si)
 
 for lat, lon in zip(df_no["lat_93_LOCALIZACIN_DE_LA"], df_no["long_93_LOCALIZACIN_DE_LA"]):
     folium.CircleMarker(
         location=[lat, lon],
         radius=2, color="red", fill=True, fill_color="red", fill_opacity=1,
-        popup=folium.Popup("<b>Vivienda efectiva:</b> No")
+        popup=folium.Popup("<b>Vivienda efectiva:</b> No", max_width=300)
     ).add_to(capa_no)
 
 for lat, lon, caso, municipio, vereda in zip(
@@ -103,7 +103,7 @@ for lat, lon, caso, municipio, vereda in zip(
         fill=True, 
         fill_color="gold", 
         fill_opacity=1,
-        popup=folium.Popup(popup_text)
+        popup=folium.Popup(popup_text, max_width=300)
     ).add_to(capa_fa)
 
 # Agregar las capas al mapa
