@@ -29,7 +29,7 @@ st.markdown(
     <style>
         .logo-container {
             position: absolute;
-            top: 10px;
+            top: 0px;
             left: 0px;
             z-index: 1000;
         }
