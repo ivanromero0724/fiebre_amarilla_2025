@@ -63,7 +63,7 @@ m.add_child(minimap)
 # Crear capas para viviendas efectivas y no efectivas
 capa_si = folium.FeatureGroup(name="Viviendas efectivas")
 capa_no = folium.FeatureGroup(name="Viviendas no efectivas")
-capa_fa = folium.FeatureGroup(name="Casos positivos de Fiebre Amarilla)
+capa_fa = folium.FeatureGroup(name="Casos positivos de Fiebre Amarilla")
 
 # Definir colores para los estados de las viviendas
 colores = df["6_VIVIENDA_EFECTIVA_"].str.strip().str.upper().map({"SI": "green", "NO": "red"}).fillna("gray")
