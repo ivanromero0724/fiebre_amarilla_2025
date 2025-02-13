@@ -175,9 +175,9 @@ with col3:
     fig3.update_layout(title={'x': 0.5, 'xanchor': 'center'})
     st.plotly_chart(fig3, use_container_width=True)
     
-col1, col2, col3 = st.columns(3)  # Ajusta los valores según el ancho deseado
+col1, col2= st.columns(2)  # Ajusta los valores según el ancho deseado
 
-with col2:  # Coloca la tabla en la columna central
+with col1:  # Coloca la tabla en la columna central
     st.markdown("<h6 style='text-align: center; font-weight: bold;'>Resumen de Viviendas por Municipio</h6>", unsafe_allow_html=True)
 
     tabla_resumen = datos.groupby("1_MUNICIPIO")["6_VIVIENDA_EFECTIVA_"].value_counts().unstack(fill_value=0)
@@ -195,3 +195,8 @@ with col2:  # Coloca la tabla en la columna central
     tabla_resumen.index.name = "Municipio"
 
     st.dataframe(tabla_resumen.style.set_properties(**{'background-color': 'white', 'border-radius': '10px', 'padding': '10px'}))
+
+with col2:
+    fig4 = px.pie(fa_datos, names="Municipio de Procedencia", title="Casos de FA por Municipio",color_discrete_sequence=px.colors.qualitative.Safe)
+    fig4.update_layout(title={'x': 0.5, 'xanchor': 'center'})
+    st.plotly_chart(fig4, use_container_width=True)
