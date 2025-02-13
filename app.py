@@ -178,11 +178,14 @@ with col3:
 col1, col2= st.columns(2)  # Ajusta los valores según el ancho deseado
 
 with col1:  # Coloca la tabla en la columna central
-    st.markdown("<div style='margin-top: 38px;'></div>", unsafe_allow_html=True)
-
+    st.markdown(
+    "<div style='margin-top: 38px;'></div>", 
+    unsafe_allow_html=True
+)
     st.markdown("<h6 style='text-align:center; font-weight: bold;'>Resumen de Viviendas por Municipio</h6>", unsafe_allow_html=True)
-
-    # Crear la tabla
+    st.text("")
+    st.text("")
+    
     tabla_resumen = datos.groupby("1_MUNICIPIO")["6_VIVIENDA_EFECTIVA_"].value_counts().unstack(fill_value=0)
     tabla_resumen["Total"] = tabla_resumen.sum(axis=1)
     tabla_resumen.columns = ["Viviendas no efectivas", "Viviendas efectivas", "Total"]
@@ -194,39 +197,10 @@ with col1:  # Coloca la tabla en la columna central
     # Concatenar la fila de totales con la tabla original
     tabla_resumen = pd.concat([tabla_resumen, total_row])
 
-    # Restaurar el nombre de la primera columna
+    # Restaurar el nombre de la primera columna (índice)
     tabla_resumen.index.name = "Municipio"
-    tabla_resumen.reset_index(inplace=True)  # Evita que "Municipio" aparezca como índice
 
-    # Convertir la tabla en HTML sin el borde por defecto
-    tabla_html = tabla_resumen.to_html(index=False, border=0)  
-
-    # Aplicar estilos CSS directamente en la tabla
-    st.markdown(
-        f"""
-        <style>
-            table {{
-                width: 80%; /* Ajusta el ancho de la tabla */
-                margin: auto; /* Centrar la tabla */
-                text-align: center;
-                font-size: 12px !important; /* Tamaño de letra más pequeño */
-                border-collapse: collapse;
-            }}
-            th, td {{
-                padding: 8px;
-                border: 1px solid #ddd;
-            }}
-            th {{
-                background-color: #f2f2f2;
-                font-weight: bold;
-            }}
-        </style>
-        <div style="display: flex; justify-content: center;">
-            {tabla_html}
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+    st.dataframe(tabla_resumen.style.set_properties(**{'background-color': 'white', 'border-radius': '10px', 'padding': '10px'}))
 
 with col2:
     fig4 = px.pie(fa_datos, names="nmun_proce", title="Distribución de Casos de FA por Municipio",color_discrete_sequence=px.colors.qualitative.Safe)
