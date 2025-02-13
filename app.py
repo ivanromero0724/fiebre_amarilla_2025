@@ -201,14 +201,30 @@ with col1:  # Coloca la tabla en la columna central
     tabla_resumen.index.name = "Municipio"
     tabla_resumen.reset_index(inplace=True)  # Evita que "Municipio" aparezca como índice
 
-    # Convertir la tabla en HTML con estilos personalizados
-    tabla_html = tabla_resumen.to_html(classes="dataframe table", border=0, index=False)
+    # Convertir la tabla en HTML y ajustar el tamaño de letra
+    tabla_html = tabla_resumen.to_html(index=False)
 
-    # Centrar la tabla y reducir el tamaño del texto
+    # Aplicar estilos CSS directamente en la tabla
     st.markdown(
         f"""
+        <style>
+            table {{
+                width: 100%;
+                text-align: center;
+                font-size: 12px !important; /* Forzar tamaño de letra */
+                border-collapse: collapse;
+            }}
+            th, td {{
+                padding: 8px;
+                border: 1px solid #ddd;
+            }}
+            th {{
+                background-color: #f2f2f2;
+                font-weight: bold;
+            }}
+        </style>
         <div style="display: flex; justify-content: center;">
-            <table class="dataframe table" style="font-size:5px;">{tabla_html}</table>
+            {tabla_html}
         </div>
         """,
         unsafe_allow_html=True
