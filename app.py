@@ -47,7 +47,7 @@ fecha_actual = datetime.now(tz_colombia).strftime("%d/%m/%Y")
 # Mostrar el título, fecha de actualización y porcentaje de viviendas georreferenciadas juntos
 st.markdown(f"""
    <div style="display: flex; align-items: center; justify-content: center;">
-        <img src="https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/Logo INS.PNG" width="60" style="margin-right: 10px;">
+        <img src="https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/Logo INS.PNG" width="60" style="margin-right: 60px;">
         <h1 style="text-align: center; margin: 0;">Viviendas con abordaje en búsqueda activa comunitaria por atención a brote de Fiebre Amarilla en Tolima</h1>
     </div>
     <p style='text-align: center; font-size: 14px;margin-bottom: 0px;'><b>Última fecha de actualización:</b> 12/02/2025</p>
