@@ -27,23 +27,43 @@ st.markdown(
 st.markdown(
     """
     <style>
-        .logo-container {
-            position: absolute;
-            top: 0px;
-            left: 0px;
+        /* Barra superior personalizada */
+        .custom-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background-color: white; /* Fondo blanco para simular barra */
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
             z-index: 1000;
+            display: flex;
+            align-items: center;
+            padding-left: 20px;
         }
-        .logo-container img {
-            width: 120px;  /* Ajusta el tamaño del logo */
-            height: auto;
+
+        /* Logo dentro de la barra */
+        .custom-header img {
+            height: 50px; /* Ajusta el tamaño del logo */
+        }
+
+        /* Espacio para que el contenido no se superponga con la barra */
+        .content {
+            margin-top: 70px; 
         }
     </style>
-    <div class="logo-container">
+
+    <!-- Barra superior con logo -->
+    <div class="custom-header">
         <img src="https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/Logo.png">
     </div>
+    
+    <!-- Espacio para el contenido -->
+    <div class="content"></div>
     """,
     unsafe_allow_html=True
 )
+
 
 
 # URL del archivo en GitHub
