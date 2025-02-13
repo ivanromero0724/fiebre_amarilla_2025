@@ -184,7 +184,7 @@ with col1:  # Coloca la tabla en la columna central
     )
 
     st.markdown("<h6 style='text-align:center; font-weight: bold;'>Resumen de Viviendas por Municipio</h6>", unsafe_allow_html=True)
-    
+
     # Crear la tabla
     tabla_resumen = datos.groupby("1_MUNICIPIO")["6_VIVIENDA_EFECTIVA_"].value_counts().unstack(fill_value=0)
     tabla_resumen["Total"] = tabla_resumen.sum(axis=1)
@@ -197,28 +197,23 @@ with col1:  # Coloca la tabla en la columna central
     # Concatenar la fila de totales con la tabla original
     tabla_resumen = pd.concat([tabla_resumen, total_row])
 
-    # Convertir el índice en una columna normal y renombrar la columna
-    tabla_resumen.reset_index(inplace=True)
-    tabla_resumen.rename(columns={"index": "Municipio"}, inplace=True)
+    # Restaurar el nombre de la primera columna
+    tabla_resumen.index.name = "Municipio"
+    tabla_resumen.reset_index(inplace=True)  # Evita que "Municipio" aparezca como índice
 
-    # Convertir la tabla en HTML con estilos (tamaño de letra más pequeño)
-    tabla_html = tabla_resumen.to_html(classes="table", border=0, index=False)
+    # Convertir la tabla en HTML con estilos personalizados
+    tabla_html = tabla_resumen.to_html(classes="dataframe table", border=0, index=False)
 
-    # Estilos CSS para centrar la tabla y reducir el tamaño de la letra
+    # Centrar la tabla y reducir el tamaño del texto
     st.markdown(
         f"""
-        <style>
-            .table {{
-                font-size: 12px;  /* Reducir el tamaño de la letra */
-                width: auto;
-            }}
-        </style>
         <div style="display: flex; justify-content: center;">
-            {tabla_html}
+            <table class="dataframe table" style="font-size:12px;">{tabla_html}</table>
         </div>
         """,
         unsafe_allow_html=True
     )
+
 with col2:
     fig4 = px.pie(fa_datos, names="nmun_proce", title="Distribución de Casos de FA por Municipio",color_discrete_sequence=px.colors.qualitative.Safe)
     fig4.update_layout(title={'x': 0.5, 'xanchor': 'center'})
