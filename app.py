@@ -204,7 +204,7 @@ with col1:  # Coloca la tabla en la columna central
     tabla_resumen.index.name = "Municipio"
 
     # Agregar margen izquierdo SOLO a la tabla
-    st.markdown("<div style='padding-left: 50px;'>", unsafe_allow_html=True)
+    st.markdown("<div style='padding-left: 200px;'>", unsafe_allow_html=True)
 
     st.dataframe(tabla_resumen.style.set_properties(**{
         'background-color': 'white', 
