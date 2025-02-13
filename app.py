@@ -39,7 +39,7 @@ st.markdown(
         }
     </style>
     <div class="logo-container">
-        <img src="https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/LOGO.png">
+        <img src="https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/Logo.png">
     </div>
     """,
     unsafe_allow_html=True
