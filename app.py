@@ -12,18 +12,6 @@ import plotly.express as px
 # Configurar la página
 st.set_page_config(layout="wide", page_title="Mapa Fiebre Amarilla Tolima", page_icon='🦟')
 
-# Reducir espacio superior con CSS
-st.markdown(
-    """
-    <style>
-        .block-container {
-            padding-top: 2rem !important;
-        }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
 #LOGO
 st.markdown(
     """
