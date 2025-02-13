@@ -31,7 +31,7 @@ st.markdown(
         .logo-container {
             position: absolute;
             top: 50px;
-            left: -25px;
+            left: -15px;
             z-index: 1000;
         }
         .logo-container img {
