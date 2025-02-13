@@ -88,7 +88,7 @@ for lat, lon in zip(df_no["lat_93_LOCALIZACIN_DE_LA"], df_no["long_93_LOCALIZACI
 
 for lat, lon, caso, municipio, vereda in zip(
     fa_datos["LATITUD"], fa_datos["LONGITUD"], fa_datos["Caso"], 
-    fa_datos["Municipio de Procedencia"], fa_datos["Vereda"]
+    fa_datos["nmun_proce"], fa_datos["Vereda"]
 ):
     popup_text = f"""
     <b>Caso:</b> {caso} <br>
@@ -197,6 +197,6 @@ with col1:  # Coloca la tabla en la columna central
     st.dataframe(tabla_resumen.style.set_properties(**{'background-color': 'white', 'border-radius': '10px', 'padding': '10px'}))
 
 with col2:
-    fig4 = px.pie(fa_datos, names="Municipio de Procedencia", title="Casos de FA por Municipio",color_discrete_sequence=px.colors.qualitative.Safe)
+    fig4 = px.pie(fa_datos, names="nmun_proce", title="Casos de FA por Municipio",color_discrete_sequence=px.colors.qualitative.Safe)
     fig4.update_layout(title={'x': 0.5, 'xanchor': 'center'})
     st.plotly_chart(fig4, use_container_width=True)
