@@ -175,9 +175,9 @@ with col3:
     fig3.update_layout(title={'x': 0.5, 'xanchor': 'center'})
     st.plotly_chart(fig3, use_container_width=True)
     
-col1, col2, col3= st.columns(3)  # Ajusta los valores según el ancho deseado
+col1, col2= st.columns(2)  # Ajusta los valores según el ancho deseado
 
-with col2:  # Coloca la tabla en la columna central
+with col1:  # Coloca la tabla en la columna central
     st.markdown(
     "<div style='margin-top: 38px;'></div>", 
     unsafe_allow_html=True
@@ -202,7 +202,7 @@ with col2:  # Coloca la tabla en la columna central
 
     st.dataframe(tabla_resumen.style.set_properties(**{'background-color': 'white', 'border-radius': '10px', 'padding': '10px'}))
     
-with col3:
+with col2:
     fig4 = px.pie(fa_datos, names="nmun_proce", title="Distribución de Casos de FA por Municipio",color_discrete_sequence=px.colors.qualitative.Safe)
     fig4.update_layout(title={'x': 0.5, 'xanchor': 'center'})
     st.plotly_chart(fig4, use_container_width=True)
