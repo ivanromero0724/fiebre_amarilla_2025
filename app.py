@@ -178,10 +178,7 @@ with col3:
 col1, col2= st.columns(2)  # Ajusta los valores según el ancho deseado
 
 with col1:  # Coloca la tabla en la columna central
-    st.markdown(
-        "<div style='margin-top: 38px;'></div>", 
-        unsafe_allow_html=True
-    )
+    st.markdown("<div style='margin-top: 38px;'></div>", unsafe_allow_html=True)
 
     st.markdown("<h6 style='text-align:center; font-weight: bold;'>Resumen de Viviendas por Municipio</h6>", unsafe_allow_html=True)
 
@@ -201,17 +198,18 @@ with col1:  # Coloca la tabla en la columna central
     tabla_resumen.index.name = "Municipio"
     tabla_resumen.reset_index(inplace=True)  # Evita que "Municipio" aparezca como índice
 
-    # Convertir la tabla en HTML y ajustar el tamaño de letra
-    tabla_html = tabla_resumen.to_html(index=False)
+    # Convertir la tabla en HTML sin el borde por defecto
+    tabla_html = tabla_resumen.to_html(index=False, border=0)  
 
     # Aplicar estilos CSS directamente en la tabla
     st.markdown(
         f"""
         <style>
             table {{
-                width: 100%;
+                width: 80%; /* Ajusta el ancho de la tabla */
+                margin: auto; /* Centrar la tabla */
                 text-align: center;
-                font-size: 12px !important; /* Forzar tamaño de letra */
+                font-size: 12px !important; /* Tamaño de letra más pequeño */
                 border-collapse: collapse;
             }}
             th, td {{
