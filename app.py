@@ -80,9 +80,9 @@ for lat, lon in zip(df_si["lat_93_LOCALIZACIN_DE_LA"], df_si["long_93_LOCALIZACI
     ).add_to(capa_si)
 
 for lat, lon in zip(df_no["lat_93_LOCALIZACIN_DE_LA"], df_no["long_93_LOCALIZACIN_DE_LA"]):
-    folium.CircleMarker(
+    folium.Marker(
         location=[lat, lon],
-        radius=2, color="red", fill=True, fill_color="red", fill_opacity=1,
+        icon=folium.Icon(icon="home", prefix="fa", color="red"),  # Icono de casa (home)
         popup="Vivienda efectiva: NO"
     ).add_to(capa_no)
 
