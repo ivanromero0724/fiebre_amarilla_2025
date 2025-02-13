@@ -197,22 +197,28 @@ with col1:  # Coloca la tabla en la columna central
     # Concatenar la fila de totales con la tabla original
     tabla_resumen = pd.concat([tabla_resumen, total_row])
 
-    # Convertir el índice en una columna normal para que "Municipio" sea parte de la tabla
+    # Convertir el índice en una columna normal y renombrar la columna
     tabla_resumen.reset_index(inplace=True)
+    tabla_resumen.rename(columns={"index": "Municipio"}, inplace=True)
 
-    # Convertir la tabla en HTML con estilos y asegurando que "Municipio" sea una columna
+    # Convertir la tabla en HTML con estilos (tamaño de letra más pequeño)
     tabla_html = tabla_resumen.to_html(classes="table", border=0, index=False)
 
-    # Centrar la tabla usando CSS
+    # Estilos CSS para centrar la tabla y reducir el tamaño de la letra
     st.markdown(
         f"""
+        <style>
+            .table {{
+                font-size: 12px;  /* Reducir el tamaño de la letra */
+                width: auto;
+            }}
+        </style>
         <div style="display: flex; justify-content: center;">
             {tabla_html}
         </div>
         """,
         unsafe_allow_html=True
     )
-
 with col2:
     fig4 = px.pie(fa_datos, names="nmun_proce", title="Distribución de Casos de FA por Municipio",color_discrete_sequence=px.colors.qualitative.Safe)
     fig4.update_layout(title={'x': 0.5, 'xanchor': 'center'})
