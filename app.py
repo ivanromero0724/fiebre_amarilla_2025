@@ -200,8 +200,8 @@ with col1:  # Coloca la tabla en la columna central
     # Restaurar el nombre de la primera columna (índice)
     tabla_resumen.index.name = "Municipio"
 
-    # Convertir la tabla en HTML con estilos
-    tabla_html = tabla_resumen.to_html(classes="table", border=0)
+    # Convertir la tabla en HTML con estilos y mantener el índice como encabezado
+    tabla_html = tabla_resumen.to_html(classes="table", border=0, index_names=True)
 
     # Centrar la tabla usando CSS
     st.markdown(
