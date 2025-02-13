@@ -35,7 +35,7 @@ st.markdown(
             z-index: 1000;
         }
         .logo-container img {
-            width: 120px;  /* Ajusta el tamaño del logo */
+            width: 80px;  /* Ajusta el tamaño del logo */
             height: auto;
         }
     </style>
