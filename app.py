@@ -44,7 +44,7 @@ st.markdown(
 
         /* Logo dentro de la barra */
         .custom-header img {
-            height: 50px; /* Ajusta el tamaño del logo */
+            height: 100px; /* Ajusta el tamaño del logo */
         }
 
         /* Espacio para que el contenido no se superponga con la barra */
