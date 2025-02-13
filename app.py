@@ -182,7 +182,10 @@ with col1:  # Coloca la tabla en la columna central
     st.text("")
     st.text("")
     st.markdown("<h6 style='text-align:center; font-weight: bold;'>Resumen de Viviendas por Municipio</h6>", unsafe_allow_html=True)
-
+    st.text("")
+    st.text("")
+    st.text("")
+    
     tabla_resumen = datos.groupby("1_MUNICIPIO")["6_VIVIENDA_EFECTIVA_"].value_counts().unstack(fill_value=0)
     tabla_resumen["Total"] = tabla_resumen.sum(axis=1)
     tabla_resumen.columns = ["Viviendas no efectivas", "Viviendas efectivas", "Total"]
