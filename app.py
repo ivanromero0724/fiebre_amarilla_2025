@@ -98,7 +98,7 @@ for lat, lon, caso, municipio, vereda in zip(
     
     folium.CircleMarker(
         location=[lat, lon],
-        radius=2, 
+        radius=3, 
         color="yellow", 
         fill=True, 
         fill_color="yellow", 
