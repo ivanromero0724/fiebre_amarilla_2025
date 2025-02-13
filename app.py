@@ -31,11 +31,11 @@ st.markdown(
         .logo-container {
             position: absolute;
             top: 100px;
-            left: -50px;
+            left: -100px;
             z-index: 1000;
         }
         .logo-container img {
-            width: 150px;  /* Ajusta el tamaño del logo */
+            width: 100px;  /* Ajusta el tamaño del logo */
             height: auto;
         }
     </style>
