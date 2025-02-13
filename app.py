@@ -99,9 +99,9 @@ for lat, lon, caso, municipio, vereda in zip(
     folium.CircleMarker(
         location=[lat, lon],
         radius=4, 
-        color="golden", 
+        color="darkyellow", 
         fill=True, 
-        fill_color="golden", 
+        fill_color="darkyellow", 
         fill_opacity=1,
         popup=folium.Popup(popup_text, max_width=300)
     ).add_to(capa_fa)
