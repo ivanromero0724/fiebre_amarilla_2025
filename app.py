@@ -174,7 +174,9 @@ with col3:
                   color_discrete_sequence=[px.colors.qualitative.Safe[3], px.colors.qualitative.Safe[1]])
     fig3.update_layout(title={'x': 0.5, 'xanchor': 'center'})
     st.plotly_chart(fig3, use_container_width=True)
-    
+
+st.markdown("<div style='margin-bottom: -10px;'></div>", unsafe_allow_html=True)
+
 col1, col2= st.columns(2)  # Ajusta los valores según el ancho deseado
 
 with col1:  # Coloca la tabla en la columna central
