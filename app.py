@@ -178,16 +178,17 @@ with col3:
 col1, col2= st.columns(2)  # Ajusta los valores según el ancho deseado
 
 with col1:  # Coloca la tabla en la columna central
-    st.markdown(
-    "<div style='margin-top: 38px;'></div>", 
-    unsafe_allow_html=True
-)
+    # Espacio arriba del título
+    st.markdown("<div style='margin-top: 38px;'></div>", unsafe_allow_html=True)
+
+    # Título centrado
     st.markdown("<h6 style='text-align:center; font-weight: bold;'>Resumen de Viviendas por Municipio</h6>", unsafe_allow_html=True)
+
+    # Espacio adicional entre título y tabla (opcional)
     st.text("")
     st.text("")
-    # Agregar espacio antes de la tabla
-    st.markdown("<div style='padding-left: 50px;'>", unsafe_allow_html=True)
     
+    # Crear la tabla resumen
     tabla_resumen = datos.groupby("1_MUNICIPIO")["6_VIVIENDA_EFECTIVA_"].value_counts().unstack(fill_value=0)
     tabla_resumen["Total"] = tabla_resumen.sum(axis=1)
     tabla_resumen.columns = ["Viviendas no efectivas", "Viviendas efectivas", "Total"]
@@ -202,7 +203,16 @@ with col1:  # Coloca la tabla en la columna central
     # Restaurar el nombre de la primera columna (índice)
     tabla_resumen.index.name = "Municipio"
 
-    st.dataframe(tabla_resumen.style.set_properties(**{'background-color': 'white', 'border-radius': '10px', 'padding': '10px'}))
+    # Agregar margen izquierdo SOLO a la tabla
+    st.markdown("<div style='padding-left: 50px;'>", unsafe_allow_html=True)
+
+    st.dataframe(tabla_resumen.style.set_properties(**{
+        'background-color': 'white', 
+        'border-radius': '10px', 
+        'padding': '10px'
+    }))
+
+    st.markdown("</div>", unsafe_allow_html=True)  # Cerrar el div para que solo afecte la tabla
     
 with col2:
     fig4 = px.pie(fa_datos, names="nmun_proce", title="Distribución de Casos de FA por Municipio",color_discrete_sequence=px.colors.qualitative.Safe)
