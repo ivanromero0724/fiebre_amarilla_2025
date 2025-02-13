@@ -98,7 +98,7 @@ for lat, lon, caso, municipio, vereda in zip(
     
     folium.CircleMarker(
         location=[lat, lon],
-        radius=4, 
+        radius=3, 
         color="gold", 
         fill=True, 
         fill_color="gold", 
@@ -149,7 +149,7 @@ st.markdown("""
     <div class="legend-container">
         <i style="background: green; width: 12px; height: 12px; display: inline-block; margin-right: 8px; border-radius: 50%;"></i> Viviendas efectivas<br>
         <i style="background: red; width: 12px; height: 12px; display: inline-block; margin-right: 8px; border-radius: 50%;"></i> Viviendas no efectivas<br>
-        <i style="background: yellow; width: 12px; height: 12px; display: inline-block; margin-right: 8px; border-radius: 50%;"></i> Casos confirmados de FA
+        <i style="background: gold; width: 12px; height: 12px; display: inline-block; margin-right: 8px; border-radius: 50%;"></i> Casos confirmados de FA
     </div>
 """, unsafe_allow_html=True)
 
