@@ -133,7 +133,7 @@ st.markdown("""
             padding: 10px;
             border-radius: 5px;
             box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
-            width: 250px;
+            width: 190px;
             line-height: 18px;
             opacity: 0.9;
             z-index: 1000;
@@ -142,7 +142,7 @@ st.markdown("""
     <div class="legend-container">
         <i style="background: green; width: 12px; height: 12px; display: inline-block; margin-right: 8px; border-radius: 50%;"></i> Viviendas efectivas<br>
         <i style="background: red; width: 12px; height: 12px; display: inline-block; margin-right: 8px; border-radius: 50%;"></i> Viviendas no efectivas<br>
-        <i style="background: yellow; width: 12px; height: 12px; display: inline-block; margin-right: 8px; border-radius: 50%;"></i> Casos confirmados de Fiebre Amarilla
+        <i style="background: yellow; width: 12px; height: 12px; display: inline-block; margin-right: 8px; border-radius: 50%;"></i> Casos confirmados de FA
     </div>
 """, unsafe_allow_html=True)
 
