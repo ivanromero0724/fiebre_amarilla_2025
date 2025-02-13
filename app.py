@@ -184,7 +184,7 @@ with col1:  # Coloca la tabla en la columna central
     # Título centrado
     st.markdown("<h6 style='text-align:center; font-weight: bold;'>Resumen de Viviendas por Municipio</h6>", unsafe_allow_html=True)
 
-    # Espacio adicional entre título y tabla (opcional)
+    # Espacio entre el título y la tabla
     st.text("")
     st.text("")
     
@@ -203,16 +203,23 @@ with col1:  # Coloca la tabla en la columna central
     # Restaurar el nombre de la primera columna (índice)
     tabla_resumen.index.name = "Municipio"
 
-    # Agregar margen izquierdo SOLO a la tabla
-    st.markdown("<div style='padding-left: 200px;'>", unsafe_allow_html=True)
+    # Agregar margen izquierdo usando HTML y CSS
+    st.markdown("""
+        <style>
+        .tabla-con-margen {
+            padding-left: 50px;
+        }
+        </style>
+        <div class="tabla-con-margen">
+    """, unsafe_allow_html=True)
 
-    st.dataframe(tabla_resumen.style.set_properties(**{
+    st.write(tabla_resumen.style.set_properties(**{
         'background-color': 'white', 
         'border-radius': '10px', 
         'padding': '10px'
     }))
 
-    st.markdown("</div>", unsafe_allow_html=True)  # Cerrar el div para que solo afecte la tabla
+    st.markdown("</div>", unsafe_allow_html=True)  # Cierra el div después de la tabla
     
 with col2:
     fig4 = px.pie(fa_datos, names="nmun_proce", title="Distribución de Casos de FA por Municipio",color_discrete_sequence=px.colors.qualitative.Safe)
