@@ -133,7 +133,7 @@ st.markdown("""
             padding: 10px;
             border-radius: 5px;
             box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
-            width: 220px;
+            width: 210px;
             line-height: 18px;
             opacity: 0.9;
             z-index: 1000;
