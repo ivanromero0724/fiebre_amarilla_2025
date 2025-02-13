@@ -12,6 +12,20 @@ import plotly.express as px
 # Configurar la página
 st.set_page_config(layout="wide", page_title="Mapa Fiebre Amarilla Tolima", page_icon='🦟')
 
+# Reducir espacio superior con CSS
+st.markdown(
+    """
+    <style>
+        .block-container {
+            padding-top: 2rem !important;
+        }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+#LOGO
+
 st.markdown(
     """
     <style>
@@ -29,18 +43,6 @@ st.markdown(
     <div class="logo-container">
         <img src="https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/Logo INS.png">
     </div>
-    """,
-    unsafe_allow_html=True
-)
-
-# Reducir espacio superior con CSS
-st.markdown(
-    """
-    <style>
-        .block-container {
-            padding-top: 2rem !important;
-        }
-    </style>
     """,
     unsafe_allow_html=True
 )
