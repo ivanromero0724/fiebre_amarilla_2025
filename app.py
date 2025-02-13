@@ -208,7 +208,7 @@ with col1:  # Coloca la tabla en la columna central
     st.markdown(
         f"""
         <div style="display: flex; justify-content: center;">
-            <table class="dataframe table" style="font-size:12px;">{tabla_html}</table>
+            <table class="dataframe table" style="font-size:5px;">{tabla_html}</table>
         </div>
         """,
         unsafe_allow_html=True
