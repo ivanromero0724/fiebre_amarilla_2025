@@ -17,7 +17,7 @@ st.markdown(
     """
     <style>
         .block-container {
-            padding-top: 2rem !important;
+            padding-top: 0rem !important;
         }
     </style>
     """,
@@ -67,6 +67,7 @@ fa_datos = pd.read_excel("https://raw.githubusercontent.com/ivanromero0724/fiebr
 tz_colombia = pytz.timezone("America/Bogota")
 fecha_actual = datetime.now(tz_colombia).strftime("%d/%m/%Y")
 
+st.text("")
 st.text("")
 # Mostrar el título, fecha de actualización y porcentaje de viviendas georreferenciadas juntos
 st.markdown(f"""
