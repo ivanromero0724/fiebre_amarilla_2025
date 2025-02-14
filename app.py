@@ -60,7 +60,7 @@ datos_geo = datos.dropna(subset=["lat_93_LOCALIZACIN_DE_LA", "long_93_LOCALIZACI
 total_viviendas = len(datos)
 viviendas_geo = len(datos_geo)
 porcentaje_geo = (viviendas_geo / total_viviendas) * 100
-fa_datos = pd.read_excel("https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/FA_2025-02-14.xlsx",engine="openpyxl")
+fa_datos = pd.read_excel("https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/FA_2025-02-14_1.xlsx",engine="openpyxl")
 
 
 # Obtener la fecha actual en la zona horaria de Colombia
