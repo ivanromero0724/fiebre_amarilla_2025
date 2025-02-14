@@ -227,7 +227,7 @@ with col3:  # Coloca la tabla en la columna central
     st.dataframe(tabla_resumen.style.set_properties(**{'background-color': 'white', 'border-radius': '10px', 'padding': '10px'}))
 
 with col1:
-    fig4 = px.pie(fa_datos, names="nmun_proce", title="Distribución de Casos Confirmados de FA por Municipio",color_discrete_sequence=px.colors.qualitative.Safe)
+    fig4 = px.pie(fa_datos, names="nmun_proce", title="Distribución de Casos de FA por Municipio",color_discrete_sequence=px.colors.qualitative.Safe)
     fig4.update_layout(title={'x': 0.5, 'xanchor': 'center'})
     st.plotly_chart(fig4, use_container_width=True)
 
