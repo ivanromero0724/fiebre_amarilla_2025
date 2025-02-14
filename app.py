@@ -116,7 +116,7 @@ for lat, lon, caso, municipio, vereda, estado_caso in zip(
     popup_text = f"""
     <b>Caso:</b> {caso} <br>
     <b>Municipio:</b> {municipio} <br>
-    <b>Vereda:</b> {vereda}
+    <b>Vereda:</b> {vereda} <br>
     <b>Estado del caso:</b> {estado_caso}
     """
     
