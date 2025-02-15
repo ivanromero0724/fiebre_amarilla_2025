@@ -110,11 +110,17 @@ for lat, lon, mun, vereda, vivienda in zip(df_si["lat_93_LOCALIZACIN_DE_LA"], df
         popup=folium.Popup(popup_text, max_width=300)
     ).add_to(capa_si)
 
-for lat, lon in zip(df_no["lat_93_LOCALIZACIN_DE_LA"], df_no["long_93_LOCALIZACIN_DE_LA"]):
+for lat, lon, mun, vereda, vivienda in zip(df_no["lat_93_LOCALIZACIN_DE_LA"], df_no["long_93_LOCALIZACIN_DE_LA"],df_no["1_MUNICIPIO"],df_no["4_VEREDA"],df_no["6_VIVIENDA_EFECTIVA_"]):
+    popup_text = f"""
+    <b>Vivienda efectiva:</b> {vivienda} <br>
+    <b>Municipio:</b> {mun} <br>
+    <b>Vereda:</b> {vereda} <br>
+    """
+    
     folium.CircleMarker(
         location=[lat, lon],
         radius=2, color="red", fill=True, fill_color="red", fill_opacity=1,
-        popup=folium.Popup("<b>Vivienda efectiva:</b> No", max_width=300)
+        popup=folium.Popup(popup_text, max_width=300)
     ).add_to(capa_no)
 
 for lat, lon, caso, municipio, vereda, estado_caso in zip(
