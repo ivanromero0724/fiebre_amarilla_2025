@@ -98,11 +98,16 @@ colores = df["6_VIVIENDA_EFECTIVA_"].str.strip().str.upper().map({"SI": "green",
 df_si = df[colores == "green"]
 df_no = df[colores == "red"]
 
-for lat, lon in zip(df_si["lat_93_LOCALIZACIN_DE_LA"], df_si["long_93_LOCALIZACIN_DE_LA"]):
+for lat, lon, mun, vereda, vivienda in zip(df_si["lat_93_LOCALIZACIN_DE_LA"], df_si["long_93_LOCALIZACIN_DE_LA"],df_si["1_MUNICIPIO"],df_si["4_VEREDA"],df_si["6_VIVIENDA_EFECTIVA_"]):
+    popup_text = f"""
+    <b>Vivienda efectiva:</b> {vivienda} <br>
+    <b>Municipio:</b> {mun} <br>
+    <b>Vereda:</b> {vereda} <br>
+    """
     folium.CircleMarker(
         location=[lat, lon],
         radius=2, color="green", fill=True, fill_color="green", fill_opacity=1,
-        popup=folium.Popup("<b>Vivienda efectiva:</b> Si", max_width=300)
+        popup=folium.Popup(popup_text, max_width=300)
     ).add_to(capa_si)
 
 for lat, lon in zip(df_no["lat_93_LOCALIZACIN_DE_LA"], df_no["long_93_LOCALIZACIN_DE_LA"]):
