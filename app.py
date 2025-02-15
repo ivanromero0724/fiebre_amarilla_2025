@@ -48,7 +48,7 @@ st.markdown(
 
 
 # URL del archivo en GitHub
-url = "https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/2025-02-15.xlsx"
+url = "https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/2025-02-15_1.xlsx"
 # Cargar los datos desde el archivo Excel
 df = pd.read_excel(url, engine="openpyxl")
 # Filtrar valores nulos en las columnas necesarias
