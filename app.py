@@ -83,7 +83,7 @@ lat_centro, lon_centro = 3.84234302999644, -74.69905002261329
 m = folium.Map(location=[lat_centro, lon_centro], zoom_start=11, tiles= None)
 
 # Agregar minimapa
-minimap = MiniMap(toggle_display=True, position="bottomright", tiles="CartoDB Positron")
+minimap = MiniMap(toggle_display=True, position="bottomright", tile_layer="CartoDB Positron")
 m.add_child(minimap)
 
 # Crear capas para viviendas efectivas y no efectivas
