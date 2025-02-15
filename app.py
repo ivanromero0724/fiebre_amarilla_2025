@@ -157,10 +157,10 @@ folium.TileLayer(
 ).add_to(m)
 
 # Agregar capas base con nombres personalizados
-folium.TileLayer("CartoDB Positron").add_to(m)
+folium.TileLayer("OpenStreetMap").add_to(m)
 
 # Agregar capas base con nombres personalizados
-folium.TileLayer("OpenStreetMap").add_to(m)
+folium.TileLayer("CartoDB Positron").add_to(m)
 
 folium.LayerControl().add_to(m)
 
