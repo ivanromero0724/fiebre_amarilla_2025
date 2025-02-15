@@ -201,6 +201,16 @@ with col3:
 
 col1, col2, col3= st.columns(3)  # Ajusta los valores según el ancho deseado
 
+with col1:
+    fig4 = px.pie(fa_datos, names="nmun_proce", title="Distribución de Casos de FA por Municipio",color_discrete_sequence=px.colors.qualitative.Safe)
+    fig4.update_layout(title={'x': 0.5, 'xanchor': 'center'})
+    st.plotly_chart(fig4, use_container_width=True)
+
+with col2:
+    fig5 = px.pie(fa_datos, names="Estado del caso", title="Estado de los Casos Confirmados de FA",color_discrete_sequence=px.colors.qualitative.Safe)
+    fig5.update_layout(title={'x': 0.5, 'xanchor': 'center'})
+    st.plotly_chart(fig5, use_container_width=True)
+
 with col3:  # Coloca la tabla en la columna central
     st.markdown(
     "<div style='margin-top: 34px;'></div>", 
@@ -225,13 +235,3 @@ with col3:  # Coloca la tabla en la columna central
     tabla_resumen.index.name = "Municipio"
 
     st.dataframe(tabla_resumen.style.set_properties(**{'background-color': 'white', 'border-radius': '10px', 'padding': '10px'}))
-
-with col1:
-    fig4 = px.pie(fa_datos, names="nmun_proce", title="Distribución de Casos de FA por Municipio",color_discrete_sequence=px.colors.qualitative.Safe)
-    fig4.update_layout(title={'x': 0.5, 'xanchor': 'center'})
-    st.plotly_chart(fig4, use_container_width=True)
-
-with col2:
-    fig5 = px.pie(fa_datos, names="Estado del caso", title="Estado de los Casos Confirmados de FA",color_discrete_sequence=px.colors.qualitative.Safe)
-    fig5.update_layout(title={'x': 0.5, 'xanchor': 'center'})
-    st.plotly_chart(fig5, use_container_width=True)
