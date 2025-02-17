@@ -150,6 +150,15 @@ m.add_child(capa_si)
 m.add_child(capa_no)
 m.add_child(capa_fa)
 
+# Crear un colormap usando Folium y agregarlo al mapa
+colormap = plugins.Colormap('YlOrRd')  # Usamos el colormap de folium ('YlOrRd' por defecto)
+
+# Ajustar el rango del colormap a los valores de tus datos
+colormap.caption = 'Intensidad de Casos de FA'
+
+# Agregar el colormap al mapa
+colormap.add_to(m)
+
 # Crear la lista de coordenadas para el mapa de calor
 heat_data = [[lat, lon] for lat, lon in zip(fa_datos["LATITUD"], fa_datos["LONGITUD"])]
 # Crear la capa de calor
