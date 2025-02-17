@@ -153,7 +153,7 @@ m.add_child(capa_fa)
 # Crear la lista de coordenadas para el mapa de calor
 heat_data = [[lat, lon] for lat, lon in zip(fa_datos["LATITUD"], fa_datos["LONGITUD"])]
 # Crear la capa de calor
-heat_layer = HeatMap(heat_data, name="Mapa de Calor Casos de FA")
+heat_layer = HeatMap(heat_data, name="Mapa de Calor Casos de FA", opacity=0.6)
 # Crear un grupo de capas para el mapa de calor
 heat_group = folium.FeatureGroup(name="Mapa de calor casos confirmados de FA", show=False)  # show=False para no activar la capa
 # Añadir la capa de calor al grupo
