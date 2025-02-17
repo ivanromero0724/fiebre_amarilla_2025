@@ -62,6 +62,10 @@ total_viviendas = len(datos)
 viviendas_geo = len(datos_geo)
 porcentaje_geo = (viviendas_geo / total_viviendas) * 100
 fa_datos = pd.read_excel("https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/FA_2025-02-16.xlsx",engine="openpyxl")
+# Contar los valores no NAN en la columna LATITUD
+casos_geo_fa = fa_datos['LATITUD'].notna().sum()
+casos_geo_fa_total = len(fa_datos)
+porcentaje_geo_fa = (casos_geo_fa / casos_geo_fa_total) * 100
 
 
 # Obtener la fecha actual en la zona horaria de Colombia
@@ -76,6 +80,7 @@ st.markdown(f"""
     <h1 style='text-align: center;'>Viviendas con abordaje en búsqueda activa comunitaria por atención a brote de Fiebre Amarilla en Tolima</h1>
     <p style='text-align: center; font-size: 14px;margin-bottom: 0px;'><b>Última fecha de actualización:</b> 16/02/2025</p>
     <p style='text-align: center; font-size: 14px;'><b>Porcentaje de viviendas georreferenciadas:</b> {porcentaje_geo:.2f}% ({viviendas_geo} de {total_viviendas})</p>
+    <p style='text-align: center; font-size: 14px;'><b>Porcentaje de casos georreferenciadas de FA:</b> {porcentaje_geo_fa:.2f}% ({casos_geo_fa} de {casos_geo_fa_total})</p>
 """, unsafe_allow_html=True)
 
 
