@@ -148,9 +148,11 @@ for lat, lon, caso, municipio, vereda, estado_caso in zip(
 # Crear la lista de coordenadas para el mapa de calor
 heat_data = [[lat, lon] for lat, lon in zip(fa_datos["LATITUD"], fa_datos["LONGITUD"])]
 
-# Crear el mapa de calor y agregarlo al mapa
-HeatMap(heat_data).add_to(m)
+# Crear el mapa de calor con el nombre de la capa
+heat_layer = HeatMap(heat_data, name="Mapa de Calor Casos de FA", overlay=True)
 
+# Agregar la capa de calor al mapa, pero no activarla
+heat_layer.add_to(m)
 # Agregar las capas al mapa
 m.add_child(capa_si)
 m.add_child(capa_no)
