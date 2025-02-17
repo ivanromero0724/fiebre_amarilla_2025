@@ -8,6 +8,7 @@ import pytz
 from branca.element import Template, MacroElement
 import matplotlib.pyplot as plt
 import plotly.express as px
+from folium.plugins import HeatMap
 
 # Configurar la página
 st.set_page_config(layout="wide", page_title="Mapa Fiebre Amarilla Tolima", page_icon='🦟')
@@ -143,6 +144,12 @@ for lat, lon, caso, municipio, vereda, estado_caso in zip(
         fill_opacity=1,
         popup=folium.Popup(popup_text, max_width=300)
     ).add_to(capa_fa)
+
+# Crear la lista de coordenadas para el mapa de calor
+heat_data = [[lat, lon] for lat, lon in zip(fa_datos["LATITUD"], fa_datos["LONGITUD"])]
+
+# Crear el mapa de calor y agregarlo al mapa
+HeatMap(heat_data).add_to(m)
 
 # Agregar las capas al mapa
 m.add_child(capa_si)
