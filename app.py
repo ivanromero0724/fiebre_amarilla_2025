@@ -100,9 +100,9 @@ df_no = df[colores == "red"]
 
 for lat, lon, mun, vereda, vivienda in zip(df_si["lat_93_LOCALIZACIN_DE_LA"], df_si["long_93_LOCALIZACIN_DE_LA"],df_si["1_MUNICIPIO"],df_si["4_VEREDA"],df_si["6_VIVIENDA_EFECTIVA_"]):
     popup_text = f"""
-    <b>Vivienda efectiva:</b> {vivienda} <br>
-    <b>Municipio:</b> {mun} <br>
-    <b>Vereda:</b> {vereda} <br>
+    <b>VIVIENDA EFECTIVA:</b> {vivienda} <br>
+    <b>MUNICIPIO:</b> {mun} <br>
+    <b>VEREDA:</b> {vereda} <br>
     """
     folium.CircleMarker(
         location=[lat, lon],
