@@ -156,6 +156,13 @@ folium.TileLayer(
     name="Imagen satelital"
 ).add_to(m)
 
+# Agregar Google Maps como capa de mosaico
+folium.TileLayer(
+    tiles="https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}",
+    attr="Google",
+    name="Google Maps"
+).add_to(m)
+
 # Agregar capas base con nombres personalizados
 folium.TileLayer("OpenStreetMap").add_to(m)
 
