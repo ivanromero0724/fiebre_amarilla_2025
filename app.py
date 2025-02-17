@@ -112,9 +112,9 @@ for lat, lon, mun, vereda, vivienda in zip(df_si["lat_93_LOCALIZACIN_DE_LA"], df
 
 for lat, lon, mun, vereda, vivienda in zip(df_no["lat_93_LOCALIZACIN_DE_LA"], df_no["long_93_LOCALIZACIN_DE_LA"],df_no["1_MUNICIPIO"],df_no["4_VEREDA"],df_no["6_VIVIENDA_EFECTIVA_"]):
     popup_text = f"""
-    <b>Vivienda efectiva:</b> {vivienda} <br>
-    <b>Municipio:</b> {mun} <br>
-    <b>Vereda:</b> {vereda} <br>
+    <b>VIVIENDA EFECTIVA:</b> {vivienda} <br>
+    <b>MUNICIPIO:</b> {mun} <br>
+    <b>VEREDA:</b> {vereda} <br>
     """
     
     folium.CircleMarker(
@@ -128,10 +128,10 @@ for lat, lon, caso, municipio, vereda, estado_caso in zip(
     fa_datos["nmun_proce"], fa_datos["Vereda"], fa_datos["Estado del caso"]
 ):
     popup_text = f"""
-    <b>Caso:</b> {caso} <br>
-    <b>Municipio:</b> {municipio} <br>
-    <b>Vereda:</b> {vereda} <br>
-    <b>Estado del caso:</b> {estado_caso}
+    <b>CASO:</b> {caso} <br>
+    <b>MUNICIPIO:</b> {municipio} <br>
+    <b>VEREDA:</b> {vereda} <br>
+    <b>ESTADO DEL CASO:</b> {estado_caso}
     """
     
     folium.CircleMarker(
