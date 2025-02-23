@@ -11,6 +11,7 @@ import plotly.express as px
 from folium.plugins import HeatMap
 
 # Configurar la página
+
 st.set_page_config(layout="wide", page_title="Mapa Fiebre Amarilla Tolima", page_icon='🦟')
 
 # Reducir espacio superior con CSS
