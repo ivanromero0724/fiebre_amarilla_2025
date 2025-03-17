@@ -67,7 +67,7 @@ fa_datos = pd.read_excel("https://raw.githubusercontent.com/ivanromero0724/fiebr
 casos_geo_fa = fa_datos['LATITUD'].notna().sum()
 casos_geo_fa_total = len(fa_datos)
 porcentaje_geo_fa = (casos_geo_fa / casos_geo_fa_total) * 100
-
+fa_datos = fa_datos.dropna(subset=["LATITUD", "LONGITUD"])
 
 # Obtener la fecha actual en la zona horaria de Colombia
 tz_colombia = pytz.timezone("America/Bogota")
