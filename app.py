@@ -67,7 +67,7 @@ fa_datos = pd.read_excel("https://raw.githubusercontent.com/ivanromero0724/fiebr
 casos_geo_fa = fa_datos['LATITUD'].notna().sum()
 casos_geo_fa_total = len(fa_datos)
 porcentaje_geo_fa = (casos_geo_fa / casos_geo_fa_total) * 100
-fa_datos = fa_datos.dropna(subset=["LATITUD", "LONGITUD"])
+fa_datos_2 = fa_datos.dropna(subset=["LATITUD", "LONGITUD"])
 
 # Obtener la fecha actual en la zona horaria de Colombia
 tz_colombia = pytz.timezone("America/Bogota")
@@ -131,8 +131,8 @@ for lat, lon, mun, vereda, vivienda in zip(df_no["lat_93_LOCALIZACIN_DE_LA"], df
     ).add_to(capa_no)
 
 for lat, lon, caso, municipio, vereda, estado_caso in zip(
-    fa_datos["LATITUD"], fa_datos["LONGITUD"], fa_datos["Caso"], 
-    fa_datos["nmun_proce"], fa_datos["Vereda"], fa_datos["Estado del caso"]
+    fa_datos_2["LATITUD"], fa_datos_2["LONGITUD"], fa_datos_2["Caso"], 
+    fa_datos_2["nmun_proce"], fa_datos_2["Vereda"], fa_datos_2["Estado del caso"]
 ):
     popup_text = f"""
     <b>CASO:</b> {caso} <br>
@@ -157,7 +157,7 @@ m.add_child(capa_no)
 m.add_child(capa_fa)
 
 # Crear la lista de coordenadas para el mapa de calor
-heat_data = [[lat, lon] for lat, lon in zip(fa_datos["LATITUD"], fa_datos["LONGITUD"])]
+heat_data = [[lat, lon] for lat, lon in zip(fa_datos_2["LATITUD"], fa_datos_2["LONGITUD"])]
 # Crear la capa de calor
 heat_layer = HeatMap(heat_data, name="Mapa de Calor Casos de FA")
 # Crear un grupo de capas para el mapa de calor
