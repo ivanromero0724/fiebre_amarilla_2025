@@ -93,8 +93,8 @@ minimap = MiniMap(toggle_display=True, position="bottomright", tile_layer="Carto
 m.add_child(minimap)
 
 # Crear capas para viviendas efectivas y no efectivas
-capa_si = folium.FeatureGroup(name="Viviendas efectivas")
-capa_no = folium.FeatureGroup(name="Viviendas no efectivas")
+capa_si = folium.FeatureGroup(name="Viviendas efectivas",show=False)
+capa_no = folium.FeatureGroup(name="Viviendas no efectivas",show=False)
 capa_fa = folium.FeatureGroup(name="Casos confirmados de Fiebre Amarilla")
 
 # Definir colores para los estados de las viviendas
