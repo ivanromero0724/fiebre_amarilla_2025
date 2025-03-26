@@ -85,7 +85,7 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 # Definir coordenadas centrales del mapa
-lat_centro, lon_centro = 3.84234302999644, -74.69905002261329
+lat_centro, lon_centro = 3.6335692, -75.0231233
 m = folium.Map(location=[lat_centro, lon_centro], zoom_start=11, tiles= None)
 
 # Agregar minimapa
