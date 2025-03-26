@@ -84,11 +84,6 @@ st.markdown(f"""
     <p style='text-align: center; font-size: 14px;'><b>Porcentaje de casos de Fiebre Amarilla georreferenciados:</b> {porcentaje_geo_fa:.2f}% ({casos_geo_fa} de {casos_geo_fa_total})</p>
 """, unsafe_allow_html=True)
 
-
-# Definir coordenadas centrales del mapa
-lat_centro, lon_centro = 3.84234302999644, -74.69905002261329
-m = folium.Map(location=[lat_centro, lon_centro], zoom_start=11, tiles= None)
-
 # Agregar minimapa
 minimap = MiniMap(toggle_display=True, position="bottomright", tile_layer="CartoDB Positron")
 m.add_child(minimap)
@@ -188,6 +183,13 @@ folium.TileLayer("OpenStreetMap").add_to(m)
 folium.TileLayer("CartoDB Positron").add_to(m)
 
 folium.LayerControl().add_to(m)
+
+# Obtener los límites de los puntos
+min_lat, min_lon = fa_datos_2["LATITUD"].min(), fa_datos_2["LONGITUD"].min()
+max_lat, max_lon = fa_datos_2["LATITUD"].max(), fa_datos_2["LONGITUD"].max()
+
+# Ajustar la vista del mapa a los puntos
+m.fit_bounds([[min_lat, min_lon], [max_lat, max_lon]])
 
 # Mostrar el mapa en Streamlit
 folium_static(m, height=650, width=1305)
