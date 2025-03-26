@@ -186,7 +186,9 @@ folium.TileLayer("OpenStreetMap").add_to(m)
 # Agregar capas base con nombres personalizados
 folium.TileLayer("CartoDB Positron").add_to(m)
 
-folium.LayerControl().add_to(m)
+# Agregar LayerControl
+layer_control = folium.LayerControl(collapsed=False)  # No colapsado por defecto
+layer_control.add_to(m)
 
 # Mostrar el mapa en Streamlit
 folium_static(m, height=650, width=1305)
