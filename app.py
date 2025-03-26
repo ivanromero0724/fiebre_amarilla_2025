@@ -150,10 +150,8 @@ for lat, lon, caso, municipio, vereda, estado_caso in zip(
         popup=folium.Popup(popup_text, max_width=300)
     ).add_to(capa_fa)
 
-# Agregar las capas al mapa
-m.add_child(capa_si)
-m.add_child(capa_no)
-m.add_child(capa_fa)
+
+
 
 # Crear la lista de coordenadas para el mapa de calor
 heat_data = [[lat, lon] for lat, lon in zip(fa_datos_2["LATITUD"], fa_datos_2["LONGITUD"])]
@@ -163,8 +161,12 @@ heat_layer = HeatMap(heat_data, name="Mapa de Calor Casos de FA")
 heat_group = folium.FeatureGroup(name="Mapa de calor casos confirmados de FA", show=True)  # show=False para no activar la capa
 # Añadir la capa de calor al grupo
 heat_group.add_child(heat_layer)
-# Añadir el grupo al mapa
+
+# Agregar las capas al mapa
+m.add_child(capa_fa)
 m.add_child(heat_group)
+m.add_child(capa_si)
+m.add_child(capa_no)
 
 # Agregar capas base de Esri
 folium.TileLayer(
