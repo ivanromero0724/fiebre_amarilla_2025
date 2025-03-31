@@ -85,8 +85,7 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 # Definir coordenadas centrales del mapa
-lat_centro, lon_centro = 3.6212343, -74.9915376
-m = folium.Map(location=[lat_centro, lon_centro], zoom_start=10, tiles= None)
+m = folium.Map(zoom_start=10, tiles= None)
 
 # Agregar minimapa
 minimap = MiniMap(toggle_display=True, position="bottomright", tile_layer="CartoDB Positron")
