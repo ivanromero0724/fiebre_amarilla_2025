@@ -89,11 +89,15 @@ st.markdown(f"""
 min_lat, max_lat = fa_datos_2["LATITUD"].min(), fa_datos_2["LATITUD"].max()
 min_lon, max_lon = fa_datos_2["LONGITUD"].min(), fa_datos_2["LONGITUD"].max()
 
-# Crear el mapa sin una ubicación fija
-m = folium.Map(zoom_start=5,tiles=None)
+# Ajustar el margen (puedes modificar los valores)
+margen_lat = 0.01  # Margen en latitud (arriba y abajo)
+margen_lon = 0.01  # Margen en longitud (izquierda y derecha)
 
-# Ajustar los límites del mapa para incluir todos los puntos
-m.fit_bounds([[min_lat, min_lon], [max_lat, max_lon]])
+# Crear el mapa sin una ubicación fija
+m = folium.Map(tiles=None)
+
+# Ajustar los límites del mapa con margen
+m.fit_bounds([[min_lat - margen_lat, min_lon - margen_lon], [max_lat + margen_lat, max_lon + margen_lon]])
 
 # Agregar minimapa
 minimap = MiniMap(toggle_display=True, position="bottomright", tile_layer="CartoDB Positron")
