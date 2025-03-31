@@ -207,6 +207,7 @@ layer_control.add_to(m)
 folium_static(m, height=650, width=1305)
 
 # Contenedor con CSS para que la leyenda se superponga sobre el mapa en la esquina inferior izquierda
+# Leyenda con barra de calor continua vertical
 st.markdown("""
     <style>
         .legend-container {
@@ -222,9 +223,9 @@ st.markdown("""
             z-index: 1000;
         }
         .gradient-bar {
-            height: 10px;
-            width: 150px;
-            background: linear-gradient(to right, rgba(0, 0, 255, 0.7), rgba(255, 0, 0, 0.7));
+            height: 150px;  /* Aumentamos la altura para que sea visible */
+            width: 10px;  /* Reducimos el ancho para darle una forma vertical */
+            background: linear-gradient(to bottom, rgba(0, 0, 255, 0.7), rgba(255, 0, 0, 0.7));  /* Gradiente vertical */
             border-radius: 5px;
         }
     </style>
