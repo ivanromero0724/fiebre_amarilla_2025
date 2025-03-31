@@ -221,6 +221,12 @@ st.markdown("""
             opacity: 0.9;
             z-index: 1000;
         }
+        .gradient-bar {
+            height: 10px;
+            width: 150px;
+            background: linear-gradient(to right, rgba(0, 0, 255, 0.7), rgba(255, 0, 0, 0.7));
+            border-radius: 5px;
+        }
     </style>
     <div class="legend-container" style="font-size: 14px;">
         <i style="background: green; width: 12px; height: 12px; display: inline-block; margin-right: 8px; border-radius: 50%;"></i> Viviendas efectivas<br>
@@ -228,8 +234,9 @@ st.markdown("""
         <i style="background: gold; width: 12px; height: 12px; display: inline-block; margin-right: 8px; border-radius: 50%;"></i> Casos confirmados de FA<br>
         <br>
         <b>Mapa de Calor</b><br>
-        <i style="background: rgba(255, 0, 0, 0.7); width: 12px; height: 12px; display: inline-block; margin-right: 8px;"></i> Alta densidad<br>
-        <i style="background: rgba(0, 0, 255, 0.7); width: 12px; height: 12px; display: inline-block; margin-right: 8px;"></i> Baja densidad
+        <span>Menor concentración de casos de FA</span><br>
+        <div class="gradient-bar"></div><br>
+        <span>Mayor concentración de casos de FA</span>
     </div>
 """, unsafe_allow_html=True)
 
