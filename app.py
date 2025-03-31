@@ -90,7 +90,7 @@ min_lat, max_lat = fa_datos_2["LATITUD"].min(), fa_datos_2["LATITUD"].max()
 min_lon, max_lon = fa_datos_2["LONGITUD"].min(), fa_datos_2["LONGITUD"].max()
 
 # Crear el mapa sin una ubicación fija
-m = folium.Map(zoom_start=10, tiles=None)
+m = folium.Map(tiles=None)
 
 # Ajustar los límites del mapa para incluir todos los puntos
 m.fit_bounds([[min_lat, min_lon], [max_lat, max_lon]])
