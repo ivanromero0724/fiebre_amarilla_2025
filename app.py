@@ -208,6 +208,7 @@ folium_static(m, height=650, width=1305)
 
 # Contenedor con CSS para que la leyenda se superponga sobre el mapa en la esquina inferior izquierda
 # Leyenda con barra de calor continua vertical
+# Contenedor con CSS para que la leyenda se superponga sobre el mapa en la esquina inferior izquierda
 st.markdown("""
     <style>
         .legend-container {
@@ -222,22 +223,11 @@ st.markdown("""
             opacity: 0.9;
             z-index: 1000;
         }
-        .gradient-bar {
-            height: 150px;  /* Aumentamos la altura para que sea visible */
-            width: 10px;  /* Reducimos el ancho para darle una forma vertical */
-            background: linear-gradient(to bottom, rgba(0, 0, 255, 0.7), rgba(255, 0, 0, 0.7));  /* Gradiente vertical */
-            border-radius: 5px;
-        }
     </style>
     <div class="legend-container" style="font-size: 14px;">
-        <i style="background: green; width: 12px; height: 5px; display: inline-block; margin-right: 8px; border-radius: 50%;"></i> Viviendas efectivas<br>
-        <i style="background: red; width: 12px; height: 5px; display: inline-block; margin-right: 8px; border-radius: 50%;"></i> Viviendas no efectivas<br>
-        <i style="background: gold; width: 12px; height: 5px; display: inline-block; margin-right: 8px; border-radius: 50%;"></i> Casos confirmados de FA<br>
-        <br>
-        <b>Mapa de Calor</b><br>
-        <span>Menor concentración de casos de FA</span><br>
-        <div class="gradient-bar"></div><br>
-        <span>Mayor concentración de casos de FA</span>
+        <i style="background: green; width: 12px; height: 12px; display: inline-block; margin-right: 8px; border-radius: 50%;"></i> Viviendas efectivas<br>
+        <i style="background: red; width: 12px; height: 12px; display: inline-block; margin-right: 8px; border-radius: 50%;"></i> Viviendas no efectivas<br>
+        <i style="background: gold; width: 12px; height: 12px; display: inline-block; margin-right: 8px; border-radius: 50%;"></i> Casos confirmados de FA
     </div>
 """, unsafe_allow_html=True)
 
