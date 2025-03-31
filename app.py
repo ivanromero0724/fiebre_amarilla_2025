@@ -85,12 +85,15 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 
-# Calcular el centro de los puntos
-lat_centro = fa_datos_2["LATITUD"].mean()
-lon_centro = fa_datos_2["LONGITUD"].mean()
+# Calcular el bounding box (extensión)
+min_lat, max_lat = fa_datos_2["LATITUD"].min(), fa_datos_2["LATITUD"].max()
+min_lon, max_lon = fa_datos_2["LONGITUD"].min(), fa_datos_2["LONGITUD"].max()
 
-# Crear el mapa centrado en el punto medio
-m = folium.Map(location=[lat_centro, lon_centro], tiles=None)
+# Crear el mapa sin una ubicación fija
+m = folium.Map(zoom_start=10, tiles=None)
+
+# Ajustar los límites del mapa para incluir todos los puntos
+m.fit_bounds([[min_lat, min_lon], [max_lat, max_lon]])
 
 # Agregar minimapa
 minimap = MiniMap(toggle_display=True, position="bottomright", tile_layer="CartoDB Positron")
