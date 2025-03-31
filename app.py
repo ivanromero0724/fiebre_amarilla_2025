@@ -229,6 +229,20 @@ st.markdown("""
     </div>
 """, unsafe_allow_html=True)
 
+# Crear una leyenda personalizada para el mapa de calor
+legend_html = """
+     <div style="position: fixed; 
+                 bottom: 50px; left: 50px; width: 150px; height: 120px; 
+                 background-color: white; border:2px solid grey; z-index:9999; 
+                 font-size:14px; padding: 10px;">
+        <b>Mapa de Calor</b><br>
+        <i style="background: rgba(255, 0, 0, 0.7); width: 20px; height: 20px; display: inline-block;"></i> Alta densidad<br>
+        <i style="background: rgba(0, 0, 255, 0.7); width: 20px; height: 20px; display: inline-block;"></i> Baja densidad
+    </div>
+"""
+
+# Añadir la leyenda al mapa
+m.get_root().html.add_child(folium.Element(legend_html))
 
 # Sección de gráficos
 col1, col2, col3 = st.columns(3)
