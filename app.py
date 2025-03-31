@@ -90,8 +90,8 @@ min_lat, max_lat = fa_datos_2["LATITUD"].min(), fa_datos_2["LATITUD"].max()
 min_lon, max_lon = fa_datos_2["LONGITUD"].min(), fa_datos_2["LONGITUD"].max()
 
 # Ajustar el margen (puedes modificar los valores)
-margen_lat = 0.01  # Margen en latitud (arriba y abajo)
-margen_lon = 0.01  # Margen en longitud (izquierda y derecha)
+margen_lat = 0.001  # Margen en latitud (arriba y abajo)
+margen_lon = 0.001  # Margen en longitud (izquierda y derecha)
 
 # Crear el mapa sin una ubicación fija
 m = folium.Map(tiles=None)
