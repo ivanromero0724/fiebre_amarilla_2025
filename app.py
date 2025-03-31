@@ -84,8 +84,13 @@ st.markdown(f"""
     <p style='text-align: center; font-size: 14px;'><b>Porcentaje de casos de Fiebre Amarilla georreferenciados:</b> {porcentaje_geo_fa:.2f}% ({casos_geo_fa} de {casos_geo_fa_total})</p>
 """, unsafe_allow_html=True)
 
-# Definir coordenadas centrales del mapa
-m = folium.Map(zoom_start=10, tiles= None)
+
+# Calcular el centro de los puntos
+lat_centro = fa_datos_2["LATITUD"].mean()
+lon_centro = fa_datos_2["LONGITUD"].mean()
+
+# Crear el mapa centrado en el punto medio
+m = folium.Map(location=[lat_centro, lon_centro], zoom_start=10, tiles=None)
 
 # Agregar minimapa
 minimap = MiniMap(toggle_display=True, position="bottomright", tile_layer="CartoDB Positron")
