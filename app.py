@@ -90,7 +90,7 @@ lat_centro = fa_datos_2["LATITUD"].mean()
 lon_centro = fa_datos_2["LONGITUD"].mean()
 
 # Crear el mapa centrado en el punto medio
-m = folium.Map(location=[lat_centro, lon_centro], zoom_start=10, tiles=None)
+m = folium.Map(location=[lat_centro, lon_centro], tiles=None)
 
 # Agregar minimapa
 minimap = MiniMap(toggle_display=True, position="bottomright", tile_layer="CartoDB Positron")
