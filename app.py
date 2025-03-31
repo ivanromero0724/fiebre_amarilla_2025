@@ -230,9 +230,9 @@ st.markdown("""
         }
     </style>
     <div class="legend-container" style="font-size: 14px;">
-        <i style="background: green; width: 12px; height: 12px; display: inline-block; margin-right: 8px; border-radius: 50%;"></i> Viviendas efectivas<br>
-        <i style="background: red; width: 12px; height: 12px; display: inline-block; margin-right: 8px; border-radius: 50%;"></i> Viviendas no efectivas<br>
-        <i style="background: gold; width: 12px; height: 12px; display: inline-block; margin-right: 8px; border-radius: 50%;"></i> Casos confirmados de FA<br>
+        <i style="background: green; width: 12px; height: 5px; display: inline-block; margin-right: 8px; border-radius: 50%;"></i> Viviendas efectivas<br>
+        <i style="background: red; width: 12px; height: 5px; display: inline-block; margin-right: 8px; border-radius: 50%;"></i> Viviendas no efectivas<br>
+        <i style="background: gold; width: 12px; height: 5px; display: inline-block; margin-right: 8px; border-radius: 50%;"></i> Casos confirmados de FA<br>
         <br>
         <b>Mapa de Calor</b><br>
         <span>Menor concentración de casos de FA</span><br>
