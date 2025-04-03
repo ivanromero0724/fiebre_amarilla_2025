@@ -290,7 +290,7 @@ with col3:  # Coloca la tabla en la columna central
 # Insertar el iframe de Looker Studio
 st.components.v1.iframe(
     "https://lookerstudio.google.com/embed/reporting/cd506bb2-116f-4d30-8c1d-081dd48fbeb2/page/p_ql2ytf87qd",
-    width=1000,  # Ajusta según tu diseño
-    height=600,  # Ajusta según tu diseño
+    width=1500,  # Ajusta según tu diseño
+    height=800,  # Ajusta según tu diseño
     scrolling=True
 )
