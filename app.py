@@ -287,11 +287,10 @@ with col3:  # Coloca la tabla en la columna central
 
     st.dataframe(tabla_resumen.style.set_properties(**{'background-color': 'white', 'border-radius': '10px', 'padding': '10px'}))
 
-<iframe 
-    width="100%" 
-    height="600px" 
-    src="https://lookerstudio.google.com/embed/reporting/cd506bb2-116f-4d30-8c1d-081dd48fbeb2/page/p_ql2ytf87qd" 
-    frameborder="0" 
-    style="border:0" 
-    allowfullscreen>
-</iframe>
+# Insertar el iframe de Looker Studio
+st.components.v1.iframe(
+    "https://lookerstudio.google.com/embed/reporting/cd506bb2-116f-4d30-8c1d-081dd48fbeb2/page/p_ql2ytf87qd",
+    width=1000,  # Ajusta según tu diseño
+    height=600,  # Ajusta según tu diseño
+    scrolling=True
+)
