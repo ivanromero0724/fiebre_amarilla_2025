@@ -9,6 +9,7 @@ from branca.element import Template, MacroElement
 import matplotlib.pyplot as plt
 import plotly.express as px
 from folium.plugins import HeatMap
+from folium.plugins import Draw
 
 # Configurar la página
 
