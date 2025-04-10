@@ -203,6 +203,7 @@ folium.TileLayer("CartoDB Positron").add_to(m)
 layer_control = folium.LayerControl(collapsed=False)  # No colapsado por defecto
 layer_control.add_to(m)
 
+Draw(export=True).add_to(m)
 # Mostrar el mapa en Streamlit
 folium_static(m, height=650, width=1305)
 
