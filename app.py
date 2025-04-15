@@ -233,62 +233,6 @@ st.markdown("""
     </div>
 """, unsafe_allow_html=True)
 
-# Sección de gráficos
-col1, col2, col3 = st.columns(3)
-
-with col1:
-    fig1 = px.pie(datos, names="1_MUNICIPIO", title="Distribución de Viviendas por Municipio",color_discrete_sequence=px.colors.qualitative.Safe)
-    fig1.update_layout(title={'x': 0.5, 'xanchor': 'center'})
-    st.plotly_chart(fig1, use_container_width=True)
-
-with col2:
-    fig2 = px.pie(datos, names="2_AREA", title="Distribución de Viviendas por Área",color_discrete_sequence=px.colors.qualitative.Safe)
-    fig2.update_layout(title={'x': 0.5, 'xanchor': 'center'})
-    st.plotly_chart(fig2, use_container_width=True)
-
-with col3:
-    fig3 = px.pie(datos, names="6_VIVIENDA_EFECTIVA_", title="Viviendas Efectivas vs No Efectivas",
-                  color_discrete_sequence=[px.colors.qualitative.Safe[3], px.colors.qualitative.Safe[1]])
-    fig3.update_layout(title={'x': 0.5, 'xanchor': 'center'})
-    st.plotly_chart(fig3, use_container_width=True)
-
-col1, col2, col3= st.columns(3)  # Ajusta los valores según el ancho deseado
-
-with col1:
-    fig4 = px.pie(fa_datos, names="nmun_proce", title="Distribución de Casos de FA por Municipio",color_discrete_sequence=px.colors.qualitative.Safe)
-    fig4.update_layout(title={'x': 0.5, 'xanchor': 'center'})
-    st.plotly_chart(fig4, use_container_width=True)
-
-with col2:
-    fig5 = px.pie(fa_datos, names="Estado del caso", title="Estado de los Casos Confirmados de FA",color_discrete_sequence=px.colors.qualitative.Safe)
-    fig5.update_layout(title={'x': 0.5, 'xanchor': 'center'})
-    st.plotly_chart(fig5, use_container_width=True)
-
-with col3:  # Coloca la tabla en la columna central
-    st.markdown(
-    "<div style='margin-top: 34px;'></div>", 
-    unsafe_allow_html=True
-)
-    st.markdown("<h6 style='text-align:center; font-weight: bold;'>Resumen de Viviendas por Municipio</h6>", unsafe_allow_html=True)
-    st.text("")
-    st.text("")
-    
-    tabla_resumen = datos.groupby("1_MUNICIPIO")["6_VIVIENDA_EFECTIVA_"].value_counts().unstack(fill_value=0)
-    tabla_resumen["Total"] = tabla_resumen.sum(axis=1)
-    tabla_resumen.columns = ["Viviendas no efectivas", "Viviendas efectivas", "Total"]
-
-    # Agregar la fila de totales
-    total_row = pd.DataFrame(tabla_resumen.sum(), columns=["Total"]).T
-    total_row.index = ["Total"]
-
-    # Concatenar la fila de totales con la tabla original
-    tabla_resumen = pd.concat([tabla_resumen, total_row])
-
-    # Restaurar el nombre de la primera columna (índice)
-    tabla_resumen.index.name = "Municipio"
-
-    st.dataframe(tabla_resumen.style.set_properties(**{'background-color': 'white', 'border-radius': '10px', 'padding': '10px'}))
-
 # Insertar el iframe de Looker Studio
 
 st.components.v1.iframe(
