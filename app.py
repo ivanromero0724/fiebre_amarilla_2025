@@ -238,6 +238,6 @@ st.markdown("""
 st.components.v1.iframe(
     "https://lookerstudio.google.com/embed/reporting/cd506bb2-116f-4d30-8c1d-081dd48fbeb2/page/GV0EF",
     width=2000,  # Ajusta según tu diseño
-    height=2000,  # Ajusta según tu diseño
-    scrolling=True
+    height=2100,  # Ajusta según tu diseño
+    scrolling=False
 )
