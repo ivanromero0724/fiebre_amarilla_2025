@@ -34,13 +34,14 @@ def login():
     user = st.text_input("Usuario")
     pwd = st.text_input("Contraseña", type="password")
     login_button = st.button("Ingresar")
-    
-    # Se asegura de verificar la autenticación cuando se presiona el botón
+
     if login_button:
+        # Verificar usuario y contraseña
         if user in usernames:
-            user_index = usernames.index(user)  # Encuentra el índice del usuario
+            user_index = usernames.index(user)
             if pwd == passwords[user_index]:
                 st.session_state["authenticated"] = True
+                st.experimental_rerun()  # Recarga la página inmediatamente después de iniciar sesión
             else:
                 st.error("Contraseña incorrecta")
         else:
