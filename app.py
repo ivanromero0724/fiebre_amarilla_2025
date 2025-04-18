@@ -28,33 +28,6 @@ passwords = [
     st.secrets["auth"]["user5_password"]
 ]
 
-# Estilos CSS
-st.markdown("""
-    <style>
-    .login-container {
-        max-width: 420px;
-        margin: 50px auto;
-        padding: 2rem;
-        border-radius: 12px;
-        background-color: #f9f9f9;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        text-align: center;
-    }
-    .title-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 20px;
-    }
-    .title-text {
-        font-size: 24px;
-        font-weight: 600;
-        color: #333333;
-        margin-left: 15px;
-    }
-    </style>
-""", unsafe_allow_html=True)
-
 # Iniciar sesión
 def login():
     # Logo y Título juntos
