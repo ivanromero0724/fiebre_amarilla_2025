@@ -10,8 +10,6 @@ import matplotlib.pyplot as plt
 import plotly.express as px
 from folium.plugins import HeatMap
 from folium.plugins import Draw
-
-st.set_page_config(layout="wide", page_title="Mapa Fiebre Amarilla Tolima", page_icon='🦟')
         
 
 # Obtener usuarios y contraseñas desde secrets
