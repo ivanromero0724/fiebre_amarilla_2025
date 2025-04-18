@@ -10,6 +10,7 @@ import matplotlib.pyplot as plt
 import plotly.express as px
 from folium.plugins import HeatMap
 from folium.plugins import Draw
+import streamlit.secrets
 
 # Configurar la página
 
