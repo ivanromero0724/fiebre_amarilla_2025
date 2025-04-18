@@ -28,7 +28,7 @@ passwords = [
     st.secrets["auth"]["user5_password"]
 ]
 
-# Iniciar sesión
+# Función para iniciar sesión
 def login():
     st.title("Iniciar sesión")
     user = st.text_input("Usuario")
@@ -50,7 +50,7 @@ def login():
 if "authenticated" not in st.session_state:
     st.session_state["authenticated"] = False
 
-# Condición para mostrar el contenido o la página de login
+# Si el usuario no está autenticado, se muestra el formulario de login
 if not st.session_state["authenticated"]:
     login()
 else:
