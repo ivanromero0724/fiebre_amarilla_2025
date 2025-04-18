@@ -41,7 +41,6 @@ def login():
             user_index = usernames.index(user)  # Encuentra el índice del usuario
             if pwd == passwords[user_index]:
                 st.session_state["authenticated"] = True
-                st.experimental_rerun()  # Recarga la página para aplicar la autenticación inmediatamente
             else:
                 st.error("Contraseña incorrecta")
         else:
