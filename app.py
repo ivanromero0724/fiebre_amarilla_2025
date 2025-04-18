@@ -32,7 +32,7 @@ passwords = [
 st.markdown("""
     <style>
     .login-container {
-        max-width: 420px;
+        max-width: 600px;
         margin: 50px auto;
         padding: 2rem;
         border-radius: 12px;
