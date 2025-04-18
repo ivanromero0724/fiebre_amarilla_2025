@@ -48,9 +48,10 @@ def login():
     pwd = st.text_input("Contraseña", type="password")
     if st.button("Ingresar"):
         if user in usernames:
-            user_index = usernames.index(user)  # Encuentra el índice del usuario
+            user_index = usernames.index(user)
             if pwd == passwords[user_index]:
                 st.session_state["authenticated"] = True
+                st.experimental_rerun()  # 🔁 Fuerza la recarga
             else:
                 st.error("Contraseña incorrecta")
         else:
