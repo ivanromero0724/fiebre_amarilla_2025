@@ -11,6 +11,21 @@ import plotly.express as px
 from folium.plugins import HeatMap
 from folium.plugins import Draw
 
+if "autenticado" not in st.session_state:
+    st.session_state.autenticado = False
+
+if not st.session_state.autenticado:
+    clave = st.text_input("Clave de acceso", type="password")
+    if st.button("Entrar"):
+        if clave == st.secrets["password"]:
+            st.session_state.autenticado = True
+            st.experimental_rerun()
+        else:
+            st.error("Clave incorrecta")
+
+if st.session_state.autenticado:
+    st.success("Acceso concedido")
+
 # Configurar la página
 
 st.set_page_config(layout="wide", page_title="Mapa Fiebre Amarilla Tolima", page_icon='🦟')
