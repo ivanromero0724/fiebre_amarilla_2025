@@ -12,9 +12,23 @@ from folium.plugins import HeatMap
 from folium.plugins import Draw
 
 
-# Obtener usuario y contraseña desde secrets
-USERNAME = st.secrets["auth"]["username"]
-PASSWORD = st.secrets["auth"]["password"]
+
+# Obtener usuarios y contraseñas desde secrets
+usernames = [
+    st.secrets["auth"]["user1_username"], 
+    st.secrets["auth"]["user2_username"], 
+    st.secrets["auth"]["user3_username"],
+    st.secrets["auth"]["user4_username"], 
+    st.secrets["auth"]["user5_username"]
+]
+
+passwords = [
+    st.secrets["auth"]["user1_password"], 
+    st.secrets["auth"]["user2_password"], 
+    st.secrets["auth"]["user3_password"],
+    st.secrets["auth"]["user4_password"], 
+    st.secrets["auth"]["user5_password"]
+]
 
 # Iniciar sesión
 def login():
@@ -22,10 +36,14 @@ def login():
     user = st.text_input("Usuario")
     pwd = st.text_input("Contraseña", type="password")
     if st.button("Ingresar"):
-        if user == USERNAME and pwd == PASSWORD:
-            st.session_state["authenticated"] = True
+        if user in usernames:
+            user_index = usernames.index(user)  # Encuentra el índice del usuario
+            if pwd == passwords[user_index]:
+                st.session_state["authenticated"] = True
+            else:
+                st.error("Contraseña incorrecta")
         else:
-            st.error("Usuario o contraseña incorrectos")
+            st.error("Usuario no encontrado")
 
 # Revisar si ya está autenticado
 if "authenticated" not in st.session_state:
