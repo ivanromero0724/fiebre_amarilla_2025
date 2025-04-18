@@ -57,8 +57,6 @@ st.markdown("""
 
 # Iniciar sesión
 def login():
-    st.markdown('<div class="login-container">', unsafe_allow_html=True)
-
     # Logo y Título juntos
     st.markdown(
         """
