@@ -11,38 +11,48 @@ import plotly.express as px
 from folium.plugins import HeatMap
 from folium.plugins import Draw
 
-# Obtener usuarios y contraseñas desde secrets
-usernames = [
-    st.secrets["auth"]["user1_username"], 
-    st.secrets["auth"]["user2_username"], 
-    st.secrets["auth"]["user3_username"],
-    st.secrets["auth"]["user4_username"], 
-    st.secrets["auth"]["user5_username"]
-]
-
-passwords = [
-    st.secrets["auth"]["user1_password"], 
-    st.secrets["auth"]["user2_password"], 
-    st.secrets["auth"]["user3_password"],
-    st.secrets["auth"]["user4_password"], 
-    st.secrets["auth"]["user5_password"]
-]
+# Estilizar con CSS
+st.markdown("""
+    <style>
+    .login-container {
+        max-width: 400px;
+        margin: auto;
+        padding: 2rem;
+        border-radius: 12px;
+        background-color: #f9f9f9;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .title-style {
+        text-align: center;
+        font-size: 28px;
+        font-weight: 600;
+        margin-bottom: 20px;
+        color: #333333;
+    }
+    </style>
+""", unsafe_allow_html=True)
 
 # Iniciar sesión
 def login():
-    st.title("Fiebre Amarilla 2025")
-    user = st.text_input("Usuario")
-    pwd = st.text_input("Contraseña", type="password")
-    if st.button("Ingresar"):
+    st.markdown('<div class="login-container">', unsafe_allow_html=True)
+    st.markdown('<div class="title-style">🦟 Fiebre Amarilla 2025</div>', unsafe_allow_html=True)
+
+    user = st.text_input("👤 Usuario")
+    pwd = st.text_input("🔒 Contraseña", type="password")
+    login_btn = st.button("Ingresar")
+
+    if login_btn:
         if user in usernames:
             user_index = usernames.index(user)
             if pwd == passwords[user_index]:
                 st.session_state["authenticated"] = True
-                st.rerun()  # 🔁 ¡Funciona con la versión actual!
+                st.rerun()
             else:
                 st.error("Contraseña incorrecta")
         else:
             st.error("Usuario no encontrado")
+
+    st.markdown('</div>', unsafe_allow_html=True)
 
 # Revisar si ya está autenticado
 if "authenticated" not in st.session_state:
