@@ -28,28 +28,78 @@ passwords = [
     st.secrets["auth"]["user5_password"]
 ]
 
-# Iniciar sesión
+# CSS personalizado para centrar todo
+st.markdown("""
+    <style>
+    body {
+        background-color: #f5f5f5;
+    }
+    .centered-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 90vh;
+    }
+    .login-box {
+        background-color: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        width: 300px;
+        text-align: center;
+    }
+    .footer {
+        margin-top: 1rem;
+        font-size: 0.8rem;
+        color: #888;
+    }
+    .login-button button {
+        background-color: #c0392b !important;
+        color: white !important;
+        font-weight: bold;
+        width: 100%;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+# Función para login
 def login():
-    st.title("Iniciar sesión")
-    user = st.text_input("Usuario")
-    pwd = st.text_input("Contraseña", type="password")
-    if st.button("Ingresar"):
-        if user in usernames:
-            user_index = usernames.index(user)  # Encuentra el índice del usuario
-            if pwd == passwords[user_index]:
-                st.session_state["authenticated"] = True
+    st.markdown('<div class="centered-container">', unsafe_allow_html=True)
+    st.image("https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/Logo.png", width=100)
+    st.markdown("<h3>GeoVisorSivigila</h3>", unsafe_allow_html=True)
+
+    with st.form("login_form", clear_on_submit=False):
+        user = st.text_input("Usuario")
+        pwd = st.text_input("Contraseña", type="password")
+        submitted = st.form_submit_button("Ingresar", type="primary")
+        
+        if submitted:
+            if user in usernames:
+                idx = usernames.index(user)
+                if pwd == passwords[idx]:
+                    st.session_state.authenticated = True
+                    st.session_state.page = "principal"
+                    st.experimental_rerun()
+                else:
+                    st.error("Contraseña incorrecta")
             else:
-                st.error("Contraseña incorrecta")
-        else:
-            st.error("Usuario no encontrado")
+                st.error("Usuario no válido")
 
-# Revisar si ya está autenticado
+    st.markdown('<div class="footer">© INS - GFRA | 2025</div>', unsafe_allow_html=True)
+    st.markdown('</div>', unsafe_allow_html=True)
+
+# Control de sesión
 if "authenticated" not in st.session_state:
-    st.session_state["authenticated"] = False
+    st.session_state.authenticated = False
 
-if not st.session_state["authenticated"]:
+if "page" not in st.session_state:
+    st.session_state.page = "login"
+
+# Mostrar la página correspondiente
+if not st.session_state.authenticated:
     login()
-else:
+elif st.session_state.page == "principal":
         # Configurar la página
         
         st.set_page_config(layout="wide", page_title="Mapa Fiebre Amarilla Tolima", page_icon='🦟')
