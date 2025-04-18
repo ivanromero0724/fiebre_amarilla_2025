@@ -30,7 +30,7 @@ passwords = [
 
 # Iniciar sesión
 def login():
-    st.title("Iniciar sesión")
+    st.title("Fiebre Amarilla 2025")
     user = st.text_input("Usuario")
     pwd = st.text_input("Contraseña", type="password")
     if st.button("Ingresar"):
