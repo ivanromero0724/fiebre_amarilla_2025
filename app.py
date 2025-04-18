@@ -11,19 +11,6 @@ import plotly.express as px
 from folium.plugins import HeatMap
 from folium.plugins import Draw
 
-import streamlit as st
-import pandas as pd
-import folium
-from streamlit_folium import folium_static
-from folium.plugins import MiniMap
-from datetime import datetime
-import pytz
-from branca.element import Template, MacroElement
-import matplotlib.pyplot as plt
-import plotly.express as px
-from folium.plugins import HeatMap
-from folium.plugins import Draw
-
 # Obtener usuarios y contraseñas desde secrets
 usernames = [
     st.secrets["auth"]["user1_username"], 
@@ -51,7 +38,7 @@ def login():
             user_index = usernames.index(user)
             if pwd == passwords[user_index]:
                 st.session_state["authenticated"] = True
-                st.experimental_rerun()  # 🔁 Fuerza la recarga
+                st.rerun()  # 🔁 ¡Funciona con la versión actual!
             else:
                 st.error("Contraseña incorrecta")
         else:
