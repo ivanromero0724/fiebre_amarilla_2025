@@ -11,6 +11,23 @@ import plotly.express as px
 from folium.plugins import HeatMap
 from folium.plugins import Draw
 
+# Obtener usuarios y contraseñas desde secrets
+usernames = [
+    st.secrets["auth"]["user1_username"], 
+    st.secrets["auth"]["user2_username"], 
+    st.secrets["auth"]["user3_username"],
+    st.secrets["auth"]["user4_username"], 
+    st.secrets["auth"]["user5_username"]
+]
+
+passwords = [
+    st.secrets["auth"]["user1_password"], 
+    st.secrets["auth"]["user2_password"], 
+    st.secrets["auth"]["user3_password"],
+    st.secrets["auth"]["user4_password"], 
+    st.secrets["auth"]["user5_password"]
+]
+
 # Estilizar con CSS
 st.markdown("""
     <style>
@@ -21,9 +38,9 @@ st.markdown("""
         border-radius: 12px;
         background-color: #f9f9f9;
         box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        text-align: center;  /* Asegura que todo dentro de este div se centre */
     }
     .title-style {
-        text-align: center;
         font-size: 28px;
         font-weight: 600;
         margin-bottom: 20px;
@@ -34,11 +51,17 @@ st.markdown("""
 
 # Iniciar sesión
 def login():
-    st.image("https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/Logo.png", width=70)
-    st.markdown('<div class="title-style"> Fiebre Amarilla 2025</div>', unsafe_allow_html=True)
+    st.markdown('<div class="login-container">', unsafe_allow_html=True)
 
-    user = st.text_input("Usuario")
-    pwd = st.text_input("Contraseña", type="password")
+    # Mostrar el logo desde la URL
+    st.image("https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/Logo.png", width=120)  # Ajusta el tamaño si es necesario
+    
+    # Título
+    st.markdown('<div class="title-style">🦟 Fiebre Amarilla 2025</div>', unsafe_allow_html=True)
+
+    # Campos de inicio de sesión
+    user = st.text_input("👤 Usuario")
+    pwd = st.text_input("🔒 Contraseña", type="password")
     login_btn = st.button("Ingresar")
 
     if login_btn:
