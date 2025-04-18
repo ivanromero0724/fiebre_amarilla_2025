@@ -41,7 +41,6 @@ def login():
             user_index = usernames.index(user)
             if pwd == passwords[user_index]:
                 st.session_state["authenticated"] = True
-                st.experimental_rerun()  # Recarga la página inmediatamente después de iniciar sesión
             else:
                 st.error("Contraseña incorrecta")
         else:
@@ -51,6 +50,7 @@ def login():
 if "authenticated" not in st.session_state:
     st.session_state["authenticated"] = False
 
+# Condición para mostrar el contenido o la página de login
 if not st.session_state["authenticated"]:
     login()
 else:
