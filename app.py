@@ -11,7 +11,6 @@ import plotly.express as px
 from folium.plugins import HeatMap
 from folium.plugins import Draw
         
-st.set_page_config(layout="wide", page_title="Mapa Fiebre Amarilla Tolima")
 # Obtener usuarios y contraseñas desde secrets
 usernames = [
     st.secrets["auth"]["user1_username"], 
