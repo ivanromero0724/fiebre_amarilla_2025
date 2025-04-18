@@ -11,8 +11,6 @@ import plotly.express as px
 from folium.plugins import HeatMap
 from folium.plugins import Draw
 
-
-
 # Obtener usuarios y contraseñas desde secrets
 usernames = [
     st.secrets["auth"]["user1_username"], 
@@ -35,11 +33,15 @@ def login():
     st.title("Iniciar sesión")
     user = st.text_input("Usuario")
     pwd = st.text_input("Contraseña", type="password")
-    if st.button("Ingresar"):
+    login_button = st.button("Ingresar")
+    
+    # Se asegura de verificar la autenticación cuando se presiona el botón
+    if login_button:
         if user in usernames:
             user_index = usernames.index(user)  # Encuentra el índice del usuario
             if pwd == passwords[user_index]:
                 st.session_state["authenticated"] = True
+                st.experimental_rerun()  # Recarga la página para aplicar la autenticación inmediatamente
             else:
                 st.error("Contraseña incorrecta")
         else:
