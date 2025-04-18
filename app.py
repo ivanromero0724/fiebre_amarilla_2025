@@ -32,7 +32,7 @@ passwords = [
 st.markdown("""
     <style>
     .login-container {
-        max-width: 600px;
+        max-width: 450px;
         margin: 50px auto;
         padding: 2rem;
         border-radius: 12px;
@@ -62,7 +62,7 @@ def login():
     st.markdown(
         """
         <div class="title-container">
-            <img src="https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/Logo.png" width="60">
+            <img src="https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/Logo.png" width="100">
             <div class="title-text">Fiebre Amarilla 2025</div>
         </div>
         """,
