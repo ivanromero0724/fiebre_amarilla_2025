@@ -28,16 +28,16 @@ passwords = [
     st.secrets["auth"]["user5_password"]
 ]
 
-# Estilizar con CSS
+# Estilos CSS
 st.markdown("""
     <style>
     .login-container {
-        max-width: 400px;
-        margin: auto;
+        max-width: 420px;
+        margin: 50px auto;
         padding: 2rem;
         border-radius: 12px;
         background-color: #f9f9f9;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         text-align: center;
     }
     .title-container {
@@ -46,11 +46,11 @@ st.markdown("""
         justify-content: center;
         margin-bottom: 20px;
     }
-    .title-style {
-        font-size: 28px;
+    .title-text {
+        font-size: 24px;
         font-weight: 600;
-        margin-left: 10px;
         color: #333333;
+        margin-left: 15px;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -59,16 +59,18 @@ st.markdown("""
 def login():
     st.markdown('<div class="login-container">', unsafe_allow_html=True)
 
-    # Contenedor para título y logo
-    st.markdown('<div class="title-container">', unsafe_allow_html=True)
-    
-    # Logo al lado del título
-    st.image("https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/Logo.png", width=60)  # Ajusta el tamaño del logo si es necesario
-    st.markdown('<div class="title-style">Fiebre Amarilla 2025</div>', unsafe_allow_html=True)
+    # Logo y Título juntos
+    st.markdown(
+        """
+        <div class="title-container">
+            <img src="https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/Logo.png" width="60">
+            <div class="title-text">Fiebre Amarilla 2025</div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
-    st.markdown('</div>', unsafe_allow_html=True)
-
-    # Campos de inicio de sesión
+    # Campos de usuario y contraseña
     user = st.text_input("Usuario")
     pwd = st.text_input("Contraseña", type="password")
     login_btn = st.button("Ingresar")
@@ -86,7 +88,7 @@ def login():
 
     st.markdown('</div>', unsafe_allow_html=True)
 
-# Revisar si ya está autenticado
+# Control de autenticación
 if "authenticated" not in st.session_state:
     st.session_state["authenticated"] = False
 
