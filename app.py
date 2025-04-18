@@ -11,8 +11,6 @@ import plotly.express as px
 from folium.plugins import HeatMap
 from folium.plugins import Draw
 
-st.set_page_config(layout="wide", page_title="Mapa Fiebre Amarilla Tolima")
-
 # Obtener usuarios y contraseñas desde secrets
 usernames = [
     st.secrets["auth"]["user1_username"], 
@@ -30,68 +28,23 @@ passwords = [
     st.secrets["auth"]["user5_password"]
 ]
 
-# Estilos CSS
-st.markdown("""
-    <style>
-    .login-container {
-        max-width: 450px;
-        margin: 50px auto;
-        padding: 2rem;
-        border-radius: 12px;
-        background-color: #f9f9f9;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        text-align: center;
-    }
-    .title-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 20px;
-    }
-    .title-text {
-        font-size: 30px;
-        font-weight: 600;
-        color: #333333;
-        margin-left: 15px;
-    }
-    </style>
-""", unsafe_allow_html=True)
-
-
 # Iniciar sesión
 def login():
-    # Logo y Título juntos
-    st.markdown(
-        """
-        <div class="title-container">
-            <img src="https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/Logo.png" width="100">
-            <div class="title-text">Fiebre Amarilla 2025</div>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-
-    # Espacio adicional (opcional)
-    st.markdown("<div style='margin-bottom: 50px;'></div>", unsafe_allow_html=True)
-    # Campos de usuario y contraseña
+    st.title("Iniciar sesión")
     user = st.text_input("Usuario")
     pwd = st.text_input("Contraseña", type="password")
-    login_btn = st.button("Ingresar")
-
-    if login_btn:
+    if st.button("Ingresar"):
         if user in usernames:
             user_index = usernames.index(user)
             if pwd == passwords[user_index]:
                 st.session_state["authenticated"] = True
-                st.rerun()
+                st.rerun()  # 🔁 ¡Funciona con la versión actual!
             else:
                 st.error("Contraseña incorrecta")
         else:
             st.error("Usuario no encontrado")
 
-    st.markdown('</div>', unsafe_allow_html=True)
-
-# Control de autenticación
+# Revisar si ya está autenticado
 if "authenticated" not in st.session_state:
     st.session_state["authenticated"] = False
 
