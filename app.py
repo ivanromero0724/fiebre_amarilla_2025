@@ -28,20 +28,16 @@ passwords = [
     st.secrets["auth"]["user5_password"]
 ]
 
-# Función para iniciar sesión
+# Iniciar sesión
 def login():
     st.title("Iniciar sesión")
     user = st.text_input("Usuario")
     pwd = st.text_input("Contraseña", type="password")
-    login_button = st.button("Ingresar")
-
-    if login_button:
-        # Verificar usuario y contraseña
+    if st.button("Ingresar"):
         if user in usernames:
-            user_index = usernames.index(user)
+            user_index = usernames.index(user)  # Encuentra el índice del usuario
             if pwd == passwords[user_index]:
                 st.session_state["authenticated"] = True
-                st.experimental_rerun()  # Recarga la página inmediatamente después de iniciar sesión
             else:
                 st.error("Contraseña incorrecta")
         else:
@@ -51,11 +47,9 @@ def login():
 if "authenticated" not in st.session_state:
     st.session_state["authenticated"] = False
 
-# Si el usuario no está autenticado, se muestra el formulario de login
 if not st.session_state["authenticated"]:
     login()
 else:
-
         # Configurar la página
         
         st.set_page_config(layout="wide", page_title="Mapa Fiebre Amarilla Tolima", page_icon='🦟')
