@@ -8,4 +8,3 @@ pytz
 branca
 matplotlib
 plotly
-streamlit.secrets
