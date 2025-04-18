@@ -69,6 +69,8 @@ def login():
         unsafe_allow_html=True
     )
 
+    # Espacio adicional (opcional)
+    st.markdown("<div style='margin-bottom: 20px;'></div>", unsafe_allow_html=True)
     # Campos de usuario y contraseña
     user = st.text_input("Usuario")
     pwd = st.text_input("Contraseña", type="password")
