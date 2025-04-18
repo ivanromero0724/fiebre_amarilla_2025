@@ -35,10 +35,10 @@ st.markdown("""
 # Iniciar sesión
 def login():
     st.markdown('<div class="login-container">', unsafe_allow_html=True)
-    st.markdown('<div class="title-style">🦟 Fiebre Amarilla 2025</div>', unsafe_allow_html=True)
+    st.markdown('<div class="title-style"> Fiebre Amarilla 2025</div>', unsafe_allow_html=True)
 
-    user = st.text_input("👤 Usuario")
-    pwd = st.text_input("🔒 Contraseña", type="password")
+    user = st.text_input("Usuario")
+    pwd = st.text_input("Contraseña", type="password")
     login_btn = st.button("Ingresar")
 
     if login_btn:
