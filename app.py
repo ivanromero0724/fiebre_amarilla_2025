@@ -28,21 +28,63 @@ passwords = [
     st.secrets["auth"]["user5_password"]
 ]
 
+# Estilizar con CSS
+st.markdown("""
+    <style>
+    .login-container {
+        max-width: 400px;
+        margin: auto;
+        padding: 2rem;
+        border-radius: 12px;
+        background-color: #f9f9f9;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        text-align: center;
+    }
+    .title-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+    .title-style {
+        font-size: 28px;
+        font-weight: 600;
+        margin-left: 10px;
+        color: #333333;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
 # Iniciar sesión
 def login():
-    st.title("Fiebre Amarilla 2025")
+    st.markdown('<div class="login-container">', unsafe_allow_html=True)
+
+    # Contenedor para título y logo
+    st.markdown('<div class="title-container">', unsafe_allow_html=True)
+    
+    # Logo al lado del título
+    st.image("https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/Logo.png", width=60)  # Ajusta el tamaño del logo si es necesario
+    st.markdown('<div class="title-style">Fiebre Amarilla 2025</div>', unsafe_allow_html=True)
+
+    st.markdown('</div>', unsafe_allow_html=True)
+
+    # Campos de inicio de sesión
     user = st.text_input("Usuario")
     pwd = st.text_input("Contraseña", type="password")
-    if st.button("Ingresar"):
+    login_btn = st.button("Ingresar")
+
+    if login_btn:
         if user in usernames:
             user_index = usernames.index(user)
             if pwd == passwords[user_index]:
                 st.session_state["authenticated"] = True
-                st.rerun()  # 🔁 ¡Funciona con la versión actual!
+                st.rerun()
             else:
                 st.error("Contraseña incorrecta")
         else:
             st.error("Usuario no encontrado")
+
+    st.markdown('</div>', unsafe_allow_html=True)
 
 # Revisar si ya está autenticado
 if "authenticated" not in st.session_state:
