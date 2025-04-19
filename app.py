@@ -270,6 +270,7 @@ else:
                 <i style="background: green; width: 12px; height: 12px; display: inline-block; margin-right: 8px; border-radius: 50%;"></i> Viviendas efectivas<br>
                 <i style="background: red; width: 12px; height: 12px; display: inline-block; margin-right: 8px; border-radius: 50%;"></i> Viviendas no efectivas<br>
                 <i style="background: gold; width: 12px; height: 12px; display: inline-block; margin-right: 8px; border-radius: 50%;"></i> Casos confirmados de FA
+                <i style="background: brown; width: 12px; height: 12px; display: inline-block; margin-right: 8px; border-radius: 50%;"></i> Epizootias
             </div>
         """, unsafe_allow_html=True)
         
