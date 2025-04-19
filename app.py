@@ -104,6 +104,7 @@ else:
         viviendas_geo = len(datos_geo)
         porcentaje_geo = (viviendas_geo / total_viviendas) * 100
         fa_datos = pd.read_excel("https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/FA_2025-04-15_FINAL.xlsx",engine="openpyxl")
+        epizootias = pd.read_excel("https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/EPIZOOTIAS.xlsx",engine="openpyxl")
         # Contar los valores no NAN en la columna LATITUD
         casos_geo_fa = fa_datos['LATITUD'].notna().sum()
         casos_geo_fa_total = len(fa_datos)
@@ -148,6 +149,7 @@ else:
         capa_si = folium.FeatureGroup(name="Viviendas efectivas",show=False)
         capa_no = folium.FeatureGroup(name="Viviendas no efectivas",show=False)
         capa_fa = folium.FeatureGroup(name="Casos confirmados de Fiebre Amarilla")
+        capa_epizootias = folium.FeatureGroup(name="Epizootias")
         
         # Definir colores para los estados de las viviendas
         colores = df["6_VIVIENDA_EFECTIVA_"].str.strip().str.upper().map({"SI": "green", "NO": "red"}).fillna("gray")
@@ -201,6 +203,28 @@ else:
                 fill_opacity=1,
                 popup=folium.Popup(popup_text, max_width=300)
             ).add_to(capa_fa)
+
+
+        for lat, lon, municipio, vereda, notificacion, resultado in zip(
+            epizootias["Latitud"], epizootias["Longitud"], epizootias["Municipio"], 
+            epizootias["Notificacion"], epizootias["Resultado"]
+        ):
+            popup_text = f"""
+            <b>MUNICIPIO:</b> {municipio} <br>
+            <b>VEREDA:</b> {vereda} <br>
+            <b>FECHA DE NOTIFICACION:</b> {notificacion}<br>
+            <b>FECHA DE RESULTADO:</b> {resultado}<br>
+            """
+            
+            folium.CircleMarker(
+                location=[lat, lon],
+                radius=3, 
+                color="brown", 
+                fill=True, 
+                fill_color="brown", 
+                fill_opacity=1,
+                popup=folium.Popup(popup_text, max_width=300)
+            ).add_to(capa_epizootias)
         
         
         
@@ -216,6 +240,7 @@ else:
         
         # Agregar las capas al mapa
         m.add_child(capa_fa)
+        m.add_child(capa_epizootias)
         m.add_child(heat_group)
         m.add_child(capa_si)
         m.add_child(capa_no)
