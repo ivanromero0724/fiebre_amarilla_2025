@@ -206,7 +206,7 @@ else:
 
 
         for lat, lon, municipio, vereda, notificacion, resultado in zip(
-            epizootias["Latitud"], epizootias["Longitud"], epizootias["Municipio"], 
+            epizootias["Latitud"], epizootias["Longitud"], epizootias["Municipio"], epizootias["Vereda"],
             epizootias["Notificacion"], epizootias["Resultado"]
         ):
             popup_text = f"""
