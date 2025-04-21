@@ -129,7 +129,7 @@ else:
         
         
         # Crear el mapa 
-        m = folium.Map(tiles=None,location=[4.5, -74.0], zoom_start=3)
+        m = folium.Map(tiles=None,location=[4.5, -74.0], zoom_start=5)
 
         # Agregar minimapa
         minimap = MiniMap(toggle_display=True, position="bottomright", tile_layer="CartoDB Positron")
