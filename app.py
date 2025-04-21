@@ -262,7 +262,7 @@ else:
         Draw(export=True).add_to(m)
 
         # Mostrar el mapa en Streamlit
-        folium_static(m, height=650, width=1305)
+        folium_static(m, height=650, width=2000)
 
         # Contenedor con CSS para que la leyenda se superponga sobre el mapa en la esquina inferior izquierda
         # Leyenda con barra de calor continua vertical
