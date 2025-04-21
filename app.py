@@ -275,61 +275,68 @@ else:
         # Mostrar el mapa en Streamlit
         folium_static(m, height=650, width=1305)
 
-    
-                # Leyendas HTML
-        leyendas_html = """
-        <div id="leyenda_viviendas_si" style="display:none; position: fixed; bottom: 50px; left: 10px; background: white; padding: 10px; z-index:9999;">
-        <b>Viviendas efectivas</b><br>
-        <i style="background: green; width:10px; height:10px; display:inline-block;"></i> Efectiva
+                # Inyectar leyenda con JS/HTML usando Streamlit Components
+        components.html("""
+        <div id="leyenda-container" style="position: fixed; bottom: 50px; left: 10px; z-index:9999;">
+            <div id="leyenda_viviendas_si" style="display:none; background: white; padding: 10px; margin-bottom: 10px;">
+                <b>Viviendas efectivas</b><br>
+                <i style="background: green; width:10px; height:10px; display:inline-block;"></i> Efectiva
+            </div>
+        
+            <div id="leyenda_viviendas_no" style="display:none; background: white; padding: 10px; margin-bottom: 10px;">
+                <b>Viviendas no efectivas</b><br>
+                <i style="background: red; width:10px; height:10px; display:inline-block;"></i> No efectiva
+            </div>
+        
+            <div id="leyenda_fa" style="display:none; background: white; padding: 10px; margin-bottom: 10px;">
+                <b>Casos confirmados de FA</b><br>
+                <i style="background: gold; width:10px; height:10px; display:inline-block;"></i> Confirmado
+            </div>
+        
+            <div id="leyenda_epizootias" style="display:none; background: white; padding: 10px;">
+                <b>Epizootias</b><br>
+                <i style="background: brown; width:10px; height:10px; display:inline-block;"></i> Epizootia
+            </div>
         </div>
         
-        <div id="leyenda_viviendas_no" style="display:none; position: fixed; bottom: 120px; left: 10px; background: white; padding: 10px; z-index:9999;">
-        <b>Viviendas no efectivas</b><br>
-        <i style="background: red; width:10px; height:10px; display:inline-block;"></i> No efectiva
-        </div>
-        
-        <div id="leyenda_fa" style="display:none; position: fixed; bottom: 190px; left: 10px; background: white; padding: 10px; z-index:9999;">
-        <b>Casos confirmados de FA</b><br>
-        <i style="background: gold; width:10px; height:10px; display:inline-block;"></i> Confirmado
-        </div>
-        
-        <div id="leyenda_epizootias" style="display:none; position: fixed; bottom: 260px; left: 10px; background: white; padding: 10px; z-index:9999;">
-        <b>Epizootias</b><br>
-        <i style="background: brown; width:10px; height:10px; display:inline-block;"></i> Epizootia
-        </div>
-        """
-        
-        # Script JS para alternar leyendas según capa visible
-        script = """
         <script>
-        function actualizarLeyendas() {
-            var mapa = window.map;
-            var visibles = {
-                'Viviendas efectivas': document.getElementById('leyenda_viviendas_si'),
-                'Viviendas no efectivas': document.getElementById('leyenda_viviendas_no'),
-                'Casos confirmados de Fiebre Amarilla': document.getElementById('leyenda_fa'),
-                'Epizootias': document.getElementById('leyenda_epizootias')
-            };
+        const delay = ms => new Promise(res => setTimeout(res, ms));
         
-            for (let leyenda in visibles) {
-                visibles[leyenda].style.display = 'none';
+        async function waitAndCheck() {
+            await delay(1000);
+            let iframe = parent.document.querySelector("iframe");
+            if (!iframe) return;
+        
+            let map = iframe.contentWindow.map;
+            if (!map) return;
+        
+            function actualizarLeyendas() {
+                let visibles = {
+                    'Viviendas efectivas': parent.document.getElementById('leyenda_viviendas_si'),
+                    'Viviendas no efectivas': parent.document.getElementById('leyenda_viviendas_no'),
+                    'Casos confirmados de Fiebre Amarilla': parent.document.getElementById('leyenda_fa'),
+                    'Epizootias': parent.document.getElementById('leyenda_epizootias')
+                };
+        
+                for (let key in visibles) {
+                    visibles[key].style.display = 'none';
+                }
+        
+                map.eachLayer(function(layer) {
+                    if (layer.options && layer.options.name && visibles[layer.options.name] && map.hasLayer(layer)) {
+                        visibles[layer.options.name].style.display = 'block';
+                    }
+                });
             }
         
-            mapa.eachLayer(function(layer) {
-                if (layer.options && layer.options.name && visibles[layer.options.name] && mapa.hasLayer(layer)) {
-                    visibles[layer.options.name].style.display = 'block';
-                }
-            });
+            map.on('overlayadd', actualizarLeyendas);
+            map.on('overlayremove', actualizarLeyendas);
+            actualizarLeyendas();
         }
         
-        map.on('overlayadd', actualizarLeyendas);
-        map.on('overlayremove', actualizarLeyendas);
-        actualizarLeyendas();
+        waitAndCheck();
         </script>
-        """
-        
-        # Agregar al HTML del mapa
-        m.get_root().html.add_child(folium.Element(leyendas_html + script))
+        """, height=300)
         
         # Contenedor con CSS para que la leyenda se superponga sobre el mapa en la esquina inferior izquierda
         # Leyenda con barra de calor continua vertical
