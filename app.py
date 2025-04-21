@@ -265,42 +265,7 @@ else:
         
         # Agregar capas base con nombres personalizados
         folium.TileLayer("CartoDB Positron").add_to(m)
-
-
-
-                # Agregar la leyenda interactiva con JavaScript
-        legend_html = """
-            <div id="leyenda" style="position: absolute; top: 10px; left: 10px; background-color: white; padding: 10px; 
-                                    border: 2px solid black; font-size: 14px; z-index: 9999;">
-                <b>Leyenda</b><br>
-                <i style="background: green; width:15px; height:15px; display:inline-block;"></i> Viviendas efectivas<br>
-                <i style="background: red; width:15px; height:15px; display:inline-block;"></i> Viviendas no efectivas<br>
-                <i style="background: gold; width:15px; height:15px; display:inline-block;"></i> Casos confirmados de FA<br>
-                <i style="background: brown; width:15px; height:15px; display:inline-block;"></i> Epizootias<br>
-            </div>
-            <script>
-                // Detectar si la capa está visible y actualizar la leyenda
-                function actualizarLeyenda() {
-                    var leyenda = document.getElementById("leyenda");
-                    var capas = ["Viviendas efectivas", "Viviendas no efectivas", "Casos confirmados de FA", "Epizootias"];
-                    leyenda.style.display = "none";
-                    capas.forEach(function(capa) {
-                        if (map.hasLayer(capa)) {
-                            leyenda.style.display = "block";
-                        }
-                    });
-                }
-                
-                // Llamar la función para actualizar la leyenda
-                actualizarLeyenda();
-                map.on('layeradd', actualizarLeyenda);
-                map.on('layerremove', actualizarLeyenda);
-            </script>
-        """
-        
-        # Incluir la leyenda en el mapa
-        m.get_root().html.add_child(folium.Element(legend_html))
-        
+    
         # Agregar LayerControl
         layer_control = folium.LayerControl(collapsed=False)  # No colapsado por defecto
         layer_control.add_to(m)
@@ -314,7 +279,29 @@ else:
         # Leyenda con barra de calor continua vertical
         # Contenedor con CSS para que la leyenda se superponga sobre el mapa en la esquina inferior izquierda
         
-        
+        st.markdown("""
+            <style>
+                .legend-container {
+                    position: absolute;
+                    bottom: 35px;
+                    left: 10px;
+                    background-color: white;
+                    padding: 10px;
+                    border-radius: 5px;
+                    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+                    line-height: 18px;
+                    opacity: 0.9;
+                    z-index: 1000;
+                }
+            </style>
+            <div class="legend-container" style="font-size: 14px;">
+                <i style="background: green; width: 12px; height: 12px; display: inline-block; margin-right: 8px; border-radius: 50%;"></i> Viviendas efectivas<br>
+                <i style="background: red; width: 12px; height: 12px; display: inline-block; margin-right: 8px; border-radius: 50%;"></i> Viviendas no efectivas<br>
+                <i style="background: gold; width: 12px; height: 12px; display: inline-block; margin-right: 8px; border-radius: 50%;"></i> Casos confirmados de FA<br>
+                <i style="background: brown; width: 12px; height: 12px; display: inline-block; margin-right: 8px; border-radius: 50%;"></i> Epizootias
+            </div>
+        """, unsafe_allow_html=True)
+    
         # Insertar el iframe de Looker Studio
         
         st.components.v1.iframe(
