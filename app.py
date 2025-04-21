@@ -39,7 +39,7 @@ def login():
             user_index = usernames.index(user)
             if pwd == passwords[user_index]:
                 st.session_state["authenticated"] = True
-                st.rerun()  # 🔁 ¡Funciona con la versión actual!
+                st.rerun()  
             else:
                 st.error("Contraseña incorrecta")
         else:
@@ -129,7 +129,7 @@ else:
         
         
         # Crear el mapa 
-        m = folium.Map(tiles=None,location=[4.5, -74.0], zoom_start=6)
+        m = folium.Map(tiles=None,location=[4.5, -74.0], zoom_start=3)
 
         # Agregar minimapa
         minimap = MiniMap(toggle_display=True, position="bottomright", tile_layer="CartoDB Positron")
