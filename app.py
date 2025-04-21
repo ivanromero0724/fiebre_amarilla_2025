@@ -140,64 +140,6 @@ else:
         capa_no = folium.FeatureGroup(name="Viviendas no efectivas",show=False)
         capa_fa = folium.FeatureGroup(name="Casos confirmados de Fiebre Amarilla")
         capa_epizootias = folium.FeatureGroup(name="Epizootias")
-
-        from branca.element import Template, MacroElement
-
-        legend = """
-        {% macro html(this, kwargs) %}
-        
-        <div id='maplegend' class='maplegend'
-             style='position: absolute; z-index:9999; border:2px solid grey; background-color:rgba(255, 255, 255, 0.8);
-             border-radius:6px; padding: 10px; font-size:14px; bottom: 20px; left: 20px;'>
-        
-        <div class='legend-title'>Leyenda</div>
-        <div class='legend-scale'>
-          <ul class='legend-labels'>
-            <li><span style='background:green;opacity:0.7;'></span>Viviendas efectivas</li>
-            <li><span style='background:red;opacity:0.7;'></span>Viviendas no efectivas</li>
-            <li><span style='background:blue;opacity:0.7;'></span>Casos confirmados de Fiebre Amarilla</li>
-            <li><span style='background:purple;opacity:0.7;'></span>Epizootias</li>
-          </ul>
-        </div>
-        </div>
-        
-        <style type='text/css'>
-          .maplegend .legend-title {
-            text-align: left;
-            margin-bottom: 5px;
-            font-weight: bold;
-            font-size: 90%;
-            }
-          .maplegend .legend-scale ul {
-            margin: 0;
-            padding: 0;
-            list-style: none;
-            }
-          .maplegend .legend-scale ul li {
-            font-size: 80%;
-            list-style: none;
-            margin-left: 0;
-            line-height: 18px;
-            margin-bottom: 2px;
-            }
-          .maplegend ul.legend-labels li span {
-            display: block;
-            float: left;
-            height: 16px;
-            width: 16px;
-            margin-right: 5px;
-            margin-left: 0;
-            border: 1px solid #999;
-            }
-        </style>
-        
-        {% endmacro %}
-        """
-        
-        macro = MacroElement()
-        macro._template = Template(legend)
-        mapa.get_root().add_child(macro)
-
         
         # Definir colores para los estados de las viviendas
         colores = df["6_VIVIENDA_EFECTIVA_"].str.strip().str.upper().map({"SI": "green", "NO": "red"}).fillna("gray")
