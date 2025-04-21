@@ -270,34 +270,69 @@ else:
         layer_control.add_to(m)
         
         Draw(export=True).add_to(m)
+
+                # Leyendas HTML
+        leyendas_html = """
+        <div id="leyenda_viviendas_si" style="display:none; position: fixed; bottom: 50px; left: 10px; background: white; padding: 10px; z-index:9999;">
+        <b>Viviendas efectivas</b><br>
+        <i style="background: green; width:10px; height:10px; display:inline-block;"></i> Efectiva
+        </div>
+        
+        <div id="leyenda_viviendas_no" style="display:none; position: fixed; bottom: 120px; left: 10px; background: white; padding: 10px; z-index:9999;">
+        <b>Viviendas no efectivas</b><br>
+        <i style="background: red; width:10px; height:10px; display:inline-block;"></i> No efectiva
+        </div>
+        
+        <div id="leyenda_fa" style="display:none; position: fixed; bottom: 190px; left: 10px; background: white; padding: 10px; z-index:9999;">
+        <b>Casos confirmados de FA</b><br>
+        <i style="background: gold; width:10px; height:10px; display:inline-block;"></i> Confirmado
+        </div>
+        
+        <div id="leyenda_epizootias" style="display:none; position: fixed; bottom: 260px; left: 10px; background: white; padding: 10px; z-index:9999;">
+        <b>Epizootias</b><br>
+        <i style="background: brown; width:10px; height:10px; display:inline-block;"></i> Epizootia
+        </div>
+        """
+        
+        # Script JS para alternar leyendas según capa visible
+        script = """
+        <script>
+        function actualizarLeyendas() {
+            var mapa = window.map;
+            var visibles = {
+                'Viviendas efectivas': document.getElementById('leyenda_viviendas_si'),
+                'Viviendas no efectivas': document.getElementById('leyenda_viviendas_no'),
+                'Casos confirmados de Fiebre Amarilla': document.getElementById('leyenda_fa'),
+                'Epizootias': document.getElementById('leyenda_epizootias')
+            };
+        
+            for (let leyenda in visibles) {
+                visibles[leyenda].style.display = 'none';
+            }
+        
+            mapa.eachLayer(function(layer) {
+                if (layer.options && layer.options.name && visibles[layer.options.name] && mapa.hasLayer(layer)) {
+                    visibles[layer.options.name].style.display = 'block';
+                }
+            });
+        }
+        
+        map.on('overlayadd', actualizarLeyendas);
+        map.on('overlayremove', actualizarLeyendas);
+        actualizarLeyendas();
+        </script>
+        """
+        
+        # Agregar al HTML del mapa
+        m.get_root().html.add_child(folium.Element(leyendas_html + script))
+
         # Mostrar el mapa en Streamlit
         folium_static(m, height=650, width=1305)
         
         # Contenedor con CSS para que la leyenda se superponga sobre el mapa en la esquina inferior izquierda
         # Leyenda con barra de calor continua vertical
         # Contenedor con CSS para que la leyenda se superponga sobre el mapa en la esquina inferior izquierda
-        st.markdown("""
-            <style>
-                .legend-container {
-                    position: absolute;
-                    bottom: 35px;
-                    left: 10px;
-                    background-color: white;
-                    padding: 10px;
-                    border-radius: 5px;
-                    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
-                    line-height: 18px;
-                    opacity: 0.9;
-                    z-index: 1000;
-                }
-            </style>
-            <div class="legend-container" style="font-size: 14px;">
-                <i style="background: green; width: 12px; height: 12px; display: inline-block; margin-right: 8px; border-radius: 50%;"></i> Viviendas efectivas<br>
-                <i style="background: red; width: 12px; height: 12px; display: inline-block; margin-right: 8px; border-radius: 50%;"></i> Viviendas no efectivas<br>
-                <i style="background: gold; width: 12px; height: 12px; display: inline-block; margin-right: 8px; border-radius: 50%;"></i> Casos confirmados de FA<br>
-                <i style="background: brown; width: 12px; height: 12px; display: inline-block; margin-right: 8px; border-radius: 50%;"></i> Epizootias
-            </div>
-        """, unsafe_allow_html=True)
+        
         
         # Insertar el iframe de Looker Studio
         
