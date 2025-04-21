@@ -235,7 +235,7 @@ else:
         # Crear la capa de calor
         heat_layer = HeatMap(heat_data, name="Mapa de Calor Casos de FA")
         # Crear un grupo de capas para el mapa de calor
-        heat_group = folium.FeatureGroup(name="Mapa de calor casos confirmados de FA", show=True)  # show=False para no activar la capa
+        heat_group = folium.FeatureGroup(name="Mapa de calor casos confirmados de FA", show=False)  # show=False para no activar la capa
         # Añadir la capa de calor al grupo
         heat_group.add_child(heat_layer)
         
