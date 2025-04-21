@@ -265,6 +265,41 @@ else:
         
         # Agregar capas base con nombres personalizados
         folium.TileLayer("CartoDB Positron").add_to(m)
+
+
+
+                # Agregar la leyenda interactiva con JavaScript
+        legend_html = """
+            <div id="leyenda" style="position: absolute; top: 10px; left: 10px; background-color: white; padding: 10px; 
+                                    border: 2px solid black; font-size: 14px; z-index: 9999;">
+                <b>Leyenda</b><br>
+                <i style="background: green; width:15px; height:15px; display:inline-block;"></i> Viviendas efectivas<br>
+                <i style="background: red; width:15px; height:15px; display:inline-block;"></i> Viviendas no efectivas<br>
+                <i style="background: gold; width:15px; height:15px; display:inline-block;"></i> Casos confirmados de FA<br>
+                <i style="background: brown; width:15px; height:15px; display:inline-block;"></i> Epizootias<br>
+            </div>
+            <script>
+                // Detectar si la capa está visible y actualizar la leyenda
+                function actualizarLeyenda() {
+                    var leyenda = document.getElementById("leyenda");
+                    var capas = ["Viviendas efectivas", "Viviendas no efectivas", "Casos confirmados de FA", "Epizootias"];
+                    leyenda.style.display = "none";
+                    capas.forEach(function(capa) {
+                        if (map.hasLayer(capa)) {
+                            leyenda.style.display = "block";
+                        }
+                    });
+                }
+                
+                // Llamar la función para actualizar la leyenda
+                actualizarLeyenda();
+                map.on('layeradd', actualizarLeyenda);
+                map.on('layerremove', actualizarLeyenda);
+            </script>
+        """
+        
+        # Incluir la leyenda en el mapa
+        m.get_root().html.add_child(folium.Element(legend_html))
         
         # Agregar LayerControl
         layer_control = folium.LayerControl(collapsed=False)  # No colapsado por defecto
@@ -275,69 +310,6 @@ else:
         # Mostrar el mapa en Streamlit
         folium_static(m, height=650, width=1305)
 
-                # Inyectar leyenda con JS/HTML usando Streamlit Components
-        components.html("""
-        <div id="leyenda-container" style="position: fixed; bottom: 50px; left: 10px; z-index:9999;">
-            <div id="leyenda_viviendas_si" style="display:none; background: white; padding: 10px; margin-bottom: 10px;">
-                <b>Viviendas efectivas</b><br>
-                <i style="background: green; width:10px; height:10px; display:inline-block;"></i> Efectiva
-            </div>
-        
-            <div id="leyenda_viviendas_no" style="display:none; background: white; padding: 10px; margin-bottom: 10px;">
-                <b>Viviendas no efectivas</b><br>
-                <i style="background: red; width:10px; height:10px; display:inline-block;"></i> No efectiva
-            </div>
-        
-            <div id="leyenda_fa" style="display:none; background: white; padding: 10px; margin-bottom: 10px;">
-                <b>Casos confirmados de FA</b><br>
-                <i style="background: gold; width:10px; height:10px; display:inline-block;"></i> Confirmado
-            </div>
-        
-            <div id="leyenda_epizootias" style="display:none; background: white; padding: 10px;">
-                <b>Epizootias</b><br>
-                <i style="background: brown; width:10px; height:10px; display:inline-block;"></i> Epizootia
-            </div>
-        </div>
-        
-        <script>
-        const delay = ms => new Promise(res => setTimeout(res, ms));
-        
-        async function waitAndCheck() {
-            await delay(1000);
-            let iframe = parent.document.querySelector("iframe");
-            if (!iframe) return;
-        
-            let map = iframe.contentWindow.map;
-            if (!map) return;
-        
-            function actualizarLeyendas() {
-                let visibles = {
-                    'Viviendas efectivas': parent.document.getElementById('leyenda_viviendas_si'),
-                    'Viviendas no efectivas': parent.document.getElementById('leyenda_viviendas_no'),
-                    'Casos confirmados de Fiebre Amarilla': parent.document.getElementById('leyenda_fa'),
-                    'Epizootias': parent.document.getElementById('leyenda_epizootias')
-                };
-        
-                for (let key in visibles) {
-                    visibles[key].style.display = 'none';
-                }
-        
-                map.eachLayer(function(layer) {
-                    if (layer.options && layer.options.name && visibles[layer.options.name] && map.hasLayer(layer)) {
-                        visibles[layer.options.name].style.display = 'block';
-                    }
-                });
-            }
-        
-            map.on('overlayadd', actualizarLeyendas);
-            map.on('overlayremove', actualizarLeyendas);
-            actualizarLeyendas();
-        }
-        
-        waitAndCheck();
-        </script>
-        """, height=300)
-        
         # Contenedor con CSS para que la leyenda se superponga sobre el mapa en la esquina inferior izquierda
         # Leyenda con barra de calor continua vertical
         # Contenedor con CSS para que la leyenda se superponga sobre el mapa en la esquina inferior izquierda
