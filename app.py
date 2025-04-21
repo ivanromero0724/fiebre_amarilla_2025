@@ -10,6 +10,7 @@ import matplotlib.pyplot as plt
 import plotly.express as px
 from folium.plugins import HeatMap
 from folium.plugins import Draw
+import streamlit.components.v1 as components
 
 # Obtener usuarios y contraseñas desde secrets
 usernames = [
@@ -271,6 +272,10 @@ else:
         
         Draw(export=True).add_to(m)
 
+        # Mostrar el mapa en Streamlit
+        folium_static(m, height=650, width=1305)
+
+    
                 # Leyendas HTML
         leyendas_html = """
         <div id="leyenda_viviendas_si" style="display:none; position: fixed; bottom: 50px; left: 10px; background: white; padding: 10px; z-index:9999;">
@@ -325,9 +330,6 @@ else:
         
         # Agregar al HTML del mapa
         m.get_root().html.add_child(folium.Element(leyendas_html + script))
-
-        # Mostrar el mapa en Streamlit
-        folium_static(m, height=650, width=1305)
         
         # Contenedor con CSS para que la leyenda se superponga sobre el mapa en la esquina inferior izquierda
         # Leyenda con barra de calor continua vertical
