@@ -174,7 +174,7 @@ else:
             ).add_to(capa_no)
         
         for lat, lon, caso, año, departamento, municipio, vereda, estado_caso in zip(
-            fa_datos_2["LATITUD"], fa_datos_2["LONGITUD"], fa_datos_2["Caso"], fa_datos_2["Año"], fa_datos_2["Departamento"]
+            fa_datos_2["LATITUD"], fa_datos_2["LONGITUD"], fa_datos_2["Caso"], fa_datos_2["Año"], fa_datos_2["Departamento"],
             fa_datos_2["nmun_proce"], fa_datos_2["Vereda"], fa_datos_2["Estado del caso"]
         ):
             popup_text = f"""
