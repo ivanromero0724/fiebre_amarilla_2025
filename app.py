@@ -105,7 +105,7 @@ else:
         viviendas_geo = len(datos_geo)
         porcentaje_geo = (viviendas_geo / total_viviendas) * 100
         fa_datos = pd.read_excel("https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/FA_2025-04-22_FINAL.xlsx",engine="openpyxl")
-        epizootias = pd.read_excel("https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/EPIZOOTIAS_FINAL_2.xlsx",engine="openpyxl")
+        epizootias = pd.read_excel("https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/EPIZOOTIAS    .xlsx",engine="openpyxl")
         # Contar los valores no NAN en la columna LATITUD
         casos_geo_fa = fa_datos['LATITUD'].notna().sum()
         casos_geo_fa_total = len(fa_datos)
@@ -197,15 +197,16 @@ else:
             ).add_to(capa_fa)
 
 
-        for lat, lon, municipio, vereda, notificacion, resultado in zip(
-            epizootias["Latitud"], epizootias["Longitud"], epizootias["Municipio"], epizootias["Vereda"],
-            epizootias["Notificacion"], epizootias["Resultado"]
+        for lat, lon, departamento, municipio, vereda, notificacion, especie in zip(
+            epizootias["Latitud"], epizootias["Longitud"], epizootias["Departamento"], epizootias["Municipio"], epizootias["Vereda"],
+            epizootias["Notificacion"], epizootias["Especie"]
         ):
             popup_text = f"""
+            <b>DEPARTAMENTO:</b> {departamento} <br>
             <b>MUNICIPIO:</b> {municipio} <br>
             <b>VEREDA:</b> {vereda} <br>
             <b>FECHA DE NOTIFICACION:</b> {notificacion}<br>
-            <b>FECHA DE RESULTADO:</b> {resultado}<br>
+            <b>FECHA DE ESPECIE:</b> {especie}<br>
             """
             
             folium.CircleMarker(
