@@ -104,7 +104,7 @@ else:
         total_viviendas = len(datos)
         viviendas_geo = len(datos_geo)
         porcentaje_geo = (viviendas_geo / total_viviendas) * 100
-        fa_datos = pd.read_excel("https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/FA_2025-04-21.xlsx",engine="openpyxl")
+        fa_datos = pd.read_excel("https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/FA_2025-04-22.xlsx",engine="openpyxl")
         epizootias = pd.read_excel("https://raw.githubusercontent.com/ivanromero0724/fiebre_amarilla_2025/main/EPIZOOTIAS_FINAL_2.xlsx",engine="openpyxl")
         # Contar los valores no NAN en la columna LATITUD
         casos_geo_fa = fa_datos['LATITUD'].notna().sum()
@@ -122,7 +122,7 @@ else:
         # Mostrar el título, fecha de actualización y porcentaje de viviendas georreferenciadas juntos
         st.markdown(f"""
             <h1 style='text-align: center;'>Viviendas con abordaje en búsqueda activa comunitaria por atención a brote de Fiebre Amarilla en Tolima</h1>
-            <p style='text-align: center; font-size: 14px;margin-bottom: 0px;'><b>Última fecha de actualización:</b> 15/04/2025</p>
+            <p style='text-align: center; font-size: 14px;margin-bottom: 0px;'><b>Última fecha de actualización:</b> 22/04/2025</p>
             <p style='text-align: center; font-size: 14px;margin-bottom: 0px;'><b>Porcentaje de viviendas georreferenciadas:</b> {porcentaje_geo:.2f}% ({viviendas_geo} de {total_viviendas})</p>
             <p style='text-align: center; font-size: 14px;'><b>Porcentaje de casos de Fiebre Amarilla georreferenciados:</b> {porcentaje_geo_fa:.2f}% ({casos_geo_fa} de {casos_geo_fa_total})</p>
         """, unsafe_allow_html=True)
@@ -173,12 +173,14 @@ else:
                 popup=folium.Popup(popup_text, max_width=300)
             ).add_to(capa_no)
         
-        for lat, lon, caso, municipio, vereda, estado_caso in zip(
-            fa_datos_2["LATITUD"], fa_datos_2["LONGITUD"], fa_datos_2["Caso"], 
+        for lat, lon, caso, año, departamento, municipio, vereda, estado_caso in zip(
+            fa_datos_2["LATITUD"], fa_datos_2["LONGITUD"], fa_datos_2["Caso"], fa_datos_2["Año"], fa_datos_2["Departamento"]
             fa_datos_2["nmun_proce"], fa_datos_2["Vereda"], fa_datos_2["Estado del caso"]
         ):
             popup_text = f"""
             <b>CASO:</b> {caso} <br>
+            <b>AÑO:</b> {año} <br>
+            <b>DEPARTAMENTO:</b> {departamento} <br>
             <b>MUNICIPIO:</b> {municipio} <br>
             <b>VEREDA:</b> {vereda} <br>
             <b>ESTADO DEL CASO:</b> {estado_caso}
