@@ -173,9 +173,9 @@ else:
                 popup=folium.Popup(popup_text, max_width=300)
             ).add_to(capa_no)
         
-        for lat, lon, caso, año, departamento, municipio, vereda, estado_caso in zip(
+        for lat, lon, caso, año, departamento, municipio, vereda, estado_caso, sintomas in zip(
             fa_datos_2["LATITUD"], fa_datos_2["LONGITUD"], fa_datos_2["Caso"], fa_datos_2["Año"], fa_datos_2["Departamento"],
-            fa_datos_2["nmun_proce"], fa_datos_2["Vereda"], fa_datos_2["Estado del caso"]
+            fa_datos_2["nmun_proce"], fa_datos_2["Vereda"], fa_datos_2["Estado del caso"], ffa_datos_2["fecha_sintomas"]
         ):
             popup_text = f"""
             <b>CASO:</b> {caso} <br>
@@ -183,7 +183,8 @@ else:
             <b>DEPARTAMENTO:</b> {departamento} <br>
             <b>MUNICIPIO:</b> {municipio} <br>
             <b>VEREDA:</b> {vereda} <br>
-            <b>ESTADO DEL CASO:</b> {estado_caso}
+            <b>ESTADO DEL CASO:</b> {estado_caso} <br>
+            <b>FECHA DE INICIO DE SÍNTOMAS:</b> {sintomas}
             """
             
             folium.CircleMarker(
