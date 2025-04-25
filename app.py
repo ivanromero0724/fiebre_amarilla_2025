@@ -198,7 +198,7 @@ else:
             ).add_to(capa_fa)
 
 
-        for lat, lon, departamento, municipio, vereda, notificacion, especie in zip(
+        for lat, lon, departamento, municipio, vereda, notificacion in zip(
             epizootias["Latitud"], epizootias["Longitud"], epizootias["Departamento"], epizootias["Municipio"], epizootias["Vereda"],
             epizootias["Notificacion"]
         ):
