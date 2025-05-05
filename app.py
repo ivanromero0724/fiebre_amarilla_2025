@@ -122,7 +122,7 @@ else:
         # Mostrar el título, fecha de actualización y porcentaje de viviendas georreferenciadas juntos
         st.markdown(f"""
             <h1 style='text-align: center;'>Monitoreo del Brote de Fiebre Amarilla en Colombia (2024-2025)</h1>
-            <p style='text-align: center; font-size: 14px;margin-bottom: 0px;'><b>Última fecha de actualización:</b> 02/05/2025</p>
+            <p style='text-align: center; font-size: 14px;margin-bottom: 0px;'><b>Última fecha de actualización:</b> 05/05/2025</p>
             <p style='text-align: center; font-size: 14px;margin-bottom: 0px;'><b>Porcentaje de viviendas georreferenciadas:</b> {porcentaje_geo:.2f}% ({viviendas_geo} de {total_viviendas})</p>
             <p style='text-align: center; font-size: 14px;'><b>Porcentaje de casos de Fiebre Amarilla georreferenciados:</b> {porcentaje_geo_fa:.2f}% ({casos_geo_fa} de {casos_geo_fa_total})</p>
         """, unsafe_allow_html=True)
