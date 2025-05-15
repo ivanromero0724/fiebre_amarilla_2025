@@ -122,7 +122,7 @@ else:
         st.markdown(f"""
             <h1 style='text-align: center;'>Monitoreo del Brote de Fiebre Amarilla en Colombia (2024-2025)</h1>
             <p style='text-align: center; font-size: 14px;margin-bottom: 0px;'><b>Última fecha de actualización:</b> 15/05/2025</p>
-            <p style='text-align: center; font-size: 14px;margin-bottom: 0px;'><b>Cantidad de epizootias (PNH):</b> {len(epizootias)} </p>
+            <p style='text-align: center; font-size: 14px;margin-bottom: 0px;'><b>Epizootias confirmadas en primates no humanos por fiebre amarilla:</b> {len(epizootias)} </p>
             <p style='text-align: center; font-size: 14px;'><b>Porcentaje de casos de Fiebre Amarilla georreferenciados:</b> {porcentaje_geo_fa:.2f}% ({casos_geo_fa} de {casos_geo_fa_total})</p>
         """, unsafe_allow_html=True)
         
