@@ -111,7 +111,6 @@ else:
         casos_geo_fa_total = len(fa_datos)
         porcentaje_geo_fa = (casos_geo_fa / casos_geo_fa_total) * 100
         fa_datos_2 = fa_datos.dropna(subset=["LATITUD", "LONGITUD"])
-        
         # Obtener la fecha actual en la zona horaria de Colombia
         tz_colombia = pytz.timezone("America/Bogota")
         fecha_actual = datetime.now(tz_colombia).strftime("%d/%m/%Y")
@@ -123,8 +122,8 @@ else:
         st.markdown(f"""
             <h1 style='text-align: center;'>Monitoreo del Brote de Fiebre Amarilla en Colombia (2024-2025)</h1>
             <p style='text-align: center; font-size: 14px;margin-bottom: 0px;'><b>Última fecha de actualización:</b> 15/05/2025</p>
-            <p style='text-align: center; font-size: 14px;margin-bottom: 0px;'><b>Porcentaje de viviendas georreferenciadas:</b> {porcentaje_geo:.2f}% ({viviendas_geo} de {total_viviendas})</p>
             <p style='text-align: center; font-size: 14px;'><b>Porcentaje de casos de Fiebre Amarilla georreferenciados:</b> {porcentaje_geo_fa:.2f}% ({casos_geo_fa} de {casos_geo_fa_total})</p>
+            <p style='text-align: center; font-size: 14px;margin-bottom: 0px;'><b>Cantidad de epizootias:</b> len(epizootias) </p>
         """, unsafe_allow_html=True)
         
         
@@ -235,8 +234,8 @@ else:
         m.add_child(capa_fa)
         m.add_child(capa_epizootias)
         m.add_child(heat_group)
-        m.add_child(capa_si)
-        m.add_child(capa_no)
+        #m.add_child(capa_si)
+        #m.add_child(capa_no)
         
         # Agregar capas base de Esri
         folium.TileLayer(
@@ -287,8 +286,6 @@ else:
                 }
             </style>
             <div class="legend-container" style="font-size: 14px;">
-                <i style="background: green; width: 12px; height: 12px; display: inline-block; margin-right: 8px; border-radius: 50%;"></i> Viviendas efectivas<br>
-                <i style="background: red; width: 12px; height: 12px; display: inline-block; margin-right: 8px; border-radius: 50%;"></i> Viviendas no efectivas<br>
                 <i style="background: gold; width: 12px; height: 12px; display: inline-block; margin-right: 8px; border-radius: 50%;"></i> Casos confirmados de FA<br>
                 <i style="background: brown; width: 12px; height: 12px; display: inline-block; margin-right: 8px; border-radius: 50%;"></i> Epizootias
             </div>
